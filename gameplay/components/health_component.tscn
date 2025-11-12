@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctrs20k5sxinx"]
+
+[ext_resource type="Script" uid="uid://b0kmg13s2ybj" path="res://gameplay/components/health_component.gd" id="1_lfgoq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxjux"]
+
+[node name="Health" type="Node3D"]
+script = ExtResource("1_lfgoq")
+
+[node name="HurtBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("BoxShape3D_fxjux")

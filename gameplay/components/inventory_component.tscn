@@ -1,0 +1,340 @@
+[gd_scene load_steps=5 format=3 uid="uid://kwxqjjup26rq"]
+
+[ext_resource type="Script" uid="uid://dchsynt3jjw22" path="res://gameplay/components/inventory_component.gd" id="1_r80f1"]
+[ext_resource type="Texture2D" uid="uid://cu22imienku2r" path="res://assets/ui/kenney_ui-pack-space-expansion/PNG/Extra/Double/bar_shadow_square_outline_small_square.png" id="2_jvpug"]
+[ext_resource type="Texture2D" uid="uid://dxvd0ttw8qj4o" path="res://assets/ui/ProgressBars/Background_texture.png" id="3_cw5xp"]
+[ext_resource type="Texture2D" uid="uid://buaiowg1pbqhn" path="res://assets/ui/ProgressBars/Progress_texture.png" id="4_w0ux3"]
+
+[node name="Inventory" type="Node3D"]
+script = ExtResource("1_r80f1")
+
+[node name="InventoryCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BulletsPanel" type="PanelContainer" parent="InventoryCanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -118.0
+offset_right = 182.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryCanvasLayer/BulletsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="BulletsGridContainer" type="GridContainer" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="BackgroundZero" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotZero" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundZero"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundOne" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotOne" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundOne"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundTwo" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotTwo" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundTwo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundThree" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotThree" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundThree"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundFour" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotFour" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundFour"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundFive" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotFive" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundFive"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundSix" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotSix" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundSix"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundSeven" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotSeven" type="TextureRect" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer/BulletsGridContainer/BackgroundSeven"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="PowerBar" type="TextureProgressBar" parent="InventoryCanvasLayer/BulletsPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+value = 53.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("3_cw5xp")
+texture_progress = ExtResource("4_w0ux3")
+
+[node name="ItemsPanel" type="PanelContainer" parent="InventoryCanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryCanvasLayer/ItemsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ItemsGridContainer" type="GridContainer" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="BackgroundZero" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotZero" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer/BackgroundZero"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundOne" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotOne" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer/BackgroundOne"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BackgroundTwo" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_jvpug")
+expand_mode = 2
+
+[node name="SlotTwo" type="TextureRect" parent="InventoryCanvasLayer/ItemsPanel/MarginContainer/ItemsGridContainer/BackgroundTwo"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="BulletsHighlight" type="TextureRect" parent="InventoryCanvasLayer"]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 126.0
+offset_top = -275.0
+offset_right = 166.0
+offset_bottom = -235.0
+grow_vertical = 0
+expand_mode = 2
+
+[node name="PUItemsHighlight" type="TextureRect" parent="InventoryCanvasLayer"]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 126.0
+offset_top = -275.0
+offset_right = 166.0
+offset_bottom = -235.0
+grow_vertical = 0
+expand_mode = 2

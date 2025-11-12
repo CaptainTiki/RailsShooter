@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhek2j5krgdtb"]
+
+[ext_resource type="Script" uid="uid://dmwxd1u2nmp5q" path="res://base/ui/base_menu.gd" id="1_g5fl7"]
+[ext_resource type="Texture2D" uid="uid://e23cxyfdmk3u" path="res://assets/base_background.jpg" id="2_5ygba"]
+
+[node name="BaseMenu" type="CanvasLayer"]
+script = ExtResource("1_g5fl7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5ygba")
+expand_mode = 3
+
+[node name="HangarButton" type="Button" parent="."]
+offset_left = 46.0
+offset_top = 492.0
+offset_right = 111.0
+offset_bottom = 523.0
+text = "Hangar"
+
+[node name="EngineeringButton" type="Button" parent="."]
+offset_left = 700.0
+offset_top = 514.0
+offset_right = 800.0
+offset_bottom = 545.0
+text = "Engineering"
+
+[node name="ProductionButton" type="Button" parent="."]
+offset_left = 963.0
+offset_top = 100.0
+offset_right = 1057.0
+offset_bottom = 131.0
+text = "Production"
+
+[node name="ResearchButton" type="Button" parent="."]
+offset_left = 351.0
+offset_top = 286.0
+offset_right = 430.0
+offset_bottom = 317.0
+text = "Research"
+
+[node name="CommandButton" type="Button" parent="."]
+offset_left = 258.0
+offset_top = 73.0
+offset_right = 346.0
+offset_bottom = 104.0
+text = "Command"
+
+[connection signal="pressed" from="HangarButton" to="." method="_on_hangar_button_pressed"]
+[connection signal="pressed" from="EngineeringButton" to="." method="_on_engineering_button_pressed"]
+[connection signal="pressed" from="ProductionButton" to="." method="_on_production_button_pressed"]
+[connection signal="pressed" from="ResearchButton" to="." method="_on_research_button_pressed"]
+[connection signal="pressed" from="CommandButton" to="." method="_on_command_button_pressed"]

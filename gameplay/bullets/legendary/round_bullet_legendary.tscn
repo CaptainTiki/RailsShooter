@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://defbuyxb5sfsm"]
+
+[ext_resource type="Script" uid="uid://bhdks4i7l7j4n" path="res://gameplay/bullets/bullet_base.gd" id="1_cc28y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nr28k"]
+
+[node name="RoundBulletLegendary" type="Area3D"]
+script = ExtResource("1_cc28y")
+damage = 2.3
+speed = 2.2
+rarity = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_nr28k")

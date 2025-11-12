@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://n7n7jb8kbhpc"]
+
+[ext_resource type="Script" uid="uid://dchxc6carry2x" path="res://base/ui/hangar_ui.gd" id="1_57fyf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_57fyf"]
+font_size = 30
+
+[node name="HangarUi" type="CanvasLayer"]
+script = ExtResource("1_57fyf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -29.0
+offset_right = 48.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hangar"
+label_settings = SubResource("LabelSettings_57fyf")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="LaunchRunButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Launch
+"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/LaunchRunButton" to="." method="_on_launchbn_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_backbn_pressed"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://epsy3hth1dfq"]
+
+[ext_resource type="Script" uid="uid://da0y4macero26" path="res://gameplay/components/shields_component.gd" id="1_61av0"]
+
+[node name="Shields" type="Node3D"]
+script = ExtResource("1_61av0")

@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6h3yjmper8ty"]
+
+[ext_resource type="Script" uid="uid://bnahm1jjf3tdp" path="res://gameplay/player/player.gd" id="1_01s76"]
+[ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="2_ahkyy"]
+[ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="3_e85hc"]
+[ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="4_s4pxm"]
+[ext_resource type="PackedScene" uid="uid://kwxqjjup26rq" path="res://gameplay/components/inventory_component.tscn" id="5_dvxkk"]
+[ext_resource type="PackedScene" uid="uid://b7l6gnhomtx8" path="res://gameplay/components/weapon_component.tscn" id="6_d14h3"]
+[ext_resource type="Script" uid="uid://da82i1tjynkth" path="res://gameplay/components/player_movement_component.gd" id="7_lh4hn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fty7g"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_01s76")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_fty7g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="Health" parent="Components" instance=ExtResource("2_ahkyy")]
+
+[node name="Armor" parent="Components" instance=ExtResource("3_e85hc")]
+
+[node name="Shields" parent="Components" instance=ExtResource("4_s4pxm")]
+
+[node name="Inventory" parent="Components" instance=ExtResource("5_dvxkk")]
+
+[node name="Weapon" parent="Components" instance=ExtResource("6_d14h3")]
+
+[node name="PlayerMovement" type="Node3D" parent="Components"]
+script = ExtResource("7_lh4hn")
+
+[connection signal="area_entered" from="Components/Health/HurtBox" to="Components/Health" method="_on_hurt_box_area_entered"]
+
+[editable path="Components/Health"]
+[editable path="Components/Weapon"]

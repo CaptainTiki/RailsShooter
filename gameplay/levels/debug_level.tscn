@@ -1,0 +1,832 @@
+[gd_scene load_steps=7 format=3 uid="uid://shvx0x7woun8"]
+
+[ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6mttl"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5t2ux"]
+sky_material = SubResource("ProceduralSkyMaterial_6mttl")
+
+[sub_resource type="Environment" id="Environment_so80d"]
+background_mode = 2
+sky = SubResource("Sky_5t2ux")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfku"]
+albedo_color = Color(0.3936, 0.39504, 0.48, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_ihhpb"]
+bake_interval = 0.3
+_data = {
+"points": PackedVector3Array(-4.873535, -5.6055946, 28.298515, 0, 0, 0, 3.5032692, -5.6157684, 12.88916, 1.3460388, -2.0310287, 18.351372, -1.3460388, 2.0310287, -18.351372, -13.111919, -5.5728455, -112.835205, 7.997343, 0.24710083, 48.12491, -7.997343, -0.24710083, -48.12491, -18.396994, -4.4485626, -209.67847, -8.712395, -0.43754387, 57.705658, 8.712395, 0.43754387, -57.705658, -75.35731, 5.104738, -361.1521, 0, 0, 0, 0, 0, 0, -21.898, 0, -562.863),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_6mttl")
+
+[node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="HeadsUpDisplay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_right = 23.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game"
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_so80d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGCombiner3D" parent="Terrain"]
+
+[node name="Floor" type="CSGBox3D" parent="Terrain/Floor"]
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor2" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor3" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall1" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, 0)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall2" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall3" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall4" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, 0)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall5" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall6" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor4" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -0.49210882, 0.071866035, -52.546745)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor5" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -5.363805, 2.4242363, -71.4704)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor6" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -10.287396, 4.801668, -90.59566)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall7" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -25.731308, 9.296963, -44.902428)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall8" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -30.603004, 11.649335, -63.82609)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall9" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -35.5266, 14.026765, -82.95134)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall10" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 24.7375, 10.887483, -57.697365)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall11" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 19.865803, 13.239854, -76.62103)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall12" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 14.94221, 15.617284, -95.74628)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor7" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -10.738976, 2.844202, -103.48591)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor8" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -13.141386, 2.0246716, -123.00329)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor9" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -15.569386, 1.1964064, -142.72862)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall13" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -37.407143, 10.630625, -100.530266)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall14" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -39.809544, 9.811091, -120.04765)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall15" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -42.237556, 8.982828, -139.77298)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall16" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 14.073364, 15.158173, -107.05713)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall17" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 11.67095, 14.338639, -126.57453)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall18" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 9.242958, 13.510378, -146.29984)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor10" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -16.87448, -0.8388314, -150.11009)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor11" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -14.4150505, -0.24497747, -169.62856)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor12" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -11.929403, 0.35520124, -189.35497)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall19" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -43.45273, 7.193198, -153.21472)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall20" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -40.993282, 7.7870517, -172.73322)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall21" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -38.507652, 8.387231, -192.45961)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall22" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 8.055683, 11.252979, -146.60086)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall23" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 10.515118, 11.846832, -166.11934)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall24" type="CSGBox3D" parent="Terrain/Floor"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 13.000763, 12.447012, -185.8457)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Rocks" type="CSGCombiner3D" parent="Terrain"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -16.652369, 2.5866241, -12.240849)
+size = Vector3(8, 8, 8)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 14.837637, 2.5866241, -12.240849)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -15.739819, 2.5866241, -32.152115)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.617004, 14.189545, -58.867676)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 11.495743, 14.189541, -95.73358)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 4.482464, 4.8851585, -84.38963)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -44.13531, 12.033678, -128.9748)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 6.3235855, 12.033678, -157.113)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.913788, 5.0479374, -184.80397)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(-0.06457181, -0.8431186, 0.53383696, -0.9939418, 0.10201689, 0.04089589, -0.08894051, -0.5279621, -0.84459805, -17.852106, 4.793416, -50.75182)
+size = Vector3(17.279297, 8, 8)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(-0.06457182, -0.84311867, 0.5338369, -0.9750228, -0.060617454, -0.21367326, 0.21251166, -0.5343003, -0.81814545, 15.853593, 7.1595244, -42.28806)
+size = Vector3(21.938965, 5.5584717, 6.9990234)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.29105565, -0.7646553, 0.57496893, -0.9328052, -0.36031353, -0.0069870176, 0.21251164, -0.5343003, -0.81814545, -28.875563, 8.981042, -94.35404)
+size = Vector3(12.377808, 5.5584717, 10.022949)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(-0.7576231, -0.6492712, -0.066741966, -0.5419692, 0.6827818, -0.48997822, 0.3636988, -0.33504662, -0.86917585, 8.762268, 11.966594, -138.1374)
+size = Vector3(25.885712, 5.5584717, 16.123291)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -35.271084, 5.128192, -153.065)
+size = Vector3(25.885712, 5.5584717, 9.526001)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -29.214039, 0.33506632, -120.92546)
+size = Vector3(14.3710785, 5.5584717, 9.526001)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, 10.026282, 3.3086019, -76.49777)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Rocks"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, -41.35012, 12.994053, -70.48079)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="Floor2" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(0.95236397, 0, 0.30496404, 0.025110304, 0.99660444, -0.07841629, -0.30392852, 0.08233857, 0.9491302, -9.690183, 0, -197.46542)
+
+[node name="Floor" type="CSGBox3D" parent="Terrain/Floor2"]
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor2" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor3" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall1" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.6868025, 0.5908917, -0.42326087, -0.65103096, 0.75904423, 0.0032682642, 0.3232046, 0.27331078, 0.9060019, -30.878906, 10.097633, -1.5463562)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall2" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall3" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall4" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, 0)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall5" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall6" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor4" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -0.49210882, 0.071866035, -52.546745)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor5" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -5.363805, 2.4242363, -71.4704)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor6" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -10.287396, 4.801668, -90.59566)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall7" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -25.731308, 9.296963, -44.902428)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall8" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -30.603004, 11.649335, -63.82609)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall9" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -35.5266, 14.026765, -82.95134)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall10" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 24.7375, 10.887483, -57.697365)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall11" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 19.865803, 13.239854, -76.62103)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall12" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 14.94221, 15.617284, -95.74628)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor7" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -10.738976, 2.844202, -103.48591)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor8" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -13.141386, 2.0246716, -123.00329)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor9" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -15.569386, 1.1964064, -142.72862)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall13" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -37.407143, 10.630625, -100.530266)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall14" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -39.809544, 9.811091, -120.04765)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall15" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -42.237556, 8.982828, -139.77298)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall16" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 14.073364, 15.158173, -107.05713)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall17" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 11.67095, 14.338639, -126.57453)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall18" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 9.242958, 13.510378, -146.29984)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor10" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -16.87448, -0.8388314, -150.11009)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor11" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -14.4150505, -0.24497747, -169.62856)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor12" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -11.929403, 0.35520124, -189.35497)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall19" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -43.45273, 7.193198, -153.21472)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall20" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -40.993282, 7.7870517, -172.73322)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall21" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -38.507652, 8.387231, -192.45961)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall22" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 8.055683, 11.252979, -146.60086)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall23" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 10.515118, 11.846832, -166.11934)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall24" type="CSGBox3D" parent="Terrain/Floor2"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 13.000763, 12.447012, -185.8457)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Rocks2" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(0.95236397, 0, 0.30496404, 0.025110304, 0.99660444, -0.07841629, -0.30392852, 0.08233857, 0.9491302, -9.690183, 0, -197.46542)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -16.652369, 2.5866241, -12.240849)
+size = Vector3(8, 8, 8)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 14.837637, 2.5866241, -12.240849)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -15.739819, 2.5866241, -32.152115)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.617004, 14.189545, -58.867676)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 11.495743, 14.189541, -95.73358)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 4.482464, 4.8851585, -84.38963)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -44.13531, 12.033678, -128.9748)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 6.3235855, 12.033678, -157.113)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.913788, 5.0479374, -184.80397)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.06457181, -0.8431186, 0.53383696, -0.9939418, 0.10201689, 0.04089589, -0.08894051, -0.5279621, -0.84459805, -17.852106, 4.793416, -50.75182)
+size = Vector3(17.279297, 8, 8)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.06457182, -0.84311867, 0.5338369, -0.9750228, -0.060617454, -0.21367326, 0.21251166, -0.5343003, -0.81814545, 15.853593, 7.1595244, -42.28806)
+size = Vector3(21.938965, 5.5584717, 6.9990234)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.29105565, -0.7646553, 0.57496893, -0.9328052, -0.36031353, -0.0069870176, 0.21251164, -0.5343003, -0.81814545, -28.875563, 8.981042, -94.35404)
+size = Vector3(12.377808, 5.5584717, 10.022949)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.7576231, -0.6492712, -0.066741966, -0.5419692, 0.6827818, -0.48997822, 0.3636988, -0.33504662, -0.86917585, 8.762268, 11.966594, -138.1374)
+size = Vector3(25.885712, 5.5584717, 16.123291)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.76739556, 0.30155388, 0.5658351, 0.4580602, 0.8753525, 0.15472317, -0.44864762, 0.37792057, -0.8098717, -33.74672, 6.8852673, -208.65965)
+size = Vector3(25.885712, 5.5584717, 21.309692)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -35.271084, 5.128192, -153.065)
+size = Vector3(25.885712, 5.5584717, 9.526001)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -29.214039, 0.33506632, -120.92546)
+size = Vector3(14.3710785, 5.5584717, 9.526001)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, 10.026282, 3.3086019, -76.49777)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Rocks2"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, -41.35012, 12.994053, -70.48079)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="Floor3" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(0.9315336, -0.05179278, -0.35994855, 0.07744118, 0.9953549, 0.057193972, 0.3553142, -0.081152864, 0.9312176, -75.18288, 12.454628, -382.78348)
+
+[node name="Floor" type="CSGBox3D" parent="Terrain/Floor3"]
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor2" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor3" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall1" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, 0)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall2" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall3" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall4" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, 0)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall5" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -19.68177)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall6" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.73287547, -0.6803628, 0, 0.6803628, 0.73287547, 0, 0, 0, 1, 26.039919, 10.097632, -39.573204)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor4" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -0.49210882, 0.071866035, -52.546745)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor5" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -5.363805, 2.4242363, -71.4704)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor6" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.968882, 0, 0.24752328, 0.030534223, 0.9923621, -0.119520314, -0.24563271, 0.123358995, 0.9614818, -10.287396, 4.801668, -90.59566)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall7" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -25.731308, 9.296963, -44.902428)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall8" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -30.603004, 11.649335, -63.82609)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall9" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71246964, 0.65659666, 0.24752322, -0.6500554, 0.7504283, -0.11952029, -0.26422513, -0.07574923, 0.96148163, -35.5266, 14.026765, -82.95134)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall10" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 24.7375, 10.887483, -57.697365)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall11" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 19.865803, 13.239854, -76.62103)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall12" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.71006984, -0.65919125, 0.24752325, 0.6975441, 0.7065034, -0.1195203, -0.09608933, 0.25752616, 0.9614818, 14.94221, 15.617284, -95.74628)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor7" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -10.738976, 2.844202, -103.48591)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor8" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -13.141386, 2.0246716, -123.00329)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor9" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.98830414, -0.09140975, 0.122062586, 0.086918235, 0.9953448, 0.04163921, -0.12530057, -0.030542737, 0.9916486, -15.569386, 1.1964064, -142.72862)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall13" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -37.407143, 10.630625, -100.530266)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall14" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -39.809544, 9.811091, -120.04765)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall15" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78869885, 0.6025405, 0.122062586, -0.6106147, 0.7908324, 0.041639198, -0.071441785, -0.10737398, 0.99164855, -42.237556, 8.982828, -139.77298)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall16" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 14.073364, 15.158173, -107.05713)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall17" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 11.67095, 14.338639, -126.57453)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall18" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.662112, -0.7393973, 0.12206253, 0.74089587, 0.6703277, 0.041639257, -0.11260995, 0.062865935, 0.9916485, 9.242958, 13.510378, -146.29984)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor10" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -16.87448, -0.8388314, -150.11009)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor11" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -14.4150505, -0.24497747, -169.62856)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Floor12" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.9888399, -0.081122614, -0.12496033, 0.077938214, 0.99650156, -0.030172702, 0.12697089, 0.020096779, 0.991703, -11.929403, 0.35520124, -189.35497)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall19" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -43.45273, 7.193198, -153.21472)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall20" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -40.993282, 7.7870517, -172.73322)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall21" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.78212124, 0.61046815, -0.12496029, -0.61800224, 0.78559726, -0.030172687, 0.07974897, 0.10082446, 0.99170285, -38.507652, 8.387231, -192.45961)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall22" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 8.055683, 11.252979, -146.60086)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall23" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 10.515118, 11.846832, -166.11934)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall24" type="CSGBox3D" parent="Terrain/Floor3"]
+transform = Transform3D(0.66950357, -0.73222256, -0.12496032, 0.7351016, 0.6772852, -0.030172639, 0.10672681, -0.0716577, 0.9917029, 13.000763, 12.447012, -185.8457)
+size = Vector3(30, 0.1, 20)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Rocks3" type="CSGCombiner3D" parent="Terrain"]
+transform = Transform3D(0.9315336, -0.05179278, -0.35994855, 0.07744118, 0.9953549, 0.057193972, 0.3553142, -0.081152864, 0.9312176, -75.18288, 12.454628, -382.78348)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -16.652369, 2.5866241, -12.240849)
+size = Vector3(8, 8, 8)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 14.837637, 2.5866241, -12.240849)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -15.739819, 2.5866241, -32.152115)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.617004, 14.189545, -58.867676)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 11.495743, 14.189541, -95.73358)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 4.482464, 4.8851585, -84.38963)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -44.13531, 12.033678, -128.9748)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, 6.3235855, 12.033678, -157.113)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.6674997, 0.5593231, 0.4915301, -0.45038676, -0.82894975, 0.33165354, -34.913788, 5.0479374, -184.80397)
+size = Vector3(5, 5, 5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(-0.06457181, -0.8431186, 0.53383696, -0.9939418, 0.10201689, 0.04089589, -0.08894051, -0.5279621, -0.84459805, -17.852106, 4.793416, -50.75182)
+size = Vector3(17.279297, 8, 8)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(-0.06457182, -0.84311867, 0.5338369, -0.9750228, -0.060617454, -0.21367326, 0.21251166, -0.5343003, -0.81814545, 15.853593, 7.1595244, -42.28806)
+size = Vector3(21.938965, 5.5584717, 6.9990234)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.29105565, -0.7646553, 0.57496893, -0.9328052, -0.36031353, -0.0069870176, 0.21251164, -0.5343003, -0.81814545, -28.875563, 8.981042, -94.35404)
+size = Vector3(12.377808, 5.5584717, 10.022949)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(-0.7576231, -0.6492712, -0.066741966, -0.5419692, 0.6827818, -0.48997822, 0.3636988, -0.33504662, -0.86917585, 8.762268, 11.966594, -138.1374)
+size = Vector3(25.885712, 5.5584717, 16.123291)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -35.271084, 5.128192, -153.065)
+size = Vector3(25.885712, 5.5584717, 9.526001)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -29.214039, 0.33506632, -120.92546)
+size = Vector3(14.3710785, 5.5584717, 9.526001)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, 10.026282, 3.3086019, -76.49777)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Rocks3"]
+transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, -41.35012, 12.994053, -70.48079)
+size = Vector3(20.88134, 5.5584717, 9.526001)
+
+[node name="WaveManager" type="Node3D" parent="."]
+
+[node name="PlayerSpawn" type="Node3D" parent="."]
+
+[node name="BulletsParent" type="Node3D" parent="."]
+
+[node name="EnemyParent" type="Node3D" parent="."]
+
+[node name="PathNodes" type="Node3D" parent="."]
+
+[node name="Path_1" type="Path3D" parent="PathNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.605179, 0)
+curve = SubResource("Curve3D_ihhpb")
