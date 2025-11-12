@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://p644gpr2dec2"]
+
+[ext_resource type="Script" uid="uid://bpkp4rsxx3nb3" path="res://gameplay/player/player_root.gd" id="1_jgd4k"]
+[ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/input_target.gd" id="2_jhpp0"]
+[ext_resource type="Script" uid="uid://oesmiypqg3xy" path="res://gameplay/player/ship_root.gd" id="3_n3mgn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgd4k"]
+albedo_color = Color(0, 0, 2.102475, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jhpp0"]
+material = SubResource("StandardMaterial3D_jgd4k")
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_aq381"]
+size = Vector3(0.75, 0.3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sec8t"]
+
+[node name="Player_Root" type="PathFollow3D"]
+script = ExtResource("1_jgd4k")
+
+[node name="Input_Target" type="Node3D" parent="."]
+script = ExtResource("2_jhpp0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Input_Target"]
+mesh = SubResource("SphereMesh_jhpp0")
+
+[node name="Ship_Root" type="Node3D" parent="." node_paths=PackedStringArray("input_target")]
+script = ExtResource("3_n3mgn")
+input_target = NodePath("../Input_Target")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship_Root"]
+mesh = SubResource("BoxMesh_aq381")
+
+[node name="Area3D" type="Area3D" parent="Ship_Root"]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, -3.7252903e-09, 0, 0, 0.9999999, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Root/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, -3.7252903e-09, 0, 0, 0.9999999, 0, 0, 0)
+shape = SubResource("BoxShape3D_sec8t")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Ship_Root"]
+light_color = Color(0.9504, 0.96, 0.672, 1)
+light_energy = 0.5
+spot_range = 100.0
+spot_attenuation = 0.25
+
+[node name="Weapon_Muzzle" type="Marker3D" parent="Ship_Root"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
+fov = 40.0

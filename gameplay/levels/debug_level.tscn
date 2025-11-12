@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://shvx0x7woun8"]
+[gd_scene load_steps=8 format=3 uid="uid://shvx0x7woun8"]
 
 [ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
+[ext_resource type="PackedScene" uid="uid://p644gpr2dec2" path="res://gameplay/player/player_root.tscn" id="2_5t2ux"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6mttl"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5t2ux"]
+sky_top_color = Color(0.09338585, 0.12064981, 0.15927172, 1)
+sky_horizon_color = Color(0.14385301, 0.14813328, 0.15455309, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.14334595, 0.14818978, 0.1554555, 1)
 
-[sub_resource type="Sky" id="Sky_5t2ux"]
-sky_material = SubResource("ProceduralSkyMaterial_6mttl")
+[sub_resource type="Sky" id="Sky_so80d"]
+sky_material = SubResource("ProceduralSkyMaterial_5t2ux")
 
 [sub_resource type="Environment" id="Environment_so80d"]
 background_mode = 2
-sky = SubResource("Sky_5t2ux")
+sky = SubResource("Sky_so80d")
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
 
@@ -31,19 +36,10 @@ script = ExtResource("1_6mttl")
 
 [node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="HeadsUpDisplay"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -23.0
-offset_top = -11.5
-offset_right = 23.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Game"
+[node name="Debug_Label" type="Label" parent="HeadsUpDisplay"]
+offset_right = 46.0
+offset_bottom = 23.0
+text = "Debug_Label"
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -52,6 +48,7 @@ environment = SubResource("Environment_so80d")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.05
 shadow_enabled = true
 
 [node name="Terrain" type="Node3D" parent="."]
@@ -830,3 +827,6 @@ size = Vector3(20.88134, 5.5584717, 9.526001)
 [node name="Path_1" type="Path3D" parent="PathNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.605179, 0)
 curve = SubResource("Curve3D_ihhpb")
+
+[node name="Player_Root" parent="PathNodes/Path_1" instance=ExtResource("2_5t2ux")]
+transform = Transform3D(0.99003947, -0.0025804548, 0.1407665, 2.3283064e-10, 0.99983203, 0.018328374, -0.14079015, -0.018145815, 0.9898732, 3.5032692, -5.6157684, 12.88916)
