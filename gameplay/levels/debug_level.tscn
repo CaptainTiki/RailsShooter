@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://shvx0x7woun8"]
+[gd_scene load_steps=9 format=3 uid="uid://shvx0x7woun8"]
 
 [ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
 [ext_resource type="PackedScene" uid="uid://p644gpr2dec2" path="res://gameplay/player/player_root.tscn" id="2_5t2ux"]
+[ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="2_so80d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5t2ux"]
 sky_top_color = Color(0.09338585, 0.12064981, 0.15927172, 1)
@@ -19,6 +20,12 @@ ambient_light_sky_contribution = 0.3
 ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
+fog_light_energy = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_anisotropy = 0.01
+volumetric_fog_length = 100.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfku"]
 albedo_color = Color(0.3936, 0.39504, 0.48, 1)
@@ -31,7 +38,7 @@ _data = {
 }
 point_count = 5
 
-[node name="Level" type="Node3D"]
+[node name="Level" type="Node3D" groups=["level"]]
 script = ExtResource("1_6mttl")
 
 [node name="HeadsUpDisplay" type="CanvasLayer" parent="."]
@@ -818,14 +825,23 @@ size = Vector3(20.88134, 5.5584717, 9.526001)
 
 [node name="PlayerSpawn" type="Node3D" parent="."]
 
-[node name="BulletsParent" type="Node3D" parent="."]
+[node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
 
 [node name="EnemyParent" type="Node3D" parent="."]
+
+[node name="Enemy" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 8.197519, -143.8657)
+
+[node name="Enemy2" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.050022, 8.197519, -112.049835)
+
+[node name="Enemy3" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.55952, 8.9592495, -160.61378)
 
 [node name="PathNodes" type="Node3D" parent="."]
 
 [node name="Path_1" type="Path3D" parent="PathNodes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.605179, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.07251, 0)
 curve = SubResource("Curve3D_ihhpb")
 
 [node name="Player_Root" parent="PathNodes/Path_1" instance=ExtResource("2_5t2ux")]

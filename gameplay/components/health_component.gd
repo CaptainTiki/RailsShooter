@@ -51,8 +51,10 @@ func get_max_health() -> float:
 
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
+	print("area entered")
 	if area.is_in_group("bullet"):
 		print("collided with bullet")
+		take_damage(area.damage)
 	if area.is_in_group("enemy"):
 		print("collided with enemy")
 	if area.is_in_group("player"):

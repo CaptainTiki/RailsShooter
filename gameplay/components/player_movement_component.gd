@@ -1,2 +1,0 @@
-extends MovementComponent
-class_name PlayerMovementComponent
