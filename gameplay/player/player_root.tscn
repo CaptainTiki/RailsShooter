@@ -53,7 +53,6 @@ camera = NodePath("FollowCamera")
 script = ExtResource("2_jhpp0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Input_Target"]
-visible = false
 mesh = SubResource("SphereMesh_jhpp0")
 
 [node name="Ship_Root" type="Node3D" parent="." node_paths=PackedStringArray("input_target", "camera")]

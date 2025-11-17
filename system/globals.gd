@@ -2,6 +2,10 @@ extends Node
 
 enum Rarity {NONE, COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 
+@export_category("Difficulty Settings")
+var aim_assist_strength : float = 0.5
+
+@export_category("User Settings")
 var invert_y : float = -1
 
 func _input(event: InputEvent) -> void:

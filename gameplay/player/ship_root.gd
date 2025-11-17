@@ -1,37 +1,38 @@
 extends Node3D
 
+@export_category("Node Links")
 @export var input_target : InputTarget
 @export var camera : FollowCamera
 
-var deadzone : float = 0.05
+@export_category("Movement Variables")
+@export var move_speed : float = 10
+@export var rotation_speed : float = 6
+@export var max_pitch_angle : float = 0.3
+@export var max_yaw_angle : float = 0.3
+@export var max_roll_angle : float = 0.5
+@export var barrel_roll_duration : float = 1.0 #in seconds
+@export var num_barrel_rolls : int = 1
+@export var barrel_roll_cooldown = 3.0
 
-var thrust_accel : float = 30
-var rotation_speed : float = 6
 var velocity : Vector3 = Vector3.ZERO
-var roll_tween : Tween
-var drag : float = 20
-var max_pitch_rotation : float = 1
-var max_bank_rotation : float = 1
 
+var roll_tween : Tween #used for barrel rolls
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("dodge_roll"):
 		dodge_roll()
 	
-	var input_dir = Vector3(input_target.position.x, input_target.position.y, 0)
-	velocity += input_dir * thrust_accel * delta
-	velocity = velocity.move_toward(Vector3.ZERO, drag * delta)
-	
+	velocity = Vector3(input_target.virtual_stick.x, input_target.virtual_stick.y, 0)
 	position += velocity * delta
 	position.x = clamp(position.x, -8, 8)
 	position.y = clamp(position.y, -6, 2.5)
 	
-	var target_rot_x = input_target.position.y * max_pitch_rotation
-	var target_rot_z = -input_target.position.x * max_bank_rotation
-	var target_rot_y = target_rot_z
+	#TODO: hook up faster yaw while banking (roll)
+	var target_rot_x = input_target.position.y * max_pitch_angle
+	var target_rot_y = input_target.position.x * max_yaw_angle
 	
-	rotation = rotation.lerp(Vector3(target_rot_x, target_rot_y, rotation.z), rotation_speed * delta)
+	rotation = rotation.lerp(Vector3(target_rot_x, target_rot_y, 0), rotation_speed * delta)
 	
 	camera.set_pos(position)
 
