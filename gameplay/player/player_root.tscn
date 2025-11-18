@@ -8,16 +8,6 @@
 [ext_resource type="Script" uid="uid://d2vke2b5gxy08" path="res://gameplay/player/follow_camera.gd" id="6_ptojr"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/player/Reticle.png" id="6_ynfs2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgd4k"]
-albedo_color = Color(0, 0, 2.102475, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_jhpp0"]
-material = SubResource("StandardMaterial3D_jgd4k")
-radius = 0.2
-height = 0.4
-radial_segments = 8
-rings = 4
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_sec8t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgtnq"]
@@ -45,19 +35,23 @@ albedo_texture = SubResource("CompressedTexture2D_4ysll")
 material = SubResource("StandardMaterial3D_37o1b")
 size = Vector2(0.15, 0.15)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgd4k"]
+albedo_color = Color(0, 0, 2.102475, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jhpp0"]
+material = SubResource("StandardMaterial3D_jgd4k")
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 4
+
 [node name="Player_Root" type="PathFollow3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_jgd4k")
 camera = NodePath("FollowCamera")
 
-[node name="Input_Target" type="Node3D" parent="."]
-script = ExtResource("2_jhpp0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Input_Target"]
-mesh = SubResource("SphereMesh_jhpp0")
-
 [node name="Ship_Root" type="Node3D" parent="." node_paths=PackedStringArray("input_target", "camera")]
 script = ExtResource("3_n3mgn")
-input_target = NodePath("../Input_Target")
+input_target = NodePath("../FollowCamera/Input_Target")
 camera = NodePath("../FollowCamera")
 
 [node name="mesh_craft_miner2" parent="Ship_Root" instance=ExtResource("4_jhpp0")]
@@ -72,20 +66,23 @@ shape = SubResource("BoxShape3D_sec8t")
 
 [node name="AreaLight" type="SpotLight3D" parent="Ship_Root"]
 light_color = Color(0.9504, 0.96, 0.672, 1)
-light_energy = 0.4
+light_energy = 3.0
 spot_range = 100.0
-spot_attenuation = 0.25
+spot_angle = 60.0
 
 [node name="SpotLight" type="SpotLight3D" parent="Ship_Root"]
 light_color = Color(0.9504, 0.96, 0.672, 1)
-light_energy = 0.6
-spot_range = 75.0
-spot_attenuation = 0.25
-spot_angle = 20.0
+light_energy = 4.0
+light_volumetric_fog_energy = 0.5
+spot_range = 300.0
+spot_attenuation = 0.5
+spot_angle = 35.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.340755)
-light_energy = 0.5
+light_color = Color(0.93192214, 0.98897463, 0.75807405, 1)
+omni_range = 40.0
+omni_attenuation = 0.55
 
 [node name="Weapon" type="Node3D" parent="Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
@@ -103,7 +100,23 @@ mesh = SubResource("QuadMesh_wk61r")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 mesh = SubResource("QuadMesh_xw8sf")
 
-[node name="FollowCamera" type="Camera3D" parent="."]
+[node name="RollCooldown" type="Timer" parent="Ship_Root"]
+wait_time = 3.0
+one_shot = true
+
+[node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("ship_root")]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
 fov = 40.0
 script = ExtResource("6_ptojr")
+ship_root = NodePath("../Ship_Root")
+
+[node name="Input_Target" type="Node3D" parent="FollowCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.99254614, -0.12186935, 0, 0.12186935, 0.99254614, 0, 0.22614735, -10.047331)
+script = ExtResource("2_jhpp0")
+
+[node name="Bank_Input_Timer" type="Timer" parent="FollowCamera/Input_Target"]
+wait_time = 0.25
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FollowCamera/Input_Target"]
+mesh = SubResource("SphereMesh_jhpp0")

@@ -18,12 +18,14 @@ background_mode = 2
 sky = SubResource("Sky_so80d")
 ambient_light_sky_contribution = 0.3
 ambient_light_energy = 0.0
-tonemap_mode = 2
+tonemap_mode = 3
 glow_enabled = true
 fog_light_energy = 0.1
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.015
-volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.3331685, 0.1857855, 0.046254933, 1)
+volumetric_fog_emission = Color(1.4401623e-07, 0.06767299, 0.00013532562, 1)
+volumetric_fog_emission_energy = 0.1
 volumetric_fog_anisotropy = 0.01
 volumetric_fog_length = 100.0
 
@@ -806,7 +808,7 @@ transform = Transform3D(-0.7576231, -0.6492712, -0.066741966, -0.5419692, 0.6827
 size = Vector3(25.885712, 5.5584717, 16.123291)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Rocks3"]
-transform = Transform3D(0.16623253, -0.6640555, -0.7289698, -0.83252776, 0.30166304, -0.46464762, 0.5284549, 0.68412733, -0.5026983, -35.271084, 5.128192, -153.065)
+transform = Transform3D(0.16623253, -0.6640556, -0.72896993, -0.83252776, 0.3016631, -0.46464768, 0.52845496, 0.68412733, -0.5026984, -35.271088, 5.1281967, -153.06503)
 size = Vector3(25.885712, 5.5584717, 9.526001)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Rocks3"]
@@ -831,6 +833,33 @@ size = Vector3(20.88134, 5.5584717, 9.526001)
 
 [node name="Enemy" parent="EnemyParent" instance=ExtResource("2_so80d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 8.197519, -143.8657)
+
+[node name="Enemy4" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 2.7957516, -203.0435)
+
+[node name="Enemy5" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.21408, 6.220541, -222.05334)
+
+[node name="Enemy6" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.037815, 11.817368, -262.07056)
+
+[node name="Enemy7" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.089684, 10.993725, -262.07056)
+
+[node name="Enemy8" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.863438, 14.606722, -294.4823)
+
+[node name="Enemy9" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.19865, 18.857635, -377.2603)
+
+[node name="Enemy10" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.563835, 20.903234, -416.33453)
+
+[node name="Enemy11" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.78078, 20.032803, -457.09225)
+
+[node name="Enemy12" parent="EnemyParent" instance=ExtResource("2_so80d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.62769, 21.2347, -471.7124)
 
 [node name="Enemy2" parent="EnemyParent" instance=ExtResource("2_so80d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.050022, 8.197519, -112.049835)

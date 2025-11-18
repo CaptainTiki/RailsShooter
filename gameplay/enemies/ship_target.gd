@@ -1,0 +1,2 @@
+extends Targetable
+class_name ShipTarget

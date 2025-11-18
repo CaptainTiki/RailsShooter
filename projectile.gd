@@ -4,7 +4,7 @@ class_name Projectile
 var speed : float = 75
 var direction : Vector3 = Vector3.ZERO
 
-var damage : float = 2
+var damage : float = 5
 
 func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta

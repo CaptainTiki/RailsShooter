@@ -45,13 +45,12 @@ func get_combined_input() -> void:
 	bank_dir = 0
 	
 	if Input.is_action_just_pressed("bank_left"):
-		if bank_timer.is_stopped(): #we just pressed the button - and we had pressed earlier
+		if not bank_timer.is_stopped(): #we just pressed the button - and we had pressed earlier
 			bank_timer.start()
 		else:
 			roll_left.emit()
-
 	if Input.is_action_just_pressed("bank_right"):
-		if bank_timer.is_stopped():
+		if bank_right_pressed and bank_timer.is_stopped():
 			bank_timer.start()
 		else:
 			roll_right.emit()

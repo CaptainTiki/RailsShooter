@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0jcxoe5h3qg2"]
+[gd_scene load_steps=8 format=3 uid="uid://c0jcxoe5h3qg2"]
 
 [ext_resource type="Script" uid="uid://bfe7mbe64obpw" path="res://gameplay/enemies/enemy.gd" id="1_jpanq"]
 [ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="2_gmro5"]
 [ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="3_tay03"]
 [ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="4_p7lxo"]
 [ext_resource type="PackedScene" uid="uid://b8w4jm5vnutod" path="res://assets/enemies/rocket_baseB.glb" id="5_5sd5k"]
+[ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="6_tay03"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6sj2a"]
 
@@ -35,5 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9973583, -0.594649, -1.503
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5430789, 0, 0)
 light_color = Color(0.6587788, 0.65987813, 0.54734355, 1)
 light_energy = 0.25
+
+[node name="Target_Node" type="Node3D" parent="."]
+script = ExtResource("6_tay03")
 
 [editable path="Health"]
