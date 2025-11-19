@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0jcxoe5h3qg2"]
+[gd_scene load_steps=11 format=3 uid="uid://c0jcxoe5h3qg2"]
 
 [ext_resource type="Script" uid="uid://bfe7mbe64obpw" path="res://gameplay/enemies/enemy.gd" id="1_jpanq"]
 [ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="2_gmro5"]
@@ -6,8 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="4_p7lxo"]
 [ext_resource type="PackedScene" uid="uid://b8w4jm5vnutod" path="res://assets/enemies/rocket_baseB.glb" id="5_5sd5k"]
 [ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="6_tay03"]
+[ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="7_p7lxo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6sj2a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sd5k"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.36416414, 0.66427493, 1.4683453, 1)
+albedo_texture = ExtResource("7_p7lxo")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_6sj2a"]
+material = SubResource("StandardMaterial3D_5sd5k")
+size = Vector2(2.5, 2.5)
 
 [node name="Enemy" type="Area3D"]
 collision_layer = 256
@@ -39,5 +51,8 @@ light_energy = 0.25
 
 [node name="Target_Node" type="Node3D" parent="."]
 script = ExtResource("6_tay03")
+
+[node name="Reticle_Mesh" type="MeshInstance3D" parent="Target_Node"]
+mesh = SubResource("QuadMesh_6sj2a")
 
 [editable path="Health"]

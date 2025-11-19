@@ -30,6 +30,7 @@ BulletsParent=""
 bullet=""
 player=""
 targetable=""
+targeting_component=""
 
 [input]
 
