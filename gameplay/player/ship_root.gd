@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 class_name ShipRoot
 
 @export_category("Node Links")
@@ -17,6 +17,7 @@ class_name ShipRoot
 @export var barrel_roll_cooldown = 3.0
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
+@onready var weapon: Weapon = $Weapon
 
 var velocity : Vector3 = Vector3.ZERO
 
@@ -26,6 +27,12 @@ var is_rolling : bool = false
 func _ready() -> void:
 	input_target.roll_left.connect(roll_left)
 	input_target.roll_right.connect(roll_right)
+
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("fire_primary"):
+		weapon.fire_guns()
+	if Input.is_action_pressed("fire_secondary"):
+		weapon.fire_torp()
 
 func _physics_process(delta: float) -> void:
 	

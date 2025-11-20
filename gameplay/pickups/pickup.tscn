@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://duws33hexo8p0"]
+
+[ext_resource type="Script" uid="uid://7gw40jym2ry1" path="res://gameplay/pickups/pickup.gd" id="1_3gfqk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gfqk"]
+albedo_color = Color(0.5042207, 1.6163259, 0.3331278, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gcb4p"]
+material = SubResource("StandardMaterial3D_3gfqk")
+top_radius = 0.2
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3gfqk"]
+radius = 0.75
+
+[node name="Pickup" type="Area3D"]
+collision_layer = 131072
+script = ExtResource("1_3gfqk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_gcb4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3gfqk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

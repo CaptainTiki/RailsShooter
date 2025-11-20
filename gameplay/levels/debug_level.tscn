@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://shvx0x7woun8"]
+[gd_scene load_steps=10 format=3 uid="uid://shvx0x7woun8"]
 
 [ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
 [ext_resource type="PackedScene" uid="uid://p644gpr2dec2" path="res://gameplay/player/player_root.tscn" id="2_5t2ux"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="2_so80d"]
+[ext_resource type="PackedScene" uid="uid://duws33hexo8p0" path="res://gameplay/pickups/pickup.tscn" id="4_gpfku"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5t2ux"]
 sky_top_color = Color(0.09338585, 0.12064981, 0.15927172, 1)
@@ -823,6 +824,15 @@ size = Vector3(20.88134, 5.5584717, 9.526001)
 transform = Transform3D(-0.5377789, -0.2824717, -0.79435724, -0.83026546, 0.3411274, 0.4407844, 0.14646782, 0.8965725, -0.41797763, -41.35012, 12.994053, -70.48079)
 size = Vector3(20.88134, 5.5584717, 9.526001)
 
+[node name="PathNodes" type="Node3D" parent="."]
+
+[node name="Path_1" type="Path3D" parent="PathNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.07251, 0)
+curve = SubResource("Curve3D_ihhpb")
+
+[node name="Player_Root" parent="PathNodes/Path_1" instance=ExtResource("2_5t2ux")]
+transform = Transform3D(0.99003947, -0.0025804548, 0.1407665, 2.3283064e-10, 0.99983203, 0.018328374, -0.14079015, -0.018145815, 0.9898732, 3.5032692, -5.6157684, 12.88916)
+
 [node name="WaveManager" type="Node3D" parent="."]
 
 [node name="PlayerSpawn" type="Node3D" parent="."]
@@ -867,11 +877,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.050022, 8.197519, -112.04
 [node name="Enemy3" parent="EnemyParent" instance=ExtResource("2_so80d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.55952, 8.9592495, -160.61378)
 
-[node name="PathNodes" type="Node3D" parent="."]
-
-[node name="Path_1" type="Path3D" parent="PathNodes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.07251, 0)
-curve = SubResource("Curve3D_ihhpb")
-
-[node name="Player_Root" parent="PathNodes/Path_1" instance=ExtResource("2_5t2ux")]
-transform = Transform3D(0.99003947, -0.0025804548, 0.1407665, 2.3283064e-10, 0.99983203, 0.018328374, -0.14079015, -0.018145815, 0.9898732, 3.5032692, -5.6157684, 12.88916)
+[node name="Pickup" parent="." instance=ExtResource("4_gpfku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.705494, 9.822474, -105.25863)

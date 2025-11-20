@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmt6b25ultidd"]
+
+[ext_resource type="Script" uid="uid://c8xp2efxiu5dl" path="res://gameplay/projectiles/bullets/basic_bullet_proj.gd" id="1_n04bv"]
+[ext_resource type="Shader" uid="uid://cs7s14urvkh7v" path="res://assets/shaders/bullet_blue.tres" id="2_0vbg0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qxf0c"]
+render_priority = 0
+shader = ExtResource("2_0vbg0")
+shader_parameter/ColorParameter = Color(0, 0.5412354, 1.2322686, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dgwo2"]
+material = SubResource("ShaderMaterial_qxf0c")
+top_radius = 0.0
+bottom_radius = 0.15
+height = 0.5
+radial_segments = 6
+rings = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a85iw"]
+radius = 0.3
+
+[node name="BasicBulletProj" type="Area3D" groups=["bullet"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_n04bv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_dgwo2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.9903333, 0.71000004, 1)
+light_energy = 0.5
+omni_attenuation = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_a85iw")

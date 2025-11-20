@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b3vbec3i5cspn"]
 
 [ext_resource type="Shader" uid="uid://cs7s14urvkh7v" path="res://assets/shaders/bullet_blue.tres" id="1_a85iw"]
-[ext_resource type="Script" uid="uid://c11wme7pe77fl" path="res://projectile.gd" id="1_qxf0c"]
+[ext_resource type="Script" uid="uid://c11wme7pe77fl" path="res://gameplay/projectiles/projectile.gd" id="1_qxf0c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qxf0c"]
 render_priority = 0
