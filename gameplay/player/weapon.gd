@@ -11,8 +11,8 @@ var current_torps : int = 6
 
 var max_power : float = 100
 var current_power : float = 100
-var power_regen_rate : float = 12
-var power_per_shot : float = 8
+var power_regen_rate : float = 20
+var power_per_shot : float = 12
 
 var bullet_scene = preload("res://gameplay/projectiles/bullets/basic_bullet_proj.tscn")
 var torp_scene = preload("res://gameplay/projectiles/torpedos/basic_torp_proj.tscn")

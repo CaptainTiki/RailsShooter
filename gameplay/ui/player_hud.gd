@@ -18,6 +18,7 @@ extends Node3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 @onready var weapon: Weapon = %Weapon
+@onready var ship_root: ShipRoot = $".."
 
 
 func _ready() -> void:
@@ -28,6 +29,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_update_weapon_UI()
+	_update_engine_UI()
 	_update_ship_UI()
 
 func _update_weapon_UI() -> void:
@@ -39,12 +41,19 @@ func _update_ship_UI() -> void:
 	health_bar.value = health.current_health
 	shields_bar.value = shields.current_shields
 
+func _update_engine_UI() -> void:
+	#boost_power_bar_left.value = ship_root.engine_power
+	#boost_power_bar_right.value = ship_root.engine_power
+	pass
+	
 func _setup_UI() -> void:
 	guns_power_bar.max_value = weapon.max_power
 	torps_ammo_bar.max_value = weapon.max_torps
 	health_bar.max_value = health.max_health
 	shields_bar.max_value = shields.max_shield
-	guns_power_bar.value = weapon.current_power
-	torps_ammo_bar.value = weapon.current_torps
-	health_bar.value = health.current_health
-	shields_bar.value = shields.current_shields
+	guns_power_bar.max_value = weapon.max_power
+	torps_ammo_bar.max_value = weapon.max_torps
+	health_bar.max_value = health.max_health
+	shields_bar.max_value = shields.max_shield
+	boost_power_bar_left.max_value = ship_root.max_engine_power
+	boost_power_bar_right.max_value = ship_root.max_engine_power

@@ -19,6 +19,9 @@ size = Vector2(1.6, 0.9)
 [node name="PlayerHud" type="Node3D"]
 script = ExtResource("1_np855")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_dj84k")
 
@@ -28,7 +31,6 @@ transparent_bg = true
 handle_input_locally = false
 gui_disable_input = true
 size = Vector2i(1024, 512)
-render_target_update_mode = 4
 
 [node name="HUD_root" type="Control" parent="Hud_SubViewport"]
 layout_mode = 3
@@ -65,19 +67,19 @@ offset_right = 12.0
 grow_vertical = 2
 theme_override_constants/separation = 11
 
-[node name="Guns_PowerBar" type="ProgressBar" parent="Hud_SubViewport/HUD_root/MarginContainer/LeftDock/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-value = 80.0
-fill_mode = 3
-show_percentage = false
-
 [node name="Torps_AmmoBar" type="ProgressBar" parent="Hud_SubViewport/HUD_root/MarginContainer/LeftDock/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 62.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Guns_PowerBar" type="ProgressBar" parent="Hud_SubViewport/HUD_root/MarginContainer/LeftDock/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 80.0
 fill_mode = 3
 show_percentage = false
 

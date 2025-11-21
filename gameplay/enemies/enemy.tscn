@@ -10,7 +10,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6sj2a"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sd5k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7lxo"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.36416414, 0.66427493, 1.4683453, 1)
@@ -18,7 +18,7 @@ albedo_texture = ExtResource("7_p7lxo")
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_6sj2a"]
-material = SubResource("StandardMaterial3D_5sd5k")
+material = SubResource("StandardMaterial3D_p7lxo")
 size = Vector2(2.5, 2.5)
 
 [node name="Enemy" type="Area3D"]

@@ -81,8 +81,6 @@ func get_mouse_input() -> void:
 	
 	virtual_stick.x = input_vector.x
 	virtual_stick.y = input_vector.y * Globals.invert_y
-	
-	#print("virtual_stick: ", virtual_stick)
 
 func get_gamepad_input() -> void:
 	#don't need deadzone for gamepad inputs

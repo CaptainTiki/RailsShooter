@@ -15,9 +15,15 @@ class_name ShipRoot
 @export var barrel_roll_duration : float = 1.0 #in seconds
 @export var num_barrel_rolls : int = 4
 @export var barrel_roll_cooldown = 3.0
+@export var max_engine_power = 100
+@export var boost_power = 100
+@export var boost_power_regen = 12
+@export var boost_power_cost = 32
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
 @onready var weapon: Weapon = $Weapon
+@onready var player_root: PlayerRoot = $".."
+@onready var cargo_hold: CargoHold = $CargoHold
 
 var velocity : Vector3 = Vector3.ZERO
 
@@ -33,6 +39,22 @@ func _process(delta: float) -> void:
 		weapon.fire_guns()
 	if Input.is_action_pressed("fire_secondary"):
 		weapon.fire_torp()
+	
+	if Input.is_action_pressed("brake"):
+		if boost_power > boost_power_cost:
+			boost_power -= boost_power_cost * delta
+			player_root.brake_ship(delta)
+	if Input.is_action_pressed("boost"):
+		if boost_power > boost_power_cost:
+			boost_power -= boost_power_cost * delta
+			player_root.boost_ship(delta)
+	
+	if Input.is_action_just_released("brake"):
+		camera.set_zoom_in(false)
+	if Input.is_action_just_released("boost"):
+		camera.set_zoom_out(false)
+		
+	boost_power = min(max_engine_power, boost_power + boost_power_regen * delta)
 
 func _physics_process(delta: float) -> void:
 	
@@ -74,3 +96,6 @@ func finish_roll() -> void:
 	roll_cooldown_timer.start()
 	is_rolling = false
 	rotation.z = 0
+
+func add_cargo(a_ore : int, p_shard : int, e_alloy : int, svage : int) -> void:
+	cargo_hold.add_cargo(a_ore, p_shard, e_alloy, svage)

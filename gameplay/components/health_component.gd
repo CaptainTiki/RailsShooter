@@ -38,7 +38,6 @@ func increase_max_health(amount : float) -> void:
 	max_health+= amount
 
 func die() -> void:
-	print(get_parent().name, " died")
 	died.emit()
 
 #public api  ----------------------------------------------------------------
@@ -49,16 +48,16 @@ func get_current_health() -> float:
 func get_max_health() -> float:
 	return max_health
 
-
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	print("area entered")
 	if area.is_in_group("bullet"):
-		print("collided with bullet")
 		take_damage(area.damage)
+		if area is Projectile:
+			area.free_projectile()
 	if area.is_in_group("enemy"):
-		print("collided with enemy")
+		print("placeholder: collided with enemy")
 	if area.is_in_group("player"):
-		print("collided with player")
+		print("placeholder: collided with player")
 
 ##check for any area overlapping (for times that we're still inside an area)
 func _check_for_overlap() -> void:

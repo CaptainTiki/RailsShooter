@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://shvx0x7woun8"]
+[gd_scene load_steps=11 format=3 uid="uid://shvx0x7woun8"]
 
 [ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
 [ext_resource type="PackedScene" uid="uid://p644gpr2dec2" path="res://gameplay/player/player_root.tscn" id="2_5t2ux"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="2_so80d"]
 [ext_resource type="PackedScene" uid="uid://duws33hexo8p0" path="res://gameplay/pickups/pickup.tscn" id="4_gpfku"]
+[ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="5_ihhpb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5t2ux"]
 sky_top_color = Color(0.09338585, 0.12064981, 0.15927172, 1)
@@ -879,3 +880,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.55952, 8.9592495, -160.61
 
 [node name="Pickup" parent="." instance=ExtResource("4_gpfku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.705494, 9.822474, -105.25863)
+
+[node name="Mineable" parent="." instance=ExtResource("5_ihhpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, 0.43147755, -172.13322)
+
+[node name="Mineable2" parent="." instance=ExtResource("5_ihhpb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.634961, 0.31939554, -186.44934)

@@ -8,7 +8,6 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.is_in_group("player"):
-		print("collided with player")
 		free_pickup()
 
 func free_pickup() -> void:

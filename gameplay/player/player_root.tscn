@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://p644gpr2dec2"]
+[gd_scene load_steps=23 format=3 uid="uid://p644gpr2dec2"]
 
 [ext_resource type="Script" uid="uid://bpkp4rsxx3nb3" path="res://gameplay/player/player_root.gd" id="1_jgd4k"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/input_target.gd" id="2_jhpp0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cudearsw1ab20" path="res://gameplay/player/targeting_component.gd" id="6_qgtnq"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="6_ynfs2"]
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="7_wk61r"]
+[ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_b8bi6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qgtnq"]
 radius = 0.36816406
@@ -139,6 +140,9 @@ ship_root = NodePath("..")
 
 [node name="PlayerHud" parent="Ship_Root" instance=ExtResource("7_wk61r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51771677)
+
+[node name="CargoHold" type="Node3D" parent="Ship_Root"]
+script = ExtResource("11_b8bi6")
 
 [node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("ship_root")]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)

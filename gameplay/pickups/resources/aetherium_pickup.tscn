@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2coreltljwww"]
+
+[ext_resource type="Script" uid="uid://dv0wi10ew0w6k" path="res://gameplay/pickups/resources/aetherium_pickup.gd" id="1_diddl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diddl"]
+albedo_color = Color(0, 1.3466078, 0.9960738, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_08i7n"]
+material = SubResource("StandardMaterial3D_diddl")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gcb4p"]
+material = SubResource("StandardMaterial3D_diddl")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3gfqk"]
+radius = 0.75
+
+[node name="AetheriumPickup" type="Area3D"]
+collision_layer = 131072
+collision_mask = 2
+script = ExtResource("1_diddl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.22414386, -0.12940952, -0.9659258, -0.5, 0.8660254, 0, 0.83651626, 0.4829629, -0.25881904, -0.23336121, 0, 0.13825107)
+mesh = SubResource("CylinderMesh_08i7n")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.1935527, -0.6531406, 0.38950533, -0.743447, 1.2204957, 0, -0.4832931, -0.26446941, -0.96193206, -0.29353195, 0, -0.13132674)
+mesh = SubResource("CylinderMesh_08i7n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 0, 0.10996902, 0)
+mesh = SubResource("CylinderMesh_gcb4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3gfqk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdpmbyeiqua7m"]
+
+[ext_resource type="Script" uid="uid://wmg4v5rbqo80" path="res://gameplay/pickups/resources/promethium_pickup.gd" id="1_7v7m4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e86c3"]
+albedo_color = Color(1.0367365, 0, 1.3467635, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_08i7n"]
+material = SubResource("StandardMaterial3D_e86c3")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl51c"]
+albedo_color = Color(1.0367365, 0, 1.3467635, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gcb4p"]
+material = SubResource("StandardMaterial3D_jl51c")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3gfqk"]
+radius = 0.75
+
+[node name="PromethiumPickup" type="Area3D"]
+collision_layer = 131072
+script = ExtResource("1_7v7m4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.25465816, -0.088903815, -0.82676345, -0.56806856, 0.5949559, 0, 0.9503972, 0.33179355, -0.2215306, -0.23336121, 0, 0.13825107)
+mesh = SubResource("CylinderMesh_08i7n")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.3879114, -0.35651648, 0.4030762, -0.8645103, 0.66620696, 0, -0.56199276, -0.1443605, -0.99544704, -0.29353195, 0, -0.13132674)
+mesh = SubResource("CylinderMesh_08i7n")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7571489, 0.22691405, 0, -0.43714014, 0.39302665, 0, 0, 0, 1, -0.10276818, -0.02793789, 0)
+mesh = SubResource("CylinderMesh_gcb4p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3gfqk")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

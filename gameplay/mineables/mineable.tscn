@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://v8c1n5heb5he"]
+
+[ext_resource type="Script" uid="uid://dob6mt3yosfer" path="res://gameplay/mineables/mineable.gd" id="1_uqxoh"]
+[ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="2_aqbma"]
+[ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="3_4tc2h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4tc2h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_diddl"]
+albedo_color = Color(0, 1.3466078, 0.9960738, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8padj"]
+material = SubResource("StandardMaterial3D_diddl")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4jxwa"]
+material = SubResource("StandardMaterial3D_diddl")
+top_radius = 0.1
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ks217"]
+albedo_color = Color(0.3390978, 0.23169902, 0.08523505, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a43jq"]
+material = SubResource("StandardMaterial3D_ks217")
+height = 0.5
+radial_segments = 6
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sd5k"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.36416414, 0.66427493, 1.4683453, 1)
+albedo_texture = ExtResource("3_4tc2h")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_8padj"]
+material = SubResource("StandardMaterial3D_5sd5k")
+size = Vector2(2.5, 2.5)
+
+[node name="Mineable" type="Area3D"]
+collision_layer = 262144
+collision_mask = 2
+script = ExtResource("1_uqxoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_4tc2h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.22414386, -0.12940952, -0.9659258, -0.5, 0.8660254, 0, 0.83651626, 0.4829629, -0.25881904, -0.23336121, 0, 0.13825107)
+mesh = SubResource("CylinderMesh_8padj")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.23496848, -0.6850834, -0.8919772, -0.72279966, 1.013774, -0.51498324, 1.277969, 0.69933516, -0.12726694, -0.21201934, -0.12240942, 0.12789236)
+mesh = SubResource("CylinderMesh_8padj")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.055885702, -0.54508466, 0.8365164, -0.5450847, 0.6852953, 0.48296297, -0.8365164, -0.48296297, -0.25881907, -0.22294028, -0.0017333329, -0.18962763)
+mesh = SubResource("CylinderMesh_4jxwa")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.8727567, -0.47907665, 0.09371111, 0.4868491, 0.86826944, -0.0953252, -0.03569843, 0.12881885, 0.9910258, -0.0048083663, -0.3052284, -0.054158688)
+mesh = SubResource("SphereMesh_a43jq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6681861, 0)
+
+[node name="Target_Node" type="Node3D" parent="."]
+script = ExtResource("2_aqbma")
+
+[node name="Reticle_Mesh" type="MeshInstance3D" parent="Target_Node"]
+mesh = SubResource("QuadMesh_8padj")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

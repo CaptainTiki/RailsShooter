@@ -87,3 +87,4 @@ bank_right={
 3d_physics/layer_10="Enemy Bullets"
 3d_physics/layer_17="Terrain"
 3d_physics/layer_18="Pickups"
+3d_physics/layer_19="Mineable"

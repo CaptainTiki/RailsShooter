@@ -4,7 +4,7 @@ class_name Enemy
 @onready var health: HealthComponent = $Health
 @onready var target_node: ShipTarget = $Target_Node
 
-var pickup_scene : PackedScene = preload("res://gameplay/pickups/torp_ammo_pickup.tscn")
+var pickup_scene : PackedScene = preload("res://gameplay/pickups/ship-ammo/torp_ammo_pickup.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
