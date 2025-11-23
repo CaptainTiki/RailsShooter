@@ -2,10 +2,11 @@ extends PathFollow3D
 class_name PlayerRoot
 
 @export var camera : FollowCamera
+@onready var ship_root: ShipRoot = $Ship_Root
 
-var acceleration : float = 6
-var travel_speed : float = 18.0
-var brake_speed : float = 9.0
+var acceleration : float = 6.5
+var travel_speed : float = 14.0
+var brake_speed : float = 6.0
 var boost_speed : float = 24.0
 var current_speed : float = 8
 

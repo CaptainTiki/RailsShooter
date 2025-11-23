@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://p644gpr2dec2"]
+[gd_scene load_steps=26 format=3 uid="uid://p644gpr2dec2"]
 
 [ext_resource type="Script" uid="uid://bpkp4rsxx3nb3" path="res://gameplay/player/player_root.gd" id="1_jgd4k"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/input_target.gd" id="2_jhpp0"]
@@ -13,12 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="6_ynfs2"]
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="7_wk61r"]
 [ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_b8bi6"]
+[ext_resource type="Script" uid="uid://cviqde28ejbaa" path="res://gameplay/player/magnet.gd" id="12_28odr"]
+[ext_resource type="Script" uid="uid://l578yot6eigw" path="res://gameplay/player/ship_stats.gd" id="13_xftqn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qgtnq"]
-radius = 0.36816406
-height = 1.4077148
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_sec8t"]
+radius = 0.558
+height = 1.758
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgtnq"]
 transparency = 1
@@ -45,6 +45,9 @@ albedo_texture = SubResource("CompressedTexture2D_4ysll")
 material = SubResource("StandardMaterial3D_37o1b")
 size = Vector2(0.15, 0.15)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_b8bi6"]
+radius = 4.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgd4k"]
 albedo_color = Color(0, 0, 2.102475, 1)
 
@@ -54,6 +57,9 @@ radius = 0.2
 height = 0.4
 radial_segments = 8
 rings = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28odr"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Player_Root" type="PathFollow3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_jgd4k")
@@ -71,13 +77,6 @@ shape = SubResource("CapsuleShape3D_qgtnq")
 
 [node name="mesh_craft_miner2" parent="Ship_Root" instance=ExtResource("4_jhpp0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.0108918, -0.1848324, -0.7884023)
-
-[node name="Area3D" type="Area3D" parent="Ship_Root"]
-transform = Transform3D(1, 0, 0, 0, 0.99999976, -3.7252903e-09, 0, 0, 0.9999999, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Root/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.99999976, -3.7252903e-09, 0, 0, 0.9999999, 0, 0, 0)
-shape = SubResource("BoxShape3D_sec8t")
 
 [node name="AreaLight" type="SpotLight3D" parent="Ship_Root"]
 light_color = Color(0.9504, 0.96, 0.672, 1)
@@ -98,6 +97,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.340755)
 light_color = Color(0.93192214, 0.98897463, 0.75807405, 1)
 omni_range = 40.0
 omni_attenuation = 0.55
+
+[node name="ShipStats" type="Node" parent="Ship_Root"]
+unique_name_in_owner = true
+script = ExtResource("13_xftqn")
 
 [node name="Health" parent="Ship_Root" node_paths=PackedStringArray("armor", "sheilds") instance=ExtResource("4_xw8sf")]
 armor = NodePath("../Armor")
@@ -140,9 +143,18 @@ ship_root = NodePath("..")
 
 [node name="PlayerHud" parent="Ship_Root" instance=ExtResource("7_wk61r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51771677)
+visible = false
 
 [node name="CargoHold" type="Node3D" parent="Ship_Root"]
 script = ExtResource("11_b8bi6")
+
+[node name="Magnet" type="Area3D" parent="Ship_Root"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("12_28odr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Root/Magnet"]
+shape = SubResource("SphereShape3D_b8bi6")
 
 [node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("ship_root")]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
@@ -160,5 +172,52 @@ one_shot = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FollowCamera/Input_Target"]
 mesh = SubResource("SphereMesh_jhpp0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Ship_HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLeftDock" type="Control" parent="CanvasLayer/Ship_HUD"]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock"]
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 23.0
+
+[node name="CargoLabels" type="HBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer/CargoLabels"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Cargo: "
+
+[node name="cargo_ammount_label" type="Label" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer/CargoLabels"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
+layout_mode = 2
+
+[node name="TriggerCollider" type="Area3D" parent="." groups=["player"]]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerCollider"]
+shape = SubResource("BoxShape3D_28odr")
+debug_color = Color(0.6456532, 0.52246577, 0, 0.41960785)
+
+[connection signal="area_entered" from="Ship_Root/Magnet" to="Ship_Root/Magnet" method="_on_area_entered"]
+[connection signal="area_exited" from="Ship_Root/Magnet" to="Ship_Root/Magnet" method="_on_area_exited"]
 
 [editable path="Ship_Root/Health"]

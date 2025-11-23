@@ -11,6 +11,8 @@ var current_menu : CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("BaseMenu")
+	GameManager.set_gamestate(Globals.GameState.MENUS)
 	_setup_menus()
 
 func _show_menu(new_menu : CanvasLayer) -> void:
@@ -69,18 +71,14 @@ func _unload_menus() -> void:
 func _on_hangar_button_pressed() -> void:
 	_show_menu(hangar_ui)
 
-
 func _on_engineering_button_pressed() -> void:
 	_show_menu(engineering_ui)
-
 
 func _on_production_button_pressed() -> void:
 	_show_menu(production_ui)
 
-
 func _on_research_button_pressed() -> void:
 	_show_menu(research_ui)
-
 
 func _on_command_button_pressed() -> void:
 	_show_menu(command_ui)

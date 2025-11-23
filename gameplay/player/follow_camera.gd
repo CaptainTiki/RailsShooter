@@ -21,8 +21,8 @@ func _physics_process(delta: float) -> void:
 		position.z = move_toward(position.z, camera_zoomout_distance, 2 * spring_speed * delta)
 
 func set_pos(pos : Vector3) -> void:
-	position.x = pos.x * 0.5
-	position.y = pos.y * 0.5
+	position.x = pos.x * 0.75
+	position.y = pos.y * 0.75
 	pass
 
 func set_zoom_in(zoom : bool)-> void:

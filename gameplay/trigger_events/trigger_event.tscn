@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlwrhfwkdm0fn"]
+
+[ext_resource type="Script" uid="uid://cby6ko5a5eigq" path="res://gameplay/trigger_events/trigger_event.gd" id="1_tg3jh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bliq7"]
+
+[node name="TriggerEvent" type="Area3D"]
+collision_layer = 524288
+script = ExtResource("1_tg3jh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bliq7")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

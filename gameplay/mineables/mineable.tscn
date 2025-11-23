@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://v8c1n5heb5he"]
 
 [ext_resource type="Script" uid="uid://dob6mt3yosfer" path="res://gameplay/mineables/mineable.gd" id="1_uqxoh"]
-[ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="2_aqbma"]
+[ext_resource type="Script" uid="uid://nx4rc8bpb8cr" path="res://targetable.gd" id="2_aqbma"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="3_4tc2h"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4tc2h"]
@@ -41,7 +41,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_5sd5k")
 size = Vector2(2.5, 2.5)
 
-[node name="Mineable" type="Area3D"]
+[node name="Mineable" type="Area3D" groups=["mineable"]]
 collision_layer = 262144
 collision_mask = 2
 script = ExtResource("1_uqxoh")
@@ -70,10 +70,12 @@ mesh = SubResource("SphereMesh_a43jq")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6681861, 0)
 
-[node name="Target_Node" type="Node3D" parent="."]
+[node name="Target_Node" type="Node3D" parent="." groups=["mineable", "targetable"]]
 script = ExtResource("2_aqbma")
 
 [node name="Reticle_Mesh" type="MeshInstance3D" parent="Target_Node"]
 mesh = SubResource("QuadMesh_8padj")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

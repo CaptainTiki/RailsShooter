@@ -1,5 +1,6 @@
 extends Node
 
+enum GameState {PAUSED, MENUS, IN_RUN, LOADING}
 enum Rarity {NONE, COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 
 @export_category("Difficulty Settings")

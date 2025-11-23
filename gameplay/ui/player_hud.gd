@@ -20,10 +20,13 @@ extends Node3D
 @onready var weapon: Weapon = %Weapon
 @onready var ship_root: ShipRoot = $".."
 
+@onready var ship_stats: ShipStats = %ShipStats
 
 func _ready() -> void:
+	visible = true
 	var material : StandardMaterial3D = mesh_instance_3d.mesh.surface_get_material(0)
 	material.albedo_texture = hud_sub_viewport.get_texture()
+	ship_stats.stats_updated.connect(_setup_UI)
 	
 	_setup_UI()
 
@@ -42,18 +45,21 @@ func _update_ship_UI() -> void:
 	shields_bar.value = shields.current_shields
 
 func _update_engine_UI() -> void:
-	#boost_power_bar_left.value = ship_root.engine_power
-	#boost_power_bar_right.value = ship_root.engine_power
+	boost_power_bar_left.value = ship_root.boost_power
+	boost_power_bar_right.value = ship_root.boost_power
 	pass
 	
 func _setup_UI() -> void:
-	guns_power_bar.max_value = weapon.max_power
-	torps_ammo_bar.max_value = weapon.max_torps
+	guns_power_bar.max_value = ship_stats.max_gun_power
+	torps_ammo_bar.max_value = ship_stats.max_torps
 	health_bar.max_value = health.max_health
 	shields_bar.max_value = shields.max_shield
-	guns_power_bar.max_value = weapon.max_power
-	torps_ammo_bar.max_value = weapon.max_torps
-	health_bar.max_value = health.max_health
-	shields_bar.max_value = shields.max_shield
-	boost_power_bar_left.max_value = ship_root.max_engine_power
-	boost_power_bar_right.max_value = ship_root.max_engine_power
+	boost_power_bar_left.value = ship_root.max_engine_power
+	boost_power_bar_right.value = ship_root.max_engine_power
+	
+	guns_power_bar.value = weapon.current_power
+	torps_ammo_bar.value = weapon.current_torps
+	health_bar.value = health.current_health
+	shields_bar.value = shields.current_shields
+	boost_power_bar_left.value = ship_root.max_engine_power
+	boost_power_bar_right.value = ship_root.max_engine_power

@@ -4,12 +4,11 @@ class_name Weapon
 @onready var fire_rate_timer: Timer = $GunsFireRate #set to 0.125 8/s
 @onready var torp_fire_rate: Timer = $TorpFireRate #set to 1.0 1/s
 
+@onready var ship_stats: ShipStats = %ShipStats
+
 @onready var targeting_component: TargetingComponent = $"../TargetingComponent"
 
-var max_torps : int = 6
-var current_torps : int = 6
-
-var max_power : float = 100
+var current_torps : int = 0
 var current_power : float = 100
 var power_regen_rate : float = 20
 var power_per_shot : float = 12
@@ -17,8 +16,12 @@ var power_per_shot : float = 12
 var bullet_scene = preload("res://gameplay/projectiles/bullets/basic_bullet_proj.tscn")
 var torp_scene = preload("res://gameplay/projectiles/torpedos/basic_torp_proj.tscn")
 
+func _ready() -> void:
+	ship_stats.stats_updated.connect(_update_stats)
+	current_torps = ship_stats.max_torps
+
 func _process(delta: float) -> void:
-	current_power = min(max_power, current_power + (power_regen_rate * delta))
+	current_power = min(ship_stats.max_gun_power, current_power + (power_regen_rate * delta))
 
 func fire_guns() -> void:
 	if !fire_rate_timer.is_stopped(): #cooldown not ready
@@ -63,4 +66,9 @@ func spawn_projectile(scene : PackedScene)-> void:
 	new_projo.global_position = global_position
 
 func add_torp_ammo(num : int)-> void:
-	current_torps = min(max_torps, current_torps + num)
+	current_torps = min(ship_stats.max_torps, current_torps + num)
+
+func _update_stats() -> void:
+	current_torps = ship_stats.max_torps
+	current_power = ship_stats.max_gun_power
+	pass

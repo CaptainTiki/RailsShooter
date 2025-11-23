@@ -25,12 +25,19 @@ class_name ShipRoot
 @onready var player_root: PlayerRoot = $".."
 @onready var cargo_hold: CargoHold = $CargoHold
 
+@onready var cargo_ammount_label: Label = %cargo_ammount_label
+
+@onready var ship_stats: ShipStats = %ShipStats
+
+
 var velocity : Vector3 = Vector3.ZERO
 
 var roll_tween : Tween #used for barrel rolls
 var is_rolling : bool = false
 
 func _ready() -> void:
+	ship_stats.setup_stats()
+	
 	input_target.roll_left.connect(roll_left)
 	input_target.roll_right.connect(roll_right)
 
@@ -60,8 +67,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = Vector3(input_target.virtual_stick.x, input_target.virtual_stick.y, 0)
 	position += velocity * move_speed * delta
-	position.x = clamp(position.x, -8, 8)
-	position.y = clamp(position.y, -6, 2.5)
+	#TODO: clamp ship position based on viewport size
+	position.x = clamp(position.x, -16, 16)
+	position.y = clamp(position.y, -10, 4)
 	
 	#TODO: hook up faster yaw while banking (roll)
 	var target_rot_x = input_target.virtual_stick.y * max_pitch_angle
@@ -99,3 +107,4 @@ func finish_roll() -> void:
 
 func add_cargo(a_ore : int, p_shard : int, e_alloy : int, svage : int) -> void:
 	cargo_hold.add_cargo(a_ore, p_shard, e_alloy, svage)
+	cargo_ammount_label.text = str(cargo_hold.aetherium_ore + cargo_hold.promethium_shards + cargo_hold.exotic_alloy + cargo_hold.salvage)

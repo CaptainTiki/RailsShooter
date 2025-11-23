@@ -15,12 +15,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_backbn_pressed() -> void:
 	hide_ui_called.emit()
 
-
 func _on_launchbn_pressed() -> void:
 	#TODO: need to load from a list of levels
-	get_tree().change_scene_to_file("res://gameplay/levels/debug_level.tscn")
+	GameManager.set_gamestate(Globals.GameState.LOADING)
+	GameManager.start_run()
 	level_loaded.emit()
+	get_tree().change_scene_to_file("res://gameplay/levels/debug_level.tscn")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0gndnkukefux"]
-
-[ext_resource type="Script" uid="uid://ctk544d5bxvd6" path="res://system/debug_manager.gd" id="1_s3v8h"]
-
-[node name="DebugManager" type="Node3D"]
-script = ExtResource("1_s3v8h")

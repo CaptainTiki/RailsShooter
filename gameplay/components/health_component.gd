@@ -49,7 +49,6 @@ func get_max_health() -> float:
 	return max_health
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
-	print("area entered")
 	if area.is_in_group("bullet"):
 		take_damage(area.damage)
 		if area is Projectile:
