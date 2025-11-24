@@ -1,24 +1,33 @@
 extends Node
 
+signal gamestate_changed
+
 var game_state : Globals.GameState = Globals.GameState.LOADING
+
+var current_level : Level = null
 
 var current_run : RunData = null
 var last_run : RunData = null
 var player_data : PlayerData = null
 
+var level_scene : PackedScene = preload("res://gameplay/levels/debug_level.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	current_run = RunData.new()
 	player_data = PlayerData.new()
 
+func set_current_level(lvl : Level)-> void:
+	current_level = lvl
 
 func set_gamestate(gs : Globals.GameState)-> void:
 	#do any other work to change gamestates here
 	game_state = gs
+	gamestate_changed.emit()
 
 func start_run() -> void:
 	current_run = RunData.new()
+	get_tree().change_scene_to_packed(level_scene)
 
 func end_run(is_success : bool) -> void:
 	

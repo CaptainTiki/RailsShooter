@@ -63,7 +63,11 @@ func _setup_menus() -> void:
 	research_ui.connect("hide_ui_called", _on_hide_menu)
 	production_ui.connect("hide_ui_called", _on_hide_menu)
 	
-	hangar_ui.connect("level_loaded", _unload_menus)
+	GameManager.gamestate_changed.connect(_check_gamestate)
+
+func _check_gamestate() -> void:
+	if GameManager.game_state == Globals.GameState.IN_RUN:
+		_unload_menus()
 
 func _unload_menus() -> void:
 	queue_free()

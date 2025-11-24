@@ -2,13 +2,15 @@ extends Area3D
 class_name Mineable
 
 @onready var target_node: Targetable = $Target_Node
+@onready var parent_room: Room = $"../.."
 
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/resources/aetherium_pickup.tscn")
 var spread : float = 0.5  # ~28 degrees
 var speed : float = 10
 
 func _ready() -> void:
-	target_node.register()
+	parent_room.destroying_room.connect(_destroy)
+	pass
 
 func _on_area_entered(area: Area3D) -> void:
 		if area.is_in_group("bullet"):
@@ -34,3 +36,7 @@ func _spawn_resource() -> void:
 		4,
 		1.5)
 	drop.global_position = global_position
+
+func _destroy() -> void:
+	target_node.unregister()
+	queue_free()

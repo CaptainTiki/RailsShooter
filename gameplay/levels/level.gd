@@ -1,14 +1,25 @@
 extends Node3D
 class_name Level
 
+signal level_ready
+
 @onready var enemy_parent: Node3D = $EnemyParent
-@onready var player_root: PlayerRoot = %Player_Root
-	
+@onready var room_manager: Node3D = $RoomManager
+
+var player_scene : PackedScene = preload("res://gameplay/player/player_root.tscn")
+
+var player_root: PlayerRoot
 var elapsed_run_time : float = 0
+var completed_rooms : int = 0
+var target_room_num : int = 2
 
 func _ready() -> void:
+	GameManager.set_current_level(self)
+	ready_first_room()
+	level_ready.emit()
 	GameManager.set_gamestate(Globals.GameState.IN_RUN)
-
+	player_root.on_new_path.connect(_parent_player_to_path)
+	player_root.path_ended.connect(_end_room)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -23,6 +34,34 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("debug_win_run"):
 		return_to_base(true)
 	pass
+
+func ready_first_room() -> void:
+	var player : PlayerRoot = player_scene.instantiate() as PlayerRoot #player needs to be first , so targets can register as targetable
+	player.parent_level = self
+	player_root = player
+	room_manager.spawn_new_room(2)
+	_parent_player_to_path()
+	player_root.next_path_start = room_manager.get_next_path_start()
+	player_root.global_position = room_manager.get_next_path_start()
+
+func ready_next_room()-> void:
+	room_manager.spawn_new_room(1)
+	_move_player_to_path()
+
+func _move_player_to_path() -> void:
+	player_root.next_path_start = room_manager.get_next_path_start()
+	player_root.set_mode(PlayerRoot._mode.MOVE_TO_PATH)
+
+func _parent_player_to_path() -> void:
+	player_root.set_progress(0)
+	room_manager.parent_to_path(player_root)
+	player_root.set_mode(PlayerRoot._mode.ON_RAIL)
+
+func _end_room() -> void:
+	completed_rooms += 1
+	if completed_rooms >= target_room_num:
+		return_to_base(true)
+	ready_next_room()
 
 func return_to_base(bring_cargo : bool) -> void:
 	GameManager.set_gamestate(Globals.GameState.LOADING) #get our loading overlay

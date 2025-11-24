@@ -59,29 +59,3 @@ func unregister_target(tgt : Targetable) -> void:
 func debug_dot_to_deg(dot: float) -> float:
 	dot = clamp(dot, -1.0, 1.0) # safety
 	return rad_to_deg(acos(dot))
-
-#func _debug_draw_aim_cone() -> void:
-	#var cone_angle_deg := debug_dot_to_deg(cone_angle)
-	#var angle_rad := deg_to_rad(cone_angle_deg)
-#
-	#var local_basis := ship_root.global_transform.basis
-	#var forward := -local_basis.z     # ship forward in world space
-#
-	## Rotate forward around local X (pitch) for up/down
-	#var up_dir    := (-local_basis.rotated(basis.x,  angle_rad).z).normalized()
-	#var down_dir  := (-local_basis.rotated(basis.x, -angle_rad).z).normalized()
-#
-	## Rotate forward around local Y (yaw) for left/right
-	#var right_dir := (-local_basis.rotated(basis.y, -angle_rad).z).normalized()
-	#var left_dir  := (-local_basis.rotated(basis.y,  angle_rad).z).normalized()
-#
-	#var origin := global_position
-#
-	## Center line (pure forward)
-	#DebugDraw3D.draw_line(origin, origin + forward * max_range)
-#
-	## Cone edges
-	#DebugDraw3D.draw_line(origin, origin + up_dir * max_range)
-	#DebugDraw3D.draw_line(origin, origin + down_dir  * max_range)
-	#DebugDraw3D.draw_line(origin, origin + left_dir  * max_range)
-	#DebugDraw3D.draw_line(origin, origin + right_dir * max_range)

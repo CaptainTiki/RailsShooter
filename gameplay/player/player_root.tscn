@@ -171,6 +171,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FollowCamera/Input_Target"]
+visible = false
 mesh = SubResource("SphereMesh_jhpp0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

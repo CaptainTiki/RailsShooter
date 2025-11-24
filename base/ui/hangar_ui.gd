@@ -23,4 +23,3 @@ func _on_launchbn_pressed() -> void:
 	GameManager.set_gamestate(Globals.GameState.LOADING)
 	GameManager.start_run()
 	level_loaded.emit()
-	get_tree().change_scene_to_file("res://gameplay/levels/debug_level.tscn")
