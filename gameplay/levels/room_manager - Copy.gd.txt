@@ -40,8 +40,8 @@ func _align_rooms(old_room : Room, new_room : Room) -> void:
 	var offset : Vector3 = old_room_exit.global_position - new_room_entry.global_position
 	new_room.global_position = offset
 
-func get_room_path_start(room : Room) -> Vector3:
-	return room.rail_path.to_global(room.rail_path.curve.get_point_position(0))
+func get_next_path_start() -> Vector3:
+	return next_room.rail_path.curve.get_point_position(0)
 
 func parent_to_path(player_root : PlayerRoot)-> void:
 	current_room.rail_path.add_child(player_root)

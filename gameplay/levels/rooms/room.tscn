@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgtdlu34jlqj4"]
+[gd_scene load_steps=6 format=3 uid="uid://dgtdlu34jlqj4"]
 
 [ext_resource type="Script" uid="uid://doert5owkxa3s" path="res://gameplay/levels/rooms/room.gd" id="1_s68w8"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_n1e08"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_owj7c"]
-[ext_resource type="PackedScene" uid="uid://dlwrhfwkdm0fn" path="res://gameplay/trigger_events/trigger_event.tscn" id="4_q0ri7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfku"]
 albedo_color = Color(0.3936, 0.39504, 0.48, 1)
@@ -11,7 +10,7 @@ albedo_color = Color(0.3936, 0.39504, 0.48, 1)
 [sub_resource type="Curve3D" id="Curve3D_ihhpb"]
 bake_interval = 0.3
 _data = {
-"points": PackedVector3Array(-4.873535, -5.6055946, 28.298515, 0, 0, 0, 3.5032692, -10.752033, 12.88916, 1.3460388, -2.0310287, 18.351372, -1.3460388, 2.0310287, -18.351372, -13.111919, -7.913351, -102.090294, 0.002711296, 0.30566406, 4.8959656, -0.002711296, -0.30566406, -4.8959656, -11.464939, -12.6118965, -157.8266, 8.068947, 5.6007023, 20.688812, -8.068947, -5.6007023, -20.688812, -14.953107, -12.8630085, -214.01627, 4.665848, -0.848114, 7.902649, -4.665848, 0.848114, -7.902649, -54.92263, -2.2427368, -286.87177, 0.7204666, -0.22668648, 18.865631, -0.7204666, 0.22668648, -18.865631, -75.35731, 0.012586594, -361.1521, -0.9325638, -0.17446136, 4.44162, 0.9325638, 0.17446136, -4.44162, -69.82687, 0.010166168, -399.93262, 0, 0, 0, 0, 0, 0, -21.898, -11.795624, -562.863),
+"points": PackedVector3Array(-4.873535, -5.6055946, 28.298515, 0, 0, 0, 1.28302, -10.752033, -15.2651615, 1.3460388, -2.0310287, 18.351372, -1.3460388, 2.0310287, -18.351372, -13.111919, -7.913351, -102.090294, 0.002711296, 0.30566406, 4.8959656, -0.002711296, -0.30566406, -4.8959656, -11.464939, -12.6118965, -157.8266, 4.8093176, -0.5438919, 23.669525, -4.8093176, 0.5438919, -23.669525, -14.953107, -12.8630085, -214.01627, 4.665848, -0.848114, 7.902649, -4.665848, 0.848114, -7.902649, -54.92263, -2.2427368, -286.87177, 0.7204666, -0.22668648, 18.865631, -0.7204666, 0.22668648, -18.865631, -75.35731, 0.012586594, -361.1521, -0.9325638, -0.17446136, 4.44162, 0.9325638, 0.17446136, -4.44162, -69.82687, 0.010166168, -399.93262, 0, 0, 0, 0, 0, 0, -24.287107, -11.795624, -554.8524),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
@@ -802,7 +801,7 @@ size = Vector3(20.88134, 5.5584717, 9.526001)
 [node name="PathNodes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.545999, 0)
 
-[node name="Path_1" type="Path3D" parent="PathNodes"]
+[node name="Rail_Path" type="Path3D" parent="PathNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2530136, 13.801627, 4.923065)
 curve = SubResource("Curve3D_ihhpb")
 
@@ -880,5 +879,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.55952, 8.9592495, -160.61
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
-[node name="TriggerEvent" parent="Triggers" instance=ExtResource("4_q0ri7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.445683, 9.279959, -556.935)
+[node name="EntryMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
+
+[node name="ExitMarker" type="Marker3D" parent="."]
+transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -13.442292, 0.9342081, -572.1973)

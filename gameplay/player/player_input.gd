@@ -1,5 +1,5 @@
 extends Node3D
-class_name InputTarget
+class_name PlayerInput
 
 signal roll_right
 signal roll_left

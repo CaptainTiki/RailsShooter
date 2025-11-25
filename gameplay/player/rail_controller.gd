@@ -1,0 +1,25 @@
+extends Node3D
+class_name RailController
+
+signal path_ended
+
+@export var camera : FollowCamera
+@export var ship_root : ShipRoot
+@export var player_root : PlayerRoot
+
+var current_speed : float = 0
+
+func _physics_process(delta: float) -> void:
+	if player_root.move_mode == PlayerRoot._mode.ON_RAIL:
+		current_speed = move_toward(current_speed, player_root.travel_speed, player_root.acceleration * delta)	
+		player_root.progress += delta * current_speed
+		if player_root.progress >= player_root.get_parent().curve.get_baked_length():
+			path_ended.emit()
+
+func brake_ship(delta: float) -> void:
+	current_speed = move_toward(current_speed, player_root.brake_speed, 2 * player_root.acceleration * delta)
+	camera.set_zoom_in(true)
+
+func boost_ship(delta: float) -> void:
+	current_speed = move_toward(current_speed, player_root.boost_speed, 2 * player_root.acceleration * delta)
+	camera.set_zoom_out(true)

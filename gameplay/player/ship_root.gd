@@ -2,7 +2,7 @@ extends Area3D
 class_name ShipRoot
 
 @export_category("Node Links")
-@export var input_target : InputTarget
+@export var player_input : PlayerInput
 @export var camera : FollowCamera
 
 @export_category("Movement Variables")
@@ -38,8 +38,8 @@ var is_rolling : bool = false
 func _ready() -> void:
 	ship_stats.setup_stats()
 	
-	input_target.roll_left.connect(roll_left)
-	input_target.roll_right.connect(roll_right)
+	player_input.roll_left.connect(roll_left)
+	player_input.roll_right.connect(roll_right)
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("fire_primary"):
@@ -65,18 +65,18 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	velocity = Vector3(input_target.virtual_stick.x, input_target.virtual_stick.y, 0)
+	velocity = Vector3(player_input.virtual_stick.x, player_input.virtual_stick.y, 0)
 	position += velocity * move_speed * delta
 	#TODO: clamp ship position based on viewport size
 	position.x = clamp(position.x, -16, 16)
 	position.y = clamp(position.y, -10, 4)
 	
 	#TODO: hook up faster yaw while banking (roll)
-	var target_rot_x = input_target.virtual_stick.y * max_pitch_angle
-	var target_rot_y = -input_target.virtual_stick.x * max_yaw_angle
+	var target_rot_x = player_input.virtual_stick.y * max_pitch_angle
+	var target_rot_y = -player_input.virtual_stick.x * max_yaw_angle
 	
 	if not is_rolling: #dont rotate roll - if we're doing the roll tween
-		rotation.z = lerp(rotation.z, input_target.bank_dir * max_roll_angle, roll_speed * delta)
+		rotation.z = lerp(rotation.z, player_input.bank_dir * max_roll_angle, roll_speed * delta)
 	
 	rotation = rotation.lerp(Vector3(target_rot_x, target_rot_y,0), rotation_speed * delta)
 

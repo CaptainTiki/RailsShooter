@@ -4,7 +4,7 @@ class_name FollowCamera
 @export var ship_root : ShipRoot
 
 var camera_distance : float = 8
-var camera_zoomin_distance : float = 7
+var camera_zoomin_distance : float = 6
 var camera_zoomout_distance : float = 9
 var spring_speed : float = 4
 
