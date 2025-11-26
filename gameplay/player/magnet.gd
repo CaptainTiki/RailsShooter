@@ -2,7 +2,7 @@ extends Area3D
 
 var attracted_objects : Array[Area3D]
 
-var magnet_strength : float = 14.0
+var magnet_strength : float = 18.0
 
 func _physics_process(delta: float) -> void:
 	for area in attracted_objects:

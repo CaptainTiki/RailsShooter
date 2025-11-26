@@ -44,7 +44,7 @@ size = Vector3(30, 0.1, 20)
 material = SubResource("StandardMaterial3D_gpfku")
 
 [node name="LeftWall2" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
-transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -26.049822, 10.097632, -19.68177)
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -25.852236, 10.097632, -19.68177)
 size = Vector3(30, 0.1, 20)
 material = SubResource("StandardMaterial3D_gpfku")
 

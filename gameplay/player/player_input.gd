@@ -57,14 +57,16 @@ func get_combined_input() -> void:
 			roll_right.emit()
 	
 	if Input.is_action_pressed("bank_left"):
-		bank_left_pressed = true
-		bank_dir += 1
+		if bank_timer.is_stopped():
+			bank_left_pressed = true
+			bank_dir += 1
 	else:
 		bank_left_pressed = false
 		
 	if Input.is_action_pressed("bank_right"):
-		bank_right_pressed = true
-		bank_dir -= 1
+		if bank_timer.is_stopped():
+			bank_right_pressed = true
+			bank_dir -= 1
 	else:
 		bank_right_pressed = false
 

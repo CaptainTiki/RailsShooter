@@ -41,7 +41,7 @@ func ready_first_room() -> void:
 	player_root = player
 	room_manager.spawn_new_room(2)
 	_parent_player_to_path()
-	player_root.next_path_start = room_manager.get_room_path_start(room_manager.current_room)
+	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.global_position = room_manager.get_room_path_start(room_manager.current_room)
 
 func ready_next_room()-> void:
@@ -49,7 +49,7 @@ func ready_next_room()-> void:
 	_move_player_to_path()
 
 func _move_player_to_path() -> void:
-	player_root.next_path_start = room_manager.get_room_path_start(room_manager.current_room)
+	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.set_mode(PlayerRoot._mode.MOVE_TO_PATH)
 
 func _parent_player_to_path() -> void:

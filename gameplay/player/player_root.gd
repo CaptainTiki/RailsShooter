@@ -12,14 +12,11 @@ enum _mode {ON_RAIL, MOVE_TO_PATH, FREE_FLIGHT, DOCKING}
 var parent_level : Level
 var move_mode : _mode = _mode.ON_RAIL
 
-var acceleration : float = 6.5
-var travel_speed : float = 14.0
+var acceleration : float = 6.5 #6.5
+var travel_speed : float = 14.0 #14.0
 var brake_speed : float = 6.0
-var boost_speed : float = 24.0
-var current_speed : float = 8
-
-var next_path_start : Vector3
-var swap_distance : float = 0.5
+var boost_speed : float = 24.0 #24.0
+var current_speed : float = 8 #8
 
 func brake_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, brake_speed, 2 * acceleration * delta)

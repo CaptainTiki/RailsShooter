@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://p644gpr2dec2"]
+[gd_scene load_steps=30 format=3 uid="uid://p644gpr2dec2"]
 
 [ext_resource type="Script" uid="uid://bpkp4rsxx3nb3" path="res://gameplay/player/player_root.gd" id="1_jgd4k"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/player_input.gd" id="2_jhpp0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c8xcmiicqtcth" path="res://assets/player/craft_miner.glb" id="4_jhpp0"]
 [ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="4_xw8sf"]
 [ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="5_b8bi6"]
+[ext_resource type="Script" uid="uid://b1g11m5kexnut" path="res://gameplay/player/attitude_controller.gd" id="5_eyn2n"]
 [ext_resource type="Script" uid="uid://ihkbfhlm0bso" path="res://gameplay/player/weapon.gd" id="5_n3mgn"]
 [ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="6_28odr"]
 [ext_resource type="Script" uid="uid://d2vke2b5gxy08" path="res://gameplay/player/follow_camera.gd" id="6_ptojr"]
@@ -69,11 +70,12 @@ loop = false
 script = ExtResource("1_jgd4k")
 camera = NodePath("FollowCamera")
 
-[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "player_root")]
+[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "player_root", "attitude_controller")]
 script = ExtResource("16_hxaeb")
 camera = NodePath("../FollowCamera")
 ship_root = NodePath("../Ship_Root")
 player_root = NodePath("..")
+attitude_controller = NodePath("../Attitude_Controller")
 
 [node name="FreeFlight_Controller" type="Node3D" parent="."]
 script = ExtResource("17_w168g")
@@ -81,6 +83,12 @@ script = ExtResource("17_w168g")
 [node name="Docking_Controller" type="Node3D" parent="." node_paths=PackedStringArray("player_root")]
 script = ExtResource("18_w168g")
 player_root = NodePath("..")
+
+[node name="Attitude_Controller" type="Node3D" parent="." node_paths=PackedStringArray("ship_root", "player_input", "rail_controller")]
+script = ExtResource("5_eyn2n")
+ship_root = NodePath("../Ship_Root")
+player_input = NodePath("../FollowCamera/Player_Input")
+rail_controller = NodePath("../Rail_Controller")
 
 [node name="Ship_Root" type="Area3D" parent="." node_paths=PackedStringArray("player_input", "camera") groups=["player"]]
 collision_mask = 131072
@@ -172,6 +180,7 @@ script = ExtResource("12_28odr")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Root/Magnet"]
 shape = SubResource("SphereShape3D_b8bi6")
+debug_color = Color(0.92632747, 0.5120404, 0.0859239, 0.41960785)
 
 [node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("ship_root")]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
@@ -184,7 +193,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99254614, -0.12186935, 0, 0.12186935, 0.99
 script = ExtResource("2_jhpp0")
 
 [node name="Bank_Input_Timer" type="Timer" parent="FollowCamera/Player_Input"]
-wait_time = 0.25
+wait_time = 0.15
 one_shot = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FollowCamera/Player_Input"]
