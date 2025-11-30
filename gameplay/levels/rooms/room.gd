@@ -5,7 +5,6 @@ enum RoomType {RAIL_ROOM, ARENA_ROOM}
 
 signal destroying_room
 
-@onready var rail_path: Path3D = $PathNodes/Rail_Path
 @onready var entry_marker: Marker3D = $EntryMarker
 @onready var exit_marker: Marker3D = $ExitMarker
 

@@ -70,23 +70,32 @@ loop = false
 script = ExtResource("1_jgd4k")
 camera = NodePath("FollowCamera")
 
-[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "player_root", "attitude_controller")]
+[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
 script = ExtResource("16_hxaeb")
 camera = NodePath("../FollowCamera")
 ship_root = NodePath("../Ship_Root")
+stats = NodePath("../Ship_Root/ShipStats")
 player_root = NodePath("..")
 attitude_controller = NodePath("../Attitude_Controller")
 
-[node name="FreeFlight_Controller" type="Node3D" parent="."]
+[node name="FreeFlight_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
 script = ExtResource("17_w168g")
+camera = NodePath("../FollowCamera")
+ship_root = NodePath("../Ship_Root")
+stats = NodePath("../Ship_Root/ShipStats")
+player_root = NodePath("..")
+attitude_controller = NodePath("../Attitude_Controller")
 
-[node name="Docking_Controller" type="Node3D" parent="." node_paths=PackedStringArray("player_root")]
+[node name="Docking_Controller" type="Node3D" parent="." node_paths=PackedStringArray("player_root", "stats")]
 script = ExtResource("18_w168g")
 player_root = NodePath("..")
+stats = NodePath("../Ship_Root/ShipStats")
 
-[node name="Attitude_Controller" type="Node3D" parent="." node_paths=PackedStringArray("ship_root", "player_input", "rail_controller")]
+[node name="Attitude_Controller" type="Node3D" parent="." node_paths=PackedStringArray("ship_root", "player_root", "stats", "player_input", "rail_controller")]
 script = ExtResource("5_eyn2n")
 ship_root = NodePath("../Ship_Root")
+player_root = NodePath("..")
+stats = NodePath("../Ship_Root/ShipStats")
 player_input = NodePath("../FollowCamera/Player_Input")
 rail_controller = NodePath("../Rail_Controller")
 

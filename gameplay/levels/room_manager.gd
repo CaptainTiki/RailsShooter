@@ -4,7 +4,7 @@ class_name RoomManager
 @onready var parent_level: Level = $".."
 
 var available_rooms : Array[PackedScene] = [
-		preload("res://gameplay/levels/rooms/room.tscn")
+		preload("res://gameplay/levels/rooms/room_rail_debug.tscn")
 	]
 
 var prev_room : Room
@@ -45,3 +45,13 @@ func get_room_path_start(room : Room) -> Vector3:
 
 func parent_to_path(player_root : PlayerRoot)-> void:
 	current_room.rail_path.add_child(player_root)
+
+func spawn_debug_room_after_current(scene: PackedScene) -> void:
+	if next_room:
+		next_room.destroy()
+	
+	var new_room : Room = scene.instantiate() as Room
+	add_child(new_room)
+	next_room = new_room
+	if current_room and new_room:
+		_align_rooms(current_room, new_room)

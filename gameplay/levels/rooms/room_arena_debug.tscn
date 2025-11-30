@@ -1,0 +1,621 @@
+[gd_scene load_steps=6 format=3 uid="uid://t3str8anyd8c"]
+
+[ext_resource type="Script" uid="uid://dl53nscubl3mq" path="res://gameplay/levels/rooms/room_arena.gd" id="1_40m11"]
+[ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_4cq2x"]
+[ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_wfhrp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfku"]
+albedo_color = Color(0.3936, 0.39504, 0.48, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40m11"]
+size = Vector3(67.45486, 36.639328, 1)
+
+[node name="Room_Arena_debug" type="Node3D"]
+script = ExtResource("1_40m11")
+room_type = 1
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGCombiner3D" parent="Terrain" groups=["terrain"]]
+use_collision = true
+collision_layer = 65536
+collision_mask = 131843
+
+[node name="Floor" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.45993, 0, -41.145508)
+size = Vector3(152.91986, 0.1, 152.29102)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall1" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -34.559425, 9.347262, -42.742973)
+size = Vector3(30, 0.1, 156.08325)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall5" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.5199727, 0.47919562, 0.70710677, -0.67768496, 0.7353524, 0, -0.5199727, -0.47919562, 0.70710677, -27.324942, 9.347266, 37.408516)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall6" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.51997274, -0.47919565, -0.7071067, -0.677685, 0.73535246, 0, 0.5199726, 0.4791956, -0.7071068, 128.27835, 9.347266, -118.639206)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall7" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.5199727, -0.47919565, 0.7071067, -0.677685, 0.73535246, 0, -0.5199727, -0.4791956, -0.7071068, 128.50056, 9.347266, 37.1863)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall8" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.5199726, 0.47919562, -0.70710677, -0.677685, 0.73535246, 2.1073424e-08, 0.51997274, 0.4791956, 0.70710677, -27.547161, 9.347266, -118.41699)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall2" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, 8.742278e-08, -0.67768496, 0.7353524, 0, -6.4286546e-08, -5.92451e-08, -1, 138.6929, 9.347262, -42.742973)
+size = Vector3(30, 0.1, 156.08325)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall3" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-3.2143273e-08, -2.962255e-08, 1, -0.67768496, 0.7353524, 0, -0.7353524, -0.67768496, -4.371139e-08, 101.07941, 9.347262, 43.883183)
+size = Vector3(30, 0.1, 58.057922)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall9" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-3.2143273e-08, -2.962255e-08, 1, -0.67768496, 0.7353524, 0, -0.7353524, -0.67768496, -4.371139e-08, 3.253296, 9.347262, 43.883183)
+size = Vector3(30, 0.1, 58.28485)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall10" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, -1.7763568e-15, 1, 29.071892, 9.347262, 65.99732)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall11" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, -8.742278e-08, -0.67768496, 0.7353524, 0, 6.4286546e-08, 5.9245103e-08, -1, 75.59761, 9.347262, 65.99732)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall12" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.9998858, 0.015113998, -6.338378e-08, 0.015095438, 0.9986577, -0.049546994, -0.00074878987, -0.049541336, -0.9987718, 51.89052, 0.34726298, 55.264103)
+size = Vector3(30, 0.1, 42.14702)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall4" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(9.6429815e-08, 8.886765e-08, -1, -0.67768496, 0.7353524, 0, 0.7353524, 0.67768496, 1.3113416e-07, -14.115166, 9.587758, -127.73476)
+size = Vector3(30, 0.1, 58.057922)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall13" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(9.6429815e-08, 8.886765e-08, -1, -0.67768496, 0.7353524, 0, 0.7353524, 0.67768496, 1.3113416e-07, 88.47176, 9.587758, -127.73477)
+size = Vector3(30, 0.1, 67.80649)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall14" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, -8.742278e-08, -0.67768496, 0.7353524, 0, 6.4286546e-08, 5.9245103e-08, -1, 57.89235, 9.587758, -149.8489)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall15" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 1.7484555e-07, -0.67768496, 0.7353524, 0, -1.285731e-07, -1.18490206e-07, 1, 11.366631, 9.587758, -149.8489)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall16" type="CSGBox3D" parent="Terrain/Floor" groups=["terrain"]]
+transform = Transform3D(0.9998859, -0.015113997, 1.5095063e-07, 0.01510071, 0.99900645, -0.04192791, 0.0006335477, 0.041923124, 0.9991208, 35.073723, 0.58775854, -136.93704)
+size = Vector3(30, 0.1, 42.14702)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Roof" type="CSGCombiner3D" parent="Terrain" groups=["terrain"]]
+transform = Transform3D(-1, -7.642742e-15, -8.742278e-08, 0, -1, 8.742278e-08, -8.742278e-08, 8.742278e-08, 1, 104.88936, 38.11023, -0.426857)
+use_collision = true
+collision_layer = 65536
+collision_mask = 131843
+
+[node name="Floor" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.45993, 0, -41.145508)
+size = Vector3(152.91986, 0.1, 152.29102)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall1" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, 0, 1, -34.559425, 9.347262, -42.742973)
+size = Vector3(30, 0.1, 156.08325)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall5" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.5199727, 0.47919562, 0.70710677, -0.67768496, 0.7353524, 0, -0.5199727, -0.47919562, 0.70710677, -27.324942, 9.347266, 37.408516)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall6" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.51997274, -0.47919565, -0.7071067, -0.677685, 0.73535246, 0, 0.5199726, 0.4791956, -0.7071068, 128.27835, 9.347266, -118.639206)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall7" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.5199727, -0.47919565, 0.7071067, -0.677685, 0.73535246, 0, -0.5199727, -0.4791956, -0.7071068, 128.50056, 9.347266, 37.1863)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall8" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.5199726, 0.47919562, -0.70710677, -0.677685, 0.73535246, 2.1073424e-08, 0.51997274, 0.4791956, 0.70710677, -27.547161, 9.347266, -118.41699)
+size = Vector3(30, 0.1, 39.940277)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall2" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, 8.742278e-08, -0.67768496, 0.7353524, 0, -6.4286546e-08, -5.92451e-08, -1, 138.6929, 9.347262, -42.742973)
+size = Vector3(30, 0.1, 156.08325)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall3" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-3.2143273e-08, -2.962255e-08, 1, -0.67768496, 0.7353524, 0, -0.7353524, -0.67768496, -4.371139e-08, 101.07941, 9.347262, 43.883183)
+size = Vector3(30, 0.1, 58.057922)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall9" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-3.2143273e-08, -2.962255e-08, 1, -0.67768496, 0.7353524, 0, -0.7353524, -0.67768496, -4.371139e-08, 3.253296, 9.347262, 43.883183)
+size = Vector3(30, 0.1, 58.28485)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall10" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 0, -0.67768496, 0.7353524, 0, 0, -1.7763568e-15, 1, 29.071892, 9.347262, 65.99732)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall11" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, -8.742278e-08, -0.67768496, 0.7353524, 0, 6.4286546e-08, 5.9245103e-08, -1, 75.59761, 9.347262, 65.99732)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall12" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.9998858, 0.015113998, -6.338378e-08, 0.015095438, 0.9986577, -0.049546994, -0.00074878987, -0.049541336, -0.9987718, 51.89052, 0.34726298, 55.264103)
+size = Vector3(30, 0.1, 42.14702)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall4" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(9.642981e-08, 8.886765e-08, -1, -0.67768496, 0.7353524, 0, 0.7353524, 0.67768496, 1.3113416e-07, 18.116493, 9.587757, -127.73476)
+size = Vector3(30, 0.1, 74.26773)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall13" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(9.642981e-08, 8.886765e-08, -1, -0.67768496, 0.7353524, 0, 0.7353524, 0.67768496, 1.3113416e-07, 105.89962, 9.587757, -127.73477)
+size = Vector3(30, 0.1, 37.325043)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall14" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(-0.7353524, -0.67768496, -8.742278e-08, -0.67768496, 0.7353524, 0, 6.428655e-08, 5.9245096e-08, -1, 93.67364, 9.587759, -149.84889)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall15" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.7353524, 0.67768496, 1.7484554e-07, -0.67768496, 0.7353524, 0, -1.2857312e-07, -1.18490206e-07, 1, 47.14791, 9.587759, -149.84889)
+size = Vector3(30, 0.1, 22.49936)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="LeftWall16" type="CSGBox3D" parent="Terrain/Roof" groups=["terrain"]]
+transform = Transform3D(0.9998859, -0.015113997, 1.5095063e-07, 0.01510071, 0.99900645, -0.04192791, 0.0006335477, 0.041923124, 0.9991208, 70.85501, 0.5877609, -136.93703)
+size = Vector3(30, 0.1, 42.14702)
+material = SubResource("StandardMaterial3D_gpfku")
+
+[node name="Entrance" type="CSGCombiner3D" parent="Terrain" groups=["terrain"]]
+use_collision = true
+collision_layer = 65536
+collision_mask = 131843
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.7921028, 0.17986673, 0.58328474, -0.14483508, -0.983691, 0.106652915, 30.050938, -0.2768979, 49.89962)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.29474917, 0.0600023, 0.9536891, -0.9445346, 0.16956341, 0.28125155, -0.14483508, -0.9836909, 0.1066529, 33.062046, 29.961905, 50.897446)
+size = Vector3(11.066711, 17.84314, 24.769592)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(-0.28920746, 0.14516939, 0.946195, -0.783482, 0.53202546, -0.32109964, -0.55001366, -0.8341911, -0.040128246, 63.92544, 32.606503, 50.688957)
+size = Vector3(11.066711, 17.84314, 35.160675)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.40268302, 0.872132, 0.27790684, -0.7921029, 0.17986672, 0.5832847, 0.45871496, -0.45500958, 0.76324755, 27.23043, 7.124222, 56.710396)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(-0.5280819, 0.5512116, 0.64598405, -0.30410635, -0.83300495, 0.46219245, 0.79287374, 0.047627777, 0.6075218, 76.61987, 13.110912, 56.710396)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.43849218, 0.30831984, 0.84419394, -0.30410638, -0.83300495, 0.46219242, 0.8457209, -0.45939255, -0.27150437, 82.09341, 1.9907703, 45.852665)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.43849218, 0.30831984, 0.84419394, -0.30410638, -0.83300495, 0.46219242, 0.8457209, -0.45939255, -0.27150437, 72.53652, -1.7633164, 45.279068)
+size = Vector3(21.16101, 11.985046, 14.079285)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.94425863, -0.3277862, 0.030522764, -0.30410632, -0.8330049, 0.46219242, -0.12607461, -0.44571164, -0.8862541, 76.63166, 10.520537, 44.732296)
+size = Vector3(12.487244, 11.985046, 14.079285)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Entrance" groups=["terrain"]]
+transform = Transform3D(0.94425863, -0.3277862, 0.030522764, -0.30410632, -0.8330049, 0.46219242, -0.12607461, -0.44571164, -0.8862541, 31.95448, 10.520537, 55.384754)
+size = Vector3(12.487244, 11.985046, 14.079285)
+
+[node name="Entrance2" type="CSGCombiner3D" parent="Terrain" groups=["terrain"]]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 86.96425, 0.24049568, -83.85159)
+use_collision = true
+collision_layer = 65536
+collision_mask = 131843
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.59295523, 0, 0.80523545, -0.7921028, 0.17986673, 0.58328474, -0.14483508, -0.983691, 0.106652915, 30.050938, -0.2768979, 41.38521)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.29474917, 0.0600023, 0.9536891, -0.9445346, 0.16956341, 0.28125155, -0.14483508, -0.9836909, 0.1066529, 29.368244, 31.208666, 50.897453)
+size = Vector3(11.066711, 17.84314, 24.769592)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(-0.28920746, 0.14516939, 0.946195, -0.783482, 0.53202546, -0.32109964, -0.55001366, -0.8341911, -0.040128246, 67.477295, 30.122957, 50.897453)
+size = Vector3(11.066711, 17.84314, 24.769592)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.44405165, -0.33279797, 0.8319038, -0.7073211, 0.4397392, 0.5534672, -0.5500136, -0.8341911, -0.04012826, 49.81614, 38.10408, 48.07444)
+size = Vector3(21.300636, 17.84314, 24.340363)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.40268302, 0.872132, 0.27790684, -0.7921029, 0.17986672, 0.5832847, 0.45871496, -0.45500958, 0.76324755, 26.79078, 18.525003, 48.616768)
+size = Vector3(17.681854, 26.344421, 19.765991)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(-0.5280819, 0.5512116, 0.64598405, -0.30410635, -0.83300495, 0.46219245, 0.79287374, 0.047627777, 0.6075218, 76.03233, 15.442823, 49.949898)
+size = Vector3(15.504456, 17.84314, 13.397156)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.43849218, 0.30831984, 0.84419394, -0.30410638, -0.83300495, 0.46219242, 0.8457209, -0.45939255, -0.27150437, 82.09341, 1.9907703, 45.852665)
+size = Vector3(21.16101, 17.84314, 19.765991)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.43849218, 0.30831984, 0.84419394, -0.30410638, -0.83300495, 0.46219242, 0.8457209, -0.45939255, -0.27150437, 72.53652, -1.7633164, 45.279068)
+size = Vector3(21.16101, 11.985046, 14.079285)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.8831585, -0.4284116, -0.19103514, -0.30410632, -0.8330049, 0.46219242, -0.35714176, -0.35009444, -0.86595803, 72.53652, -1.7633164, 56.493446)
+size = Vector3(21.16101, 11.985046, 14.079285)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.94425863, -0.3277862, 0.030522764, -0.30410632, -0.8330049, 0.46219242, -0.12607461, -0.44571164, -0.8862541, 76.63166, 10.520537, 44.732296)
+size = Vector3(12.487244, 11.985046, 14.079285)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Entrance2" groups=["terrain"]]
+transform = Transform3D(0.94425863, -0.3277862, 0.030522764, -0.30410632, -0.8330049, 0.46219242, -0.12607461, -0.44571164, -0.8862541, 31.95448, 10.520537, 55.384754)
+size = Vector3(12.487244, 11.985046, 14.079285)
+
+[node name="Rocks" type="CSGCombiner3D" parent="Terrain" groups=["terrain"]]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 86.96425, 0.24049568, -13.409866)
+use_collision = true
+collision_layer = 65536
+collision_mask = 131843
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.43718952, -0.33005002, 0.83661956, 0.4532918, 0.8842995, 0.111984774, -0.7767829, 0.33027437, 0.5362156, 111.85761, 1.9998741, 42.60188)
+size = Vector3(2.7528, 8.483246, 3.630516)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.4808305, -0.23883711, 0.8436581, 0.40670672, 0.91316813, 0.026718527, -0.77678305, 0.33027452, 0.5362158, 109.855896, 8.776994, 5.934202)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.61868566, 0.24117114, 0.7477063, 0.17663531, 0.8846521, -0.4314987, -0.7655248, 0.39903358, 0.5047221, 122.51692, 8.776994, -27.06305)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.59375966, -0.7334095, 0.33099896, 0.39893615, 0.62556416, 0.6704624, -0.6987844, -0.26604614, 0.6640182, 130.81656, 8.776994, 78.55961)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.4211687, 0.32320789, -0.84743935, 0.45329186, 0.88429964, 0.11198477, 0.78558475, -0.33697304, -0.5189469, -43.906174, -0.16189766, 18.106373)
+size = Vector3(2.7528, 8.483246, 3.630516)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.46480042, 0.23201421, -0.8544765, 0.40670672, 0.91316813, 0.026718533, 0.7864798, -0.33510274, -0.5188027, -48.594345, 3.283702, 68.94544)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.9049666, 0.40671116, -0.12498748, 0.4067067, 0.91316813, 0.026718559, 0.1250015, -0.026653985, -0.99179864, -57.113556, 3.283702, 39.691124)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.6028576, -0.24930319, -0.75789917, 0.17663532, 0.8846521, -0.43149877, 0.77805084, -0.3940043, -0.4892833, -53.134674, 6.615222, 87.975235)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.76430607, -0.32409486, -0.5574937, 0.4067067, 0.91316813, 0.026718559, 0.5004259, -0.24715771, 0.82975125, -10.152428, 3.283702, 108.522385)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.083312765, -0.007949345, -0.99649173, 0.40670663, 0.913168, 0.026718546, 0.90975195, -0.40750605, 0.079311356, -39.767082, 3.283702, 115.68922)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.74954623, -0.40503687, -0.5235705, 0.17663534, 0.8846521, -0.43149877, 0.63795036, 0.23094718, 0.7346313, 8.648811, 6.615222, 113.93176)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.82637227, -0.380204, 0.4153963, 0.4067067, 0.9131681, 0.026718544, -0.3894853, 0.14686501, 0.9092482, 114.88294, 7.751502, 92.83791)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.8188687, -0.35142952, -0.4538189, 0.40670666, 0.913168, 0.02671855, 0.405023, -0.20645015, 0.89069325, 105.49477, 7.751502, 121.825035)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.9358454, -0.015122976, 0.3520867, 0.17663535, 0.884652, -0.43149874, -0.30494854, 0.4660072, 0.8305685, 129.33035, 11.083022, 79.64621)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.98129797, 0.112183474, -0.15642735, -0.18073955, 0.8165968, -0.5481816, 0.06624086, 0.5662018, 0.8216006, -36.573296, 10.913517, -54.441986)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.57244533, 0.31188866, -0.75830853, -0.42037514, 0.9056724, 0.055158995, 0.70398235, 0.28719854, 0.64955807, -57.900055, 8.437144, -32.821915)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.90091854, 0.19264647, -0.38888663, -0.43333352, 0.44850713, -0.78170544, 0.023825534, 0.8727711, 0.48754847, -18.054863, 7.2353635, -60.556427)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.46065125, -0.42216367, -0.780755, 0.21997616, 0.90650135, -0.36036897, 0.85989016, -0.005743272, 0.5104467, 111.478165, 9.856537, -51.906586)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.29680574, -0.079809055, -0.951597, -0.0003068149, 0.9965094, -0.083479896, 0.95493776, -0.024485685, -0.29579446, 81.86635, 4.6685534, -56.86795)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.45435926, -0.6403545, -0.6192771, -0.04674822, 0.67708015, -0.73442286, 0.8895909, 0.362642, 0.2777022, 126.431, 12.060935, -39.045757)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.45435926, -0.6403545, -0.6192771, -0.04674822, 0.67708015, -0.73442286, 0.8895909, 0.362642, 0.2777022, 126.431, 12.060935, 44.435917)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5793053, 0.7387109, -0.34454593, 0.39893615, 0.62556416, 0.6704624, 0.7108133, 0.25095072, -0.657091, -63.598465, 6.615222, -17.45502)
+size = Vector3(2.7528, 23.456589, 3.630516)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, 48.764614, 19.574692, 6.079426)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, -10.7465515, 19.574692, 74.30486)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, -18.272835, 19.574692, -34.75495)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, 72.35371, 19.5747, 61.49974)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 48.402966, 0.3200456, 5.92511)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 48.603867, 4.8349605, 5.994774)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 48.85913, 8.779822, 5.737955)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 48.841015, 38.205315, 5.92511)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 48.640114, 33.6904, 5.994774)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 48.38485, 29.745533, 5.737955)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, -16.21421, 19.574692, -11.508944)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -16.57586, 0.3200456, -11.6632595)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -16.374962, 4.8349605, -11.5935955)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -16.119698, 8.779822, -11.850414)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D37" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -16.13781, 38.205315, -11.6632595)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D38" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -16.338707, 33.6904, -11.5935955)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D39" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -16.593971, 29.745533, -11.850414)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D40" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, -7.4744186, 19.574692, 46.381813)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D41" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -7.836067, 0.3200456, 46.227497)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D42" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -7.63517, 4.8349605, 46.29716)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D43" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, -7.3799057, 8.779822, 46.04034)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D44" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -7.398018, 38.205315, 46.227497)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D45" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -7.598915, 33.6904, 46.29716)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D46" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, -7.8541794, 29.745533, 46.040344)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D47" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, 94.29202, 19.574692, 63.730797)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D48" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 93.930374, 0.3200456, 63.576485)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D49" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 94.13127, 4.8349605, 63.64614)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D50" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 94.386536, 8.779822, 63.38932)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D51" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 94.36842, 38.205315, 63.576485)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D52" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 94.16753, 33.6904, 63.64614)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D53" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 93.91226, 29.745533, 63.389328)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D54" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, 89.44189, 19.574692, -23.761833)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D55" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 89.08024, 0.3200456, -23.916145)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D56" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 89.281136, 4.8349605, -23.846489)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D57" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 89.5364, 8.779822, -24.10331)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D58" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 89.51829, 38.205315, -23.916145)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D59" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 89.31739, 33.6904, -23.846489)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D60" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 89.062126, 29.745533, -24.103302)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D61" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5665661, -0.0052757263, 0.8239994, 0.01668951, 0.9998481, -0.00507389, -0.82384735, 0.016627073, 0.56656814, 25.87503, 19.5747, 57.100662)
+size = Vector3(2.7528, 40.92555, 3.630516)
+
+[node name="CSGBox3D62" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 25.513382, 0.32005322, 56.94635)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D63" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 25.71428, 4.834968, 57.016006)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D64" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(0.5611519, -0.0022554253, 0.8263933, 0.016530022, 0.42744496, -0.005088631, -0.81597453, 0.0071082385, 0.5682142, 25.969543, 8.77983, 56.759186)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="CSGBox3D65" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 25.951431, 38.205322, 56.94635)
+size = Vector3(11.394707, 12.108096, 11.613977)
+
+[node name="CSGBox3D66" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 25.750534, 33.690407, 57.016006)
+size = Vector3(8.8744335, 10.1750345, 8.925711)
+
+[node name="CSGBox3D67" type="CSGBox3D" parent="Terrain/Rocks" groups=["terrain"]]
+transform = Transform3D(-0.5611519, 0.002255462, -0.8263933, -0.01653007, -0.42744496, 0.0050885603, -0.8159746, 0.0071082385, 0.5682141, 25.49527, 29.74554, 56.759193)
+size = Vector3(5.6286426, 10.1750345, 5.2103705)
+
+[node name="Mineables" type="Node3D" parent="."]
+
+[node name="Mineable" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.014011, 0.43147755, -3.2165985)
+
+[node name="Mineable2" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.17786, 0.43147755, 12.285717)
+
+[node name="Mineable3" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.177856, 0.43147755, -95.398254)
+
+[node name="Mineable4" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(0.62256926, -0.7825647, 0, 0.7825647, 0.62256926, 0, 0, 0, 1, 132.49265, 4.220086, -84.398254)
+
+[node name="Mineable5" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(0.62256926, -0.7825647, 0, 0.7825647, 0.62256926, 0, 0, 0, 1, 137.88628, 9.108597, -4.6777725)
+
+[node name="Mineable6" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(0.6769916, 0.73599076, 0, -0.73599076, 0.6769916, 0, 0, 0, 1, -33.76098, 9.108597, -4.6777725)
+
+[node name="Mineable7" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(0.8674332, -0.07060355, 0.49251878, -0.42914706, 0.39474538, 0.8124093, -0.25177854, -0.9160737, 0.31211588, -6.556656, 9.108597, 43.120327)
+
+[node name="Mineable8" parent="Mineables" instance=ExtResource("2_4cq2x")]
+transform = Transform3D(0.8674332, -0.07060355, 0.4925188, 0.3988224, 0.6905201, -0.6034256, -0.29749018, 0.719859, 0.62713856, 91.15476, 9.108597, -126.682594)
+
+[node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="EnemyParent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="Enemy" parent="EnemyParent" instance=ExtResource("3_wfhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 8.197519, 1.1396332)
+
+[node name="Triggers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="EntryMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.667007, 1.4178951, 76.31091)
+
+[node name="ExitMarker" type="Marker3D" parent="."]
+transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, 35.068737, 1.8697226, -158.0339)
+
+[node name="ExitTriggerArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.330864, 18.924732, -159.87401)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitTriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2344856, 0.343544, 0)
+shape = SubResource("BoxShape3D_40m11")
+
+[node name="EntryTriggerArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.250484, 18.924732, 72.27488)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryTriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2344856, 0.343544, 0)
+shape = SubResource("BoxShape3D_40m11")

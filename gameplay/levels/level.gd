@@ -7,6 +7,7 @@ signal level_ready
 @onready var room_manager: Node3D = $RoomManager
 
 var player_scene : PackedScene = preload("res://gameplay/player/player_root.tscn")
+var arena_debug_scene : PackedScene = preload("res://gameplay/levels/rooms/room_arena_debug.tscn")
 
 var player_root: PlayerRoot
 var elapsed_run_time : float = 0
@@ -33,6 +34,8 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("debug_win_run"):
 		return_to_base(true)
+	if Input.is_action_just_pressed("debug_action_two"):
+		room_manager.spawn_debug_room_after_current(arena_debug_scene)
 	pass
 
 func ready_first_room() -> void:
@@ -44,29 +47,33 @@ func ready_first_room() -> void:
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.global_position = room_manager.get_room_path_start(room_manager.current_room)
 
-func ready_next_room()-> void:
+func ready_room(room_type : Room.RoomType)-> void:
 	room_manager.spawn_new_room(1)
-	_move_player_to_path()
+	#after we spawn in a new room - we'll have swapped next for currrent - so 
+	#below - we need to keep checking CURRENT room - since next room is now current room
+	if room_manager.current_room.room_type ==  Room.RoomType.RAIL_ROOM:
+		_move_player_to_path()
+	elif room_manager.current_room.room_type ==  Room.RoomType.ARENA_ROOM:
+		_parent_player_to_room()
 
 func _move_player_to_path() -> void:
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
-	player_root.set_mode(PlayerRoot._mode.MOVE_TO_PATH)
+	player_root.set_mode(PlayerRoot.MoveMode.MOVE_TO_PATH)
 
 func _parent_player_to_path() -> void:
 	player_root.set_progress(0)
-	if room_manager.current_room.room_type == Room.RoomType.RAIL_ROOM:
-		room_manager.parent_to_path(player_root)
-		player_root.set_mode(PlayerRoot._mode.ON_RAIL)
-	elif room_manager.current_room.room_type == Room.RoomType.ARENA_ROOM:
-		add_child(player_root) #no path, parent to the level directly
-		player_root.set_mode(PlayerRoot._mode.FREE_FLIGHT)
-		pass
+	room_manager.parent_to_path(player_root)
+	player_root.set_mode(PlayerRoot.MoveMode.ON_RAIL)
+
+func _parent_player_to_room() -> void:
+	add_child(player_root) #no path, parent to the level directly
+	player_root.set_mode(PlayerRoot.MoveMode.FREE_FLIGHT)
 
 func _end_room() -> void:
 	completed_rooms += 1
 	if completed_rooms >= target_room_num:
 		return_to_base(true)
-	ready_next_room()
+	ready_room(room_manager.next_room.room_type)
 
 func return_to_base(bring_cargo : bool) -> void:
 	GameManager.set_gamestate(Globals.GameState.LOADING) #get our loading overlay
