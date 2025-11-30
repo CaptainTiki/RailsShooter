@@ -49,7 +49,10 @@ func set_docking_pose(delta : float)-> void:
 
 func set_freeflight_pose(delta: float)-> void:
 	#do pitch and yaw
-	player_root.rotation += Vector3(player_input.virtual_stick.y, -player_input.virtual_stick.x, 0) * delta
+	player_root.rotation += Vector3(
+		player_input.virtual_stick.y * stats.turn_speed,
+		-player_input.virtual_stick.x * stats.turn_speed,
+		0) * delta
 	
 	#do our knife edge
 	if not ship_root.is_rolling: #dont rotate roll - if we're doing the roll tween

@@ -1,6 +1,8 @@
 extends Node3D
 class_name FreeFlightController
 
+signal end_arena_room(trigger : RoomExitTrigger)
+
 @export var camera : FollowCamera
 @export var ship_root : ShipRoot
 @export var stats : ShipStats
@@ -32,3 +34,6 @@ func disable_free_travel()-> void:
 func enable_free_travel()-> void:
 	set_physics_process(true)
 	set_process(true)
+
+func ArenaRoomEnded(trigger : RoomExitTrigger) -> void:
+	end_arena_room.emit(trigger)

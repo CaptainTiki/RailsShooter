@@ -1,7 +1,7 @@
 extends Node3D
 class_name Room
 
-enum RoomType {RAIL_ROOM, ARENA_ROOM}
+enum RoomType {NONE, RAIL_ROOM, ARENA_ROOM}
 
 signal destroying_room
 

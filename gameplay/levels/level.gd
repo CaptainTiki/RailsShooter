@@ -12,7 +12,7 @@ var arena_debug_scene : PackedScene = preload("res://gameplay/levels/rooms/room_
 var player_root: PlayerRoot
 var elapsed_run_time : float = 0
 var completed_rooms : int = 0
-var target_room_num : int = 2
+var target_room_num : int = 4
 
 func _ready() -> void:
 	GameManager.set_current_level(self)
@@ -20,7 +20,8 @@ func _ready() -> void:
 	level_ready.emit()
 	GameManager.set_gamestate(Globals.GameState.IN_RUN)
 	player_root.docking_controller.docking_complete.connect(_parent_player_to_path)
-	player_root.rail_controller.path_ended.connect(_end_room)
+	player_root.rail_controller.path_ended.connect(_end_rail_room)
+	player_root.free_flight_controller.end_arena_room.connect(_end_arena_room)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,20 +48,28 @@ func ready_first_room() -> void:
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.global_position = room_manager.get_room_path_start(room_manager.current_room)
 
-func ready_room(room_type : Room.RoomType)-> void:
-	room_manager.spawn_new_room(1)
-	#after we spawn in a new room - we'll have swapped next for currrent - so 
-	#below - we need to keep checking CURRENT room - since next room is now current room
-	if room_manager.current_room.room_type ==  Room.RoomType.RAIL_ROOM:
-		_move_player_to_path()
-	elif room_manager.current_room.room_type ==  Room.RoomType.ARENA_ROOM:
-		_parent_player_to_room()
+func ready_room(room_type : Room.RoomType = Room.RoomType.NONE)-> void:
+	print("level.ready_room")
+	if room_type == Room.RoomType.NONE:
+		room_manager.spawn_new_room(1)
+		#after we spawn in a new room - we'll have swapped next for currrent - so 
+		#below - we need to keep checking CURRENT room - since next room is now current room
+		if room_manager.current_room.room_type ==  Room.RoomType.RAIL_ROOM:
+			_move_player_to_path()
+		elif room_manager.current_room.room_type ==  Room.RoomType.ARENA_ROOM:
+			_parent_player_to_room()
+	else:
+		#TODO: wire up to be able to ask for specific room types next
+		#this enables bossroom -> treasure room (and etc) progression
+		pass 
 
 func _move_player_to_path() -> void:
+	print("level._move_player_to_path")
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.set_mode(PlayerRoot.MoveMode.MOVE_TO_PATH)
 
 func _parent_player_to_path() -> void:
+	print("level._parent_player_to_path")
 	player_root.set_progress(0)
 	room_manager.parent_to_path(player_root)
 	player_root.set_mode(PlayerRoot.MoveMode.ON_RAIL)
@@ -69,11 +78,21 @@ func _parent_player_to_room() -> void:
 	add_child(player_root) #no path, parent to the level directly
 	player_root.set_mode(PlayerRoot.MoveMode.FREE_FLIGHT)
 
-func _end_room() -> void:
+#called by the player - who has exited a room (hit the end of the path, or triggered an exit node)
+func _end_rail_room() -> void:
+	print("level._end_rail_room")
 	completed_rooms += 1
 	if completed_rooms >= target_room_num:
 		return_to_base(true)
-	ready_room(room_manager.next_room.room_type)
+	ready_room(Room.RoomType.NONE) #don't specify room - so we get a random room type
+
+func _end_arena_room(_trigger : RoomExitTrigger) -> void:
+	print("level._end_arena_room")
+	#get trigger's parent room? 
+	completed_rooms += 1
+	if completed_rooms >= target_room_num:
+		return_to_base(true)
+	ready_room(Room.RoomType.NONE) #don't specify room - so we get a random room type
 
 func return_to_base(bring_cargo : bool) -> void:
 	GameManager.set_gamestate(Globals.GameState.LOADING) #get our loading overlay

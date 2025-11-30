@@ -11,7 +11,8 @@ signal stats_updated
 @export var boost_speed : float = 84.0 #24.0
 @export var docking_speed : float = 6 #transition to docking port
 @export_category("Ship Rotation")
-@export var rotation_speed : float = 7
+@export var rotation_speed : float = 7 #how fast we rotate in rail & docking mode
+@export var turn_speed : float = 1 #this is how fast we turn in freeflight
 @export var roll_speed : float = 6
 @export var max_pitch_angle : float = 0.3
 @export var max_yaw_angle : float = 0.3
