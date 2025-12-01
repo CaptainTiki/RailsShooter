@@ -14,10 +14,16 @@ func _ready() -> void:
 	pass
 
 func register() -> void:
+	#TODO: fix this with a signal from the rooms - that ask for register on ready
+	#instead of doing this at runtime on the fly
+	if not targeting_component:
+		_register_with_tgt_comp()
 	targeting_component.register_target(self)
 	pass
 
 func unregister() -> void:
+	if not targeting_component:
+		_register_with_tgt_comp()
 	targeting_component.unregister_target(self)
 	pass
 

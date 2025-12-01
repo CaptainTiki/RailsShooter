@@ -36,4 +36,5 @@ func enable_free_travel()-> void:
 	set_process(true)
 
 func ArenaRoomEnded(trigger : RoomExitTrigger) -> void:
+	print("arena room ended triggered")
 	end_arena_room.emit(trigger)

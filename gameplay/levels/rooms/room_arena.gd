@@ -12,7 +12,7 @@ func on_exit_trigger_entered(object_area, trigger_area) -> void:
 	#first - if we're NOT in this room - then we're not "exiting"
 	#so this is essentially an "entry trigger" - we can use that later
 	#for now, we'll just early return
-	if GameManager.current_level != self:
+	if GameManager.current_level.room_manager.current_room != self:
 		return
 		
 	if object_area.is_in_group("player"):

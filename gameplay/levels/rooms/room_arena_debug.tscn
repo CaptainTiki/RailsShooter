@@ -610,7 +610,7 @@ transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86
 [node name="RoomExits" type="Node3D" parent="."]
 
 [node name="ExitTriggerArea_One" type="Area3D" parent="RoomExits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.330864, 18.924732, -159.87401)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.330864, 18.924732, -165.94705)
 script = ExtResource("4_4cq2x")
 exit_id = 1
 exit_label = "Alpha"
@@ -620,7 +620,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2344856, 0.343544, 0)
 shape = SubResource("BoxShape3D_40m11")
 
 [node name="EntryTriggerArea" type="Area3D" parent="RoomExits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.250484, 18.924732, 72.27488)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.250484, 18.924732, 81.81592)
 script = ExtResource("4_4cq2x")
 exit_id = 2
 exit_label = "Beta"

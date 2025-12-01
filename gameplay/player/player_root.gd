@@ -18,9 +18,9 @@ var move_mode : MoveMode = MoveMode.ON_RAIL
 
 var current_speed : float = 8 #8
 
-func _physics_process(delta: float) -> void:
-	print("location: ", global_position)
-	pass
+#func _physics_process(delta: float) -> void:
+	#print("location: ", global_position)
+	#pass
 
 func brake_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, stats.brake_speed, 2 * stats.acceleration * delta)
