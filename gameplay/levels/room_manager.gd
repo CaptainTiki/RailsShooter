@@ -3,6 +3,7 @@ class_name RoomManager
 
 @onready var parent_level: Level = $".."
 
+var deploy_room : PackedScene = preload("res://gameplay/levels/rooms/moon_bay_room.tscn")
 var available_rooms : Array[PackedScene] = [
 		preload("res://gameplay/levels/rooms/room_rail_debug.tscn"),
 		preload("res://gameplay/levels/rooms/room_arena_debug.tscn")
@@ -12,7 +13,12 @@ var prev_room : Room
 var current_room : Room
 var next_room : Room
 
-func spawn_new_room(num_rooms : int) -> void:
+func deploy_first_room() -> void:
+	var new_room : Room = deploy_room.instantiate() as Room
+	add_child(new_room)
+	next_room = new_room
+
+func spawn_new_room(num_rooms : int = 1) -> void:
 	for i in num_rooms:	
 		if prev_room:
 			prev_room.destroy() #get rid of the prev room before we spawn more. 
@@ -46,6 +52,7 @@ func get_room_path_start(room : Room) -> Vector3:
 
 func parent_to_path(player_root : PlayerRoot)-> void:
 	if current_room.room_type == Room.RoomType.RAIL_ROOM:
+		player_root.un_parent()
 		current_room.rail_path.add_child(player_root)
 
 func spawn_debug_room_after_current(scene: PackedScene) -> void:

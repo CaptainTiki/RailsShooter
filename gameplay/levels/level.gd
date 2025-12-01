@@ -40,18 +40,27 @@ func _process(delta: float) -> void:
 	pass
 
 func ready_first_room() -> void:
+	_spawn_player()
+	room_manager.deploy_first_room() #deploy the moon pool room
+	room_manager.spawn_new_room() #deploy the "next room" - so we have 2 in the chain\
+	_finish_first_room_setup()
+	#call_deferred("_finish_first_room_setup")
+
+func _spawn_player() -> void:
 	var player : PlayerRoot = player_scene.instantiate() as PlayerRoot #player needs to be first , so targets can register as targetable
 	player.parent_level = self
 	player_root = player
-	room_manager.spawn_new_room(2)
-	_parent_player_to_path()
+	#temp add the player to scene - before we spawn in rooms
+	#add_child(player_root)
+
+func _finish_first_room_setup() -> void:
+	_parent_player_to_path() #parent player to the path in moon pool room
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.global_position = room_manager.get_room_path_start(room_manager.current_room)
 
 func ready_room(room_type : Room.RoomType = Room.RoomType.NONE)-> void:
-	print("level.ready_room")
 	if room_type == Room.RoomType.NONE:
-		room_manager.spawn_new_room(1)
+		room_manager.spawn_new_room()
 		#after we spawn in a new room - we'll have swapped next for currrent - so 
 		#below - we need to keep checking CURRENT room - since next room is now current room
 		if room_manager.current_room.room_type ==  Room.RoomType.RAIL_ROOM:
@@ -64,30 +73,27 @@ func ready_room(room_type : Room.RoomType = Room.RoomType.NONE)-> void:
 		pass 
 
 func _move_player_to_path() -> void:
-	print("level._move_player_to_path")
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
 	player_root.set_mode(PlayerRoot.MoveMode.MOVE_TO_PATH)
 
 func _parent_player_to_path() -> void:
-	print("level._parent_player_to_path")
 	player_root.set_progress(0)
 	room_manager.parent_to_path(player_root)
 	player_root.set_mode(PlayerRoot.MoveMode.ON_RAIL)
 
 func _parent_player_to_room() -> void:
+	player_root.un_parent()
 	add_child(player_root) #no path, parent to the level directly
 	player_root.set_mode(PlayerRoot.MoveMode.FREE_FLIGHT)
 
 #called by the player - who has exited a room (hit the end of the path, or triggered an exit node)
 func _end_rail_room() -> void:
-	print("level._end_rail_room")
 	completed_rooms += 1
 	if completed_rooms >= target_room_num:
 		return_to_base(true)
 	ready_room(Room.RoomType.NONE) #don't specify room - so we get a random room type
 
 func _end_arena_room(_trigger : RoomExitTrigger) -> void:
-	print("level._end_arena_room")
 	#get trigger's parent room? 
 	completed_rooms += 1
 	if completed_rooms >= target_room_num:

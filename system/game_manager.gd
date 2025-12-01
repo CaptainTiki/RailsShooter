@@ -30,17 +30,18 @@ func start_run() -> void:
 	get_tree().change_scene_to_packed(level_scene)
 
 func end_run(is_success : bool) -> void:
+	current_run.success = is_success
+	player_data.total_num_runs += 1
 	
 	#TODO: set up all the data change from a run into persistant player_data
 	#TODO: set up transfer / copy functions inside player_data, so this doesn't turn into 1000 lines 
-	player_data.aetherium_ore += current_run.aetherium_ore
-	player_data.promethium_shards += current_run.promethium_shards
-	player_data.exotic_alloy += current_run.exotic_alloy
-	player_data.salvage += current_run.salvage
-	player_data.total_num_runs += 1
 	
 	if current_run.success:
 		player_data.total_success_runs += 1
+		player_data.aetherium_ore += current_run.aetherium_ore
+		player_data.promethium_shards += current_run.promethium_shards
+		player_data.exotic_alloy += current_run.exotic_alloy
+		player_data.salvage += current_run.salvage
 	else:
 		player_data.total_fail_runs += 1
 	

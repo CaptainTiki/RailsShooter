@@ -9,6 +9,12 @@ func _ready() -> void:
 			exit.area_entered.connect(on_exit_trigger_entered.bind(exit))
 
 func on_exit_trigger_entered(object_area, trigger_area) -> void:
+	#first - if we're NOT in this room - then we're not "exiting"
+	#so this is essentially an "entry trigger" - we can use that later
+	#for now, we'll just early return
+	if GameManager.current_level != self:
+		return
+		
 	if object_area.is_in_group("player"):
 		if object_area.get_parent() is PlayerRoot:
 			var player : PlayerRoot = object_area.get_parent()

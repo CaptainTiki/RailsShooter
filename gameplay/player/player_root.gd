@@ -18,6 +18,10 @@ var move_mode : MoveMode = MoveMode.ON_RAIL
 
 var current_speed : float = 8 #8
 
+func _physics_process(delta: float) -> void:
+	print("location: ", global_position)
+	pass
+
 func brake_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, stats.brake_speed, 2 * stats.acceleration * delta)
 	camera.set_zoom_in(true)
@@ -25,6 +29,10 @@ func brake_ship(delta: float) -> void:
 func boost_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, stats.boost_speed, 2 * stats.acceleration * delta)
 	camera.set_zoom_out(true)
+
+func un_parent() -> void:
+	if get_parent():
+		get_parent().remove_child(self)
 
 func set_mode(_m : MoveMode)-> void:
 	move_mode = _m
@@ -37,6 +45,7 @@ func set_mode(_m : MoveMode)-> void:
 			docking_controller.disable_docking()
 			free_flight_controller.disable_free_travel()
 		MoveMode.FREE_FLIGHT:
+			print("set to freeflight mode in player_root")
 			rail_controller.disable_rail_travel()
 			attitude_controller.enable_attitude_controller(true)
 			docking_controller.disable_docking()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgtdlu34jlqj4"]
 
-[ext_resource type="Script" uid="uid://doert5owkxa3s" path="res://gameplay/levels/rooms/room.gd" id="1_s68w8"]
+[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_jpe2b"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_n1e08"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_owj7c"]
 
@@ -16,7 +16,7 @@ _data = {
 point_count = 9
 
 [node name="MoonPool_Room" type="Node3D"]
-script = ExtResource("1_s68w8")
+script = ExtResource("1_jpe2b")
 
 [node name="Terrain" type="Node3D" parent="."]
 
