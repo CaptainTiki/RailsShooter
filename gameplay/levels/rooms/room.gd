@@ -22,6 +22,13 @@ func get_room_gates() -> Array[RoomGate]:
 			room_gates.append(gate)
 	return room_gates
 
+func get_gate_by_id(id : String) -> RoomGate:
+	for gate in triggers.get_children():
+		if gate is RoomGate:
+			if gate.gate_id == id:
+				return gate
+	return null
+
 func get_entry_anchor() -> Marker3D:
 	var first_marker : Marker3D = markers.get_child(0)
 	return first_marker

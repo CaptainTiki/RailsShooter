@@ -919,8 +919,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 transform = Transform3D(0.8816331, 0, -0.4719354, 0, 1, 0, 0.4719354, 0, 0.8816331, -11.480774, 14.512913, -569.55225)
 align_marker = NodePath("../../Markers/ExitMarker")
 
-[node name="RailDockTrigger" parent="Triggers" instance=ExtResource("5_vykfn")]
+[node name="RailDockTrigger" parent="Triggers" node_paths=PackedStringArray("rail") instance=ExtResource("5_vykfn")]
 transform = Transform3D(0.883545, 0, -0.4683462, 0, 1, 0, 0.4683462, 0, 0.883545, -22.538689, 11.501869, -555.2561)
+rail = NodePath("../../PathNodes/Rail_Path")
+direction = 0
+target_progress_percent = 100.0
 
 [node name="CollisionShape3D" parent="Triggers/RailDockTrigger" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3865051)

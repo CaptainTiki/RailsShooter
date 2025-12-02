@@ -8,7 +8,6 @@ signal docking_complete
 
 var docking_position : Vector3
 var swap_distance : float = 0.1
-
 var cinematic_mode : bool = false
 
 func _ready() -> void:

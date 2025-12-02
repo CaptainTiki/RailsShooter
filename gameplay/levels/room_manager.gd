@@ -26,24 +26,16 @@ func deploy_first_room() -> void:
 	_ensure_room_node(new_room)
 	_populate_exits_for_room(new_room)
 
-func _spawn_room_for_exit(from_room: Room, gate_id) -> Room:
-	# pick a scene for the next room
+func _spawn_room_for_exit(from_room: Room, from_gate: RoomGate) -> Room:
 	var scene: PackedScene = get_next_room()
 	var new_room: Room = scene.instantiate() as Room
 	add_child(new_room)
 
-	# make sure both rooms exist in the graph
 	_ensure_room_node(from_room)
 	_ensure_room_node(new_room)
 
-	# hook up the graph in the "forward" direction
-	room_graph[from_room][gate_id] = new_room
-
-	# optional: if you already know which gate in the new room connects back, you can store that later
-
-	# align new room to from_room's exit
-	if from_room:
-		_align_rooms(from_room, new_room, gate_id)
+	room_graph[from_room][from_gate.gate_id] = new_room
+	_align_rooms(from_room, new_room, from_gate)
 
 	return new_room
 
@@ -99,21 +91,22 @@ func parent_to_path(player_root : PlayerRoot)-> void:
 
 #exiting a node - this spawns in our next rooms in the graph
 func _on_gate_exit(roomA: Room, gate_id) -> void:
-	# we just left roomA through gate_id
 	print("RoomManager: EXIT from ", roomA.name, " via ", gate_id)
 	prev_room = roomA
 	state = State.TRANSITIONING
 
-	_ensure_room_node(roomA)
+	var gate : RoomGate = roomA.get_gate_by_id(gate_id)  # you can implement this on Room
+	if gate == null:
+		push_warning("RoomManager: no gate ", gate_id, " on room ", roomA.name)
+		return
 
-	var target_room: Room = null
+	# make sure exits are populated before we use them
+	_populate_exits_for_room(roomA)
 
-	if room_graph[roomA].has(gate_id):
-		# we've been through this exit before, reuse the existing room
-		target_room = room_graph[roomA][gate_id]
-	else:
-		# first time using this exit, spawn and wire up a new room
-		target_room = _spawn_room_for_exit(roomA, gate_id)
+	var target_room: Room = gate.connected_room
+	if target_room == null:
+		push_warning("RoomManager: gate has no connected_room after populate?")
+		return
 
 	next_room = target_room
 
@@ -134,29 +127,25 @@ func _on_gate_enter(new_room: Room, gate_id) -> void:
 	_populate_exits_for_room(new_room) 
 
 func _populate_exits_for_room(room: Room) -> void:
+	if room == null:
+		return
+
 	_ensure_room_node(room)
 
-	# however you want to get its gates:
-	# maybe the room has an array, or the gates are in a group.
-	var gates: Array[RoomGate] = room.get_room_gates()
+	for gate in room.get_room_gates():
+		# if this gate already has a room linked, skip
+		if gate.connected_room:
+			continue
 
-	for gate in gates:
-		var gid = gate.gate_id
-
-		if room_graph[room].has(gid):
-			continue  # already has a linked room
-
-		# first time we've seen this gate → spawn neighbor
+		# first time using this gate → spawn neighbor
 		var neighbor_scene: PackedScene = get_next_room()
 		var neighbor_room: Room = neighbor_scene.instantiate() as Room
 		add_child(neighbor_room)
 
+		gate.connected_room = neighbor_room
+
 		_ensure_room_node(neighbor_room)
-
-		room_graph[room][gid] = neighbor_room
-
-		# optional: also hook back-link if you want proper backtracking later
-		# room_graph[neighbor_room][neighbor_entry_gate] = room
+		room_graph[room][gate.gate_id] = neighbor_room  # optional global graph
 
 		_align_rooms(room, neighbor_room, gate)
 
