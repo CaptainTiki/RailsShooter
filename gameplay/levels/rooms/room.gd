@@ -7,15 +7,21 @@ signal destroying_room
 
 @onready var entry_marker: Marker3D = $EntryMarker
 @onready var exit_marker: Marker3D = $ExitMarker
-
+@onready var markers: Node3D = $Markers
+@onready var triggers: Node3D = $Triggers
 @export var room_type : RoomType = RoomType.RAIL_ROOM
 
 func destroy() -> void:
 	destroying_room.emit() #this tells our targets to unregister
 	queue_free()
 
-func get_exit_marker() -> Marker3D:
-	return exit_marker
-	
-func get_entry_marker() -> Marker3D:
-	return entry_marker
+func get_room_gates() -> Array[RoomGate]:
+	var room_gates : Array[RoomGate]
+	for gate in triggers.get_children():
+		if gate is RoomGate:
+			room_gates.append(gate)
+	return room_gates
+
+func get_entry_anchor() -> Marker3D:
+	var first_marker : Marker3D = markers.get_child(0)
+	return first_marker

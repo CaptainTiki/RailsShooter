@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://y8hvkw4ln8u2"]
+
+[ext_resource type="Script" uid="uid://df1n0nak4sn43" path="res://gameplay/levels/rooms/room_gate.gd" id="1_mb3y7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vykfn"]
+size = Vector3(72.685425, 40.32486, 1)
+
+[node name="RoomGate" type="Area3D"]
+collision_layer = 524289
+script = ExtResource("1_mb3y7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vykfn")
+
+[connection signal="area_entered" from="." to="." method="_on_roomgate_entered"]

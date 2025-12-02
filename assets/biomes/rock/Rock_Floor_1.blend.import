@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://q16xye5cdfd4"
-valid=false
+path="res://.godot/imported/Rock_Floor_1.blend-d7232466ae8675b512de42321f36fa66.scn"
 
 [deps]
 
 source_file="res://assets/biomes/rock/Rock_Floor_1.blend"
+dest_files=["res://.godot/imported/Rock_Floor_1.blend-d7232466ae8675b512de42321f36fa66.scn"]
 
 [params]
 

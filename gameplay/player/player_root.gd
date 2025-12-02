@@ -34,29 +34,29 @@ func un_parent() -> void:
 	if get_parent():
 		get_parent().remove_child(self)
 
-func set_mode(_m : MoveMode)-> void:
+func set_move_mode(_m : MoveMode)-> void:
 	move_mode = _m
 	MovementModeChanged.emit(move_mode)
 	
 	match move_mode:
 		MoveMode.ON_RAIL:
-			rail_controller.enable_rail_travel()
+			rail_controller.set_active(true)
 			attitude_controller.enable_attitude_controller(true)
 			docking_controller.disable_docking()
-			free_flight_controller.disable_free_travel()
+			free_flight_controller.set_active(false)
 		MoveMode.FREE_FLIGHT:
 			print("set to freeflight mode in player_root")
-			rail_controller.disable_rail_travel()
+			rail_controller.set_active(false)
 			attitude_controller.enable_attitude_controller(true)
 			docking_controller.disable_docking()
-			free_flight_controller.enable_free_travel()
+			free_flight_controller.set_active(true)
 		MoveMode.DOCKING:
-			rail_controller.disable_rail_travel()
+			rail_controller.set_active(false)
 			attitude_controller.enable_attitude_controller(true) #true unless we're using a docking port - have to revisit
 			docking_controller.enable_docking()
-			free_flight_controller.disable_free_travel()
+			free_flight_controller.set_active(false)
 		MoveMode.MOVE_TO_PATH: #this is for backwards copat - will be depricated soon
-			rail_controller.disable_rail_travel()
+			rail_controller.set_active(false)
 			attitude_controller.enable_attitude_controller(true) #true unless we're using a docking port - have to revisit
 			docking_controller.enable_docking()
-			free_flight_controller.disable_free_travel()
+			free_flight_controller.set_active(false)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpkjtqkgpumxb"]
+[gd_scene load_steps=8 format=3 uid="uid://bpkjtqkgpumxb"]
 
 [ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_knv8m"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_4ixc5"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_h1hg0"]
+[ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_4ixc5"]
+[ext_resource type="PackedScene" uid="uid://cp4oodnwifpan" path="res://gameplay/levels/rooms/raildock_trigger.tscn" id="5_h1hg0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpfku"]
 albedo_color = Color(0.3936, 0.39504, 0.48, 1)
@@ -879,8 +881,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.55952, 8.9592495, -160.61
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
-[node name="EntryMarker" type="Marker3D" parent="."]
+[node name="RoomGate_1" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_4ixc5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.70874, 8.47407)
+align_marker = NodePath("../../Markers/EntryMarker")
+
+[node name="RoomGate_2" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_4ixc5")]
+transform = Transform3D(0.88087416, 0, -0.47335044, 0, 1, 0, 0.47335044, 0, 0.88087416, -14.333024, 15.70874, -570.9043)
+gate_id = &"gate_2"
+align_marker = NodePath("../../Markers/ExitMarker")
+
+[node name="RailDockTrigger" parent="Triggers" instance=ExtResource("5_h1hg0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.944031, 3.5761247)
+direction = 1
+
+[node name="RailDockTrigger2" parent="Triggers" instance=ExtResource("5_h1hg0")]
+transform = Transform3D(0.8874939, 0, -0.4608195, 0, 1, 0, 0.4608195, 0, 0.8874939, -16.645638, 14.620199, -564.68353)
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="EntryMarker" type="Marker3D" parent="Markers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
 
-[node name="ExitMarker" type="Marker3D" parent="."]
+[node name="ExitMarker" type="Marker3D" parent="Markers"]
 transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -13.442292, 0.9342081, -572.1973)
