@@ -11,6 +11,10 @@ signal destroying_room
 @onready var triggers: Node3D = $Triggers
 @export var room_type : RoomType = RoomType.RAIL_ROOM
 
+
+func _ready() -> void:
+	print("Room READY: ", name, " id=", get_instance_id())
+	
 func destroy() -> void:
 	destroying_room.emit() #this tells our targets to unregister
 	queue_free()

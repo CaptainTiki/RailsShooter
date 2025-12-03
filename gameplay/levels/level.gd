@@ -20,9 +20,18 @@ var pending_rail_dock: RailDockTrigger = null
 func _ready() -> void:
 	GameManager.set_current_level(self)
 	ready_first_room()
+	_debug_list_rooms("level._ready()")
 	level_ready.emit()
 	GameManager.set_gamestate(Globals.GameState.IN_RUN)
-	
+
+func _debug_list_rooms(context: String) -> void:
+	print("\n=== ROOM DEBUG (", context, ") ===")
+	for child in get_children():
+		if child is Room:
+			print(" Room node: ", child.name, " id=", child.get_instance_id())
+			# if Room has a room_type enum, you can also log that:
+			# print("   type=", child.room_type)
+	print("=== END ROOM DEBUG ===\n")
 
 func _process(delta: float) -> void:
 	elapsed_run_time += delta
@@ -52,19 +61,20 @@ func _spawn_player() -> void:
 	player_root = player
 
 func on_raildock_trigger(_ship_root: ShipRoot, trigger: RailDockTrigger) -> void:
-	if player_root.rail_transition_in_progress:
-		print("Level.on_raildock_trigger ignored: rail transition already in progress")
-		return
-	
+	var ts := Time.get_ticks_msec()
+	print("Level.on_raildock_trigger t=", ts,
+		" trigger=", trigger.name,
+		" mode=", player_root.move_mode)
+
 	match player_root.move_mode:
 		PlayerRoot.MoveMode.ON_RAIL:
-			print("  -> calling exit_rail_via_trigger")
+			print("  -> exit_rail_via_trigger")
 			player_root.exit_rail_via_trigger(trigger)
 		PlayerRoot.MoveMode.FREE_FLIGHT:
-			print("  -> calling enter_rail_via_trigger")
+			print("  -> enter_rail_via_trigger")
 			player_root.enter_rail_via_trigger(trigger)
 		_:
-			print("Level.on_raildock_trigger ignored in mode=", player_root.move_mode)
+			print("  -> ignored (mode=", player_root.move_mode, ")")
 
 func _move_player_to_path() -> void:
 	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)

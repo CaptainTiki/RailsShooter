@@ -890,17 +890,14 @@ transform = Transform3D(0.88087416, 0, -0.47335044, 0, 1, 0, 0.47335044, 0, 0.88
 gate_id = &"gate_2"
 align_marker = NodePath("../../Markers/ExitMarker")
 
-[node name="RailDockTrigger" parent="Triggers" node_paths=PackedStringArray("rail") instance=ExtResource("5_h1hg0")]
+[node name="RailRoom_RailDockTrigger" parent="Triggers" instance=ExtResource("5_h1hg0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.944031, 3.5761247)
 rail_id = 1
-rail = NodePath("../../PathNodes/Rail_Path")
 direction = 0
-target_progress_percent = null
 
-[node name="RailDockTrigger2" parent="Triggers" node_paths=PackedStringArray("rail") instance=ExtResource("5_h1hg0")]
+[node name="RailRoom_RailDockTrigger2" parent="Triggers" instance=ExtResource("5_h1hg0")]
 transform = Transform3D(0.8874939, 0, -0.4608195, 0, 1, 0, 0.4608195, 0, 0.8874939, -16.645638, 14.620199, -564.68353)
 rail_id = 2
-rail = NodePath("../../PathNodes/Rail_Path")
 direction = -1
 target_progress_percent = 100.0
 

@@ -6,7 +6,7 @@
 size = Vector3(72.685425, 40.32486, 1)
 
 [node name="RoomGate" type="Area3D"]
-collision_layer = 524289
+collision_layer = 524288
 script = ExtResource("1_mb3y7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
