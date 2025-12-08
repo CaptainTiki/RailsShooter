@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		regen_shield(delta)
 
 ##Absorbs damage up to current shield value, returns any leftover damage for armor/HP
-func block_damage(amount: float) -> float:
+func block_damage(amount: float, _type : Globals.DamageType) -> float:
 	delay = regen_delay
 	if current_shields > 0:
 		current_shields -= amount
@@ -38,7 +38,7 @@ func regen_shield(delta: float) -> void:
 	delay -= delta
 	if delay <= 0:
 		current_shields += regen_amount * delta
-		clamp(current_shields, 0, max_shield)
+		current_shields = clamp(current_shields, 0, max_shield)
 		if current_shields >= max_shield:
 			shield_restored.emit()
 

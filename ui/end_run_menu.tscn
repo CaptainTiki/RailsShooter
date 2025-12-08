@@ -1,0 +1,186 @@
+[gd_scene load_steps=6 format=3 uid="uid://cojyl2glcbth2"]
+
+[ext_resource type="Script" uid="uid://dfv1jjqgbhq1" path="res://ui/end_run_menu.gd" id="1_d52wx"]
+
+[sub_resource type="Gradient" id="Gradient_d52wx"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.14509805)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ejwgg"]
+gradient = SubResource("Gradient_d52wx")
+fill_from = Vector2(0.508547, 0)
+fill_to = Vector2(0.52136755, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_50142"]
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_d52wx"]
+font_size = 30
+
+[node name="EndRunMenu" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_d52wx")
+
+[node name="Gradient" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ejwgg")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -69.5
+offset_right = 35.0
+offset_bottom = 69.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="Time_Elapsed_Label" type="Label" parent="Container/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Time Elapsed"
+
+[node name="VSeparator" type="VSeparator" parent="Container/VBoxContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Time_Elapsed_Value" type="Label" parent="Container/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "2:01"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="OreCollected_Label" type="Label" parent="Container/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Ore Collected"
+
+[node name="VSeparator2" type="VSeparator" parent="Container/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="OreCollected_Value" type="Label" parent="Container/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "000"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="EnemiesDestroyed_Label" type="Label" parent="Container/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Enemies Destroyed"
+
+[node name="VSeparator3" type="VSeparator" parent="Container/VBoxContainer/HBoxContainer3"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="EnemiesDestroyed_Value" type="Label" parent="Container/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "000"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Container/VBoxContainer"]
+layout_mode = 2
+
+[node name="DamageTaken_Label" type="Label" parent="Container/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Damage Taken"
+
+[node name="VSeparator4" type="VSeparator" parent="Container/VBoxContainer/HBoxContainer4"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="DamageTaken_Value" type="Label" parent="Container/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "000"
+
+[node name="HSeparator" type="HSeparator" parent="Container/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+
+[node name="Exit_Bn" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.0
+offset_right = 116.0
+offset_bottom = 206.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Container2" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Container2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Container2/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+
+[node name="Title_Label" type="Label" parent="VBoxContainer/Container2/VBoxContainer"]
+layout_mode = 2
+text = "- E N D  R U N -"
+label_settings = SubResource("LabelSettings_50142")
+
+[node name="Container3" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Container3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Container3/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+
+[node name="Results_Label" type="Label" parent="VBoxContainer/Container3/VBoxContainer"]
+layout_mode = 2
+text = "P A U S E D"
+label_settings = SubResource("LabelSettings_d52wx")
+
+[connection signal="pressed" from="Container/VBoxContainer/Exit_Bn" to="." method="_on_exit_bn_pressed"]

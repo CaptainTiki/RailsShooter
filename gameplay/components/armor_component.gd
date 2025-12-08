@@ -4,10 +4,11 @@ class_name ArmorComponent
 ##armor_amount is a percentage
 @export var armor_amount : float = 0.01
 
-func reduce_damage(amount: float) -> float:
+func reduce_damage(amount: float, _type : Globals.DamageType) -> float:
 	var dmg_reduction : float = amount * armor_amount
 	var damage_amount : float = amount - dmg_reduction
-	return clamp(damage_amount, 0, amount)
+	damage_amount = clamp(damage_amount, 0, amount)
+	return damage_amount
 
 func get_armor_value() -> float:
 	return armor_amount

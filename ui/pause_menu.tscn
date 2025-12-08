@@ -1,6 +1,102 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtg7hfd3p5jc2"]
+[gd_scene load_steps=5 format=3 uid="uid://dtg7hfd3p5jc2"]
 
 [ext_resource type="Script" uid="uid://ko4hl2vggbf0" path="res://ui/pause_menu.gd" id="1_50142"]
 
-[node name="PauseMenu" type="Node3D"]
+[sub_resource type="Gradient" id="Gradient_50142"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.14509805)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ejwgg"]
+gradient = SubResource("Gradient_50142")
+fill_from = Vector2(0.508547, 0)
+fill_to = Vector2(0.52136755, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_50142"]
+font_size = 45
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 2
 script = ExtResource("1_50142")
+
+[node name="Gradient" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ejwgg")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -69.5
+offset_right = 35.0
+offset_bottom = 69.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume_Bn" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="Exit_Bn" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
+
+[node name="HSeparator" type="HSeparator" parent="Container/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+
+[node name="Debug_Bn" type="Button" parent="Container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Debug"
+
+[node name="Container2" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_right = 35.0
+offset_bottom = 139.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="Container2/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 34
+
+[node name="Label" type="Label" parent="Container2/VBoxContainer"]
+layout_mode = 2
+text = "P A U S E D"
+label_settings = SubResource("LabelSettings_50142")
+
+[connection signal="pressed" from="Container/VBoxContainer/Resume_Bn" to="." method="_on_resume_bn_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Exit_Bn" to="." method="_on_exit_bn_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/Debug_Bn" to="." method="_on_debug_bn_pressed"]

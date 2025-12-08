@@ -1,9 +1,10 @@
 extends PathFollow3D
 class_name PlayerRoot
 
+signal PlayerDied
 signal MovementModeChanged(move_mode : MoveMode)
 
-enum MoveMode {ON_RAIL, MOVE_TO_PATH, FREE_FLIGHT, DOCKING}
+enum MoveMode {NONE, ON_RAIL, MOVE_TO_PATH, FREE_FLIGHT, DOCKING}
 
 @export var camera : FollowCamera
 @onready var stats: ShipStats = %ShipStats
@@ -19,12 +20,11 @@ var pending_rail_dock: RailDockTrigger = null
 var current_speed : float = 8 #8
 var direction : int = 1 #direction of travel - set by docking triggers
 var rail_transition_in_progress: bool = false
-#func _physics_process(delta: float) -> void:
-	#print("location: ", global_position)
-	#pass
 
 func _ready() -> void:
 	docking_controller.docking_complete.connect(_on_rail_docking_complete)
+	ship_root.health_component.died.connect(_on_player_died)
+	
 
 func brake_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, stats.brake_speed, 2 * stats.acceleration * delta)
@@ -99,6 +99,12 @@ func set_move_mode(_m : MoveMode)-> void:
 	MovementModeChanged.emit(move_mode)
 	
 	match move_mode:
+		MoveMode.NONE:
+			#we're dead - or cinematic - turn off input
+			rail_controller.set_active(false)
+			attitude_controller.enable_attitude_controller(false)
+			docking_controller.disable_docking()
+			free_flight_controller.set_active(false)
 		MoveMode.ON_RAIL:
 			rail_controller.set_active(true)
 			attitude_controller.enable_attitude_controller(true)
@@ -120,3 +126,7 @@ func set_move_mode(_m : MoveMode)-> void:
 			attitude_controller.enable_attitude_controller(true) #true unless we're using a docking port - have to revisit
 			docking_controller.enable_docking()
 			free_flight_controller.set_active(false)
+
+func _on_player_died() -> void:
+	set_move_mode(MoveMode.NONE) #disable input
+	PlayerDied.emit()

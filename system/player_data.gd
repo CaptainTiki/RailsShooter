@@ -5,6 +5,7 @@ var total_runtime : float = 0.00
 var total_num_runs : int = 0
 var total_success_runs : int = 0
 var total_fail_runs : int = 0
+var total_aborted_runs : int = 0
 
 var aetherium_ore : float = 0
 var promethium_shards : float = 0

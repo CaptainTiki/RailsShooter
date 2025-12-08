@@ -20,14 +20,14 @@ func heal(amount : float) -> void:
 	if current_health < max_health:
 		healed.emit()
 		current_health += amount
-		clamp(current_health, 0, max_health)
+		current_health = clamp(current_health, 0, max_health)
  
-func take_damage(amount : float) -> void:
+func take_damage(amount : float, _type : Globals.DamageType) -> void:
 	var remainder : float = amount #set the amount in case we have no shields or armor
 	if sheilds:
-		remainder = sheilds.block_damage(remainder)
+		remainder = sheilds.block_damage(remainder, _type)
 	if armor:
-		remainder = armor.reduce_damage(remainder)
+		remainder = armor.reduce_damage(remainder, _type)
 	current_health -= remainder
 	if current_health <= 0:
 		die()
@@ -50,7 +50,7 @@ func get_max_health() -> float:
 
 func _on_hurt_box_area_entered(area: Area3D) -> void:
 	if area.is_in_group("bullet"):
-		take_damage(area.damage)
+		take_damage(area.damage, area.damage_type)
 		if area is Projectile:
 			area.free_projectile()
 	if area.is_in_group("enemy"):

@@ -133,22 +133,45 @@ func _populate_exits_for_room(room: Room) -> void:
 	_ensure_room_node(room)
 
 	for gate in room.get_room_gates():
-		# if this gate already has a room linked, skip
+		# Skip if this gate already knows where it goes
 		if gate.connected_room:
 			continue
 
-		# first time using this gate → spawn neighbor
+		# 1) Spawn the neighbor
 		var neighbor_scene: PackedScene = get_next_room()
 		var neighbor_room: Room = neighbor_scene.instantiate() as Room
 		add_child(neighbor_room)
 
-		gate.connected_room = neighbor_room
-
 		_ensure_room_node(neighbor_room)
-		room_graph[room][gate.gate_id] = neighbor_room  # optional global graph
 
+		# 2) Align the neighbor to THIS gate
 		_align_rooms(room, neighbor_room, gate)
 
+		# 3) Wire A -> B
+		gate.connected_room = neighbor_room
+		room_graph[room][gate.gate_id] = neighbor_room
+
+		# 4) Find the "entry" gate on neighbor and wire B -> A
+		var entry_gate := _find_entry_gate_for_room(neighbor_room)
+		if entry_gate:
+			entry_gate.connected_room = room
+			room_graph[neighbor_room][entry_gate.gate_id] = room
+
+func _find_entry_gate_for_room(room: Room) -> RoomGate:
+	var anchor: Node3D = room.get_entry_anchor()
+	if anchor == null:
+		return null
+
+	var nearest_gate: RoomGate = null
+	var nearest_dist := INF
+
+	for g in room.get_room_gates():
+		var d := g.global_position.distance_to(anchor.global_position)
+		if d < nearest_dist:
+			nearest_dist = d
+			nearest_gate = g
+
+	return nearest_gate
 
 func _ensure_room_node(room: Room) -> void:
 	if room == null:

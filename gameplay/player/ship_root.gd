@@ -22,6 +22,9 @@ class_name ShipRoot
 @onready var cargo_ammount_label: Label = %cargo_ammount_label
 
 @onready var ship_stats: ShipStats = %ShipStats
+@onready var shields_component: SheildsComponent = $Shields
+@onready var armor_component: ArmorComponent = $Armor
+@onready var health_component: HealthComponent = $Health
 
 var roll_tween : Tween #used for barrel rolls
 var is_rolling : bool = false

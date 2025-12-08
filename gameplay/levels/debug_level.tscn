@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://shvx0x7woun8"]
+[gd_scene load_steps=8 format=3 uid="uid://shvx0x7woun8"]
 
 [ext_resource type="Script" uid="uid://bpj2uofyhy3ap" path="res://gameplay/levels/level.gd" id="1_6mttl"]
 [ext_resource type="Script" uid="uid://die4npb6mvxsg" path="res://gameplay/levels/room_manager.gd" id="2_5t2ux"]
@@ -28,6 +28,14 @@ volumetric_fog_emission_energy = 0.1
 volumetric_fog_anisotropy = 0.01
 volumetric_fog_length = 100.0
 
+[sub_resource type="Gradient" id="Gradient_5t2ux"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_so80d"]
+gradient = SubResource("Gradient_5t2ux")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Level" type="Node3D" groups=["level"]]
 script = ExtResource("1_6mttl")
 
@@ -44,3 +52,23 @@ shadow_enabled = true
 [node name="RoomManager" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 script = ExtResource("2_5t2ux")
+
+[node name="Menus" type="CanvasLayer" parent="."]
+
+[node name="Vignette_Fade" type="TextureRect" parent="Menus"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_so80d")
+
+[node name="Screen_Fade" type="ColorRect" parent="Menus"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

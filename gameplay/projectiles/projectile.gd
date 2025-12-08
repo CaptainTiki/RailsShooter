@@ -4,6 +4,7 @@ class_name Projectile
 var direction : Vector3 = Vector3.ZERO
 var target : Targetable
 var lock_strength : float = 0.01
+var damage_type : Globals.DamageType = Globals.DamageType.GENERAL
 
 #needs to move to globals
 var proj_homing_strength : float = 0.01 #percent of homing applied PER FRAME (this is the knob we tweak with difficulty settings)

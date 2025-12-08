@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjur0pgj85cwp"]
+
+[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_pblmp"]
+[ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_7blt8"]
+[ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_71mw5"]
+[ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_21gqm"]
+[ext_resource type="PackedScene" uid="uid://cp4oodnwifpan" path="res://gameplay/levels/rooms/raildock_trigger.tscn" id="5_bl23d"]
+
+[sub_resource type="Curve3D" id="Curve3D_pblmp"]
+
+[node name="Room_Rail_Debug" type="Node3D"]
+script = ExtResource("1_pblmp")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="PathNodes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.545999, 0)
+
+[node name="Rail_Path" type="Path3D" parent="PathNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2530136, 13.801627, 4.923065)
+curve = SubResource("Curve3D_pblmp")
+
+[node name="Mineables" type="Node3D" parent="."]
+
+[node name="Mineable" parent="Mineables" instance=ExtResource("2_7blt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, 0.43147755, -172.13322)
+
+[node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="EnemyParent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="Enemy" parent="EnemyParent" instance=ExtResource("3_71mw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 8.197519, -143.8657)
+
+[node name="Triggers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
+
+[node name="RoomGate_1" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_21gqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.70874, 8.47407)
+align_marker = NodePath("../../Markers/EntryMarker")
+
+[node name="RoomGate_2" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_21gqm")]
+transform = Transform3D(0.88087416, 0, -0.47335044, 0, 1, 0, 0.47335044, 0, 0.88087416, -14.333024, 15.70874, -570.9043)
+gate_id = &"gate_2"
+align_marker = NodePath("../../Markers/ExitMarker")
+
+[node name="RailRoom_RailDockTrigger" parent="Triggers" instance=ExtResource("5_bl23d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.944031, 3.5761247)
+rail_id = 1
+direction = 0
+
+[node name="RailRoom_RailDockTrigger2" parent="Triggers" instance=ExtResource("5_bl23d")]
+transform = Transform3D(0.8874939, 0, -0.4608195, 0, 1, 0, 0.4608195, 0, 0.8874939, -16.645638, 14.620199, -564.68353)
+rail_id = 2
+direction = -1
+target_progress_percent = 100.0
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="EntryMarker" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
+
+[node name="ExitMarker" type="Marker3D" parent="Markers"]
+transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -13.442292, 0.9342081, -572.1973)

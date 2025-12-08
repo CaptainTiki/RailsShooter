@@ -1,6 +1,7 @@
 extends Node
 
 signal gamestate_changed
+signal run_ended
 
 var game_state : Globals.GameState = Globals.GameState.LOADING
 
@@ -29,21 +30,29 @@ func start_run() -> void:
 	current_run = RunData.new()
 	get_tree().change_scene_to_packed(level_scene)
 
-func end_run(is_success : bool) -> void:
-	current_run.success = is_success
+func end_run() -> void:
 	player_data.total_num_runs += 1
 	
 	#TODO: set up all the data change from a run into persistant player_data
 	#TODO: set up transfer / copy functions inside player_data, so this doesn't turn into 1000 lines 
 	
-	if current_run.success:
+	if current_run.run_outcome == RunData.RunOutcome.SUCCESS:
 		player_data.total_success_runs += 1
 		player_data.aetherium_ore += current_run.aetherium_ore
 		player_data.promethium_shards += current_run.promethium_shards
 		player_data.exotic_alloy += current_run.exotic_alloy
 		player_data.salvage += current_run.salvage
-	else:
+	elif current_run.run_outcome == RunData.RunOutcome.FAILED:
 		player_data.total_fail_runs += 1
+	elif current_run.run_outcome == RunData.RunOutcome.ABORTED:
+		player_data.total_aborted_runs += 1
 	
 	set_gamestate(Globals.GameState.MENUS)
+	unpause_game() #just in case we're still paused when we get back to the menus
 	last_run = current_run #store the last run so you can go back and look if you want
+
+func pause_game() -> void:
+	get_tree().paused = true
+
+func unpause_game() -> void:
+	get_tree().paused = false
