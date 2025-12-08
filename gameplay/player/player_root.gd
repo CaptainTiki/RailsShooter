@@ -58,10 +58,11 @@ func exit_rail_via_trigger(_trigger: RailDockTrigger) -> void:
 	rail_transition_in_progress = false
 
 func _on_rail_docking_complete() -> void:
-	print("PlayerRoot._on_rail_docking_complete at position=", global_position)
 	if pending_rail_dock == null:
 		return
 
+	print("PlayerRoot._on_rail_docking_complete at position=", global_position, ", gate: ", pending_rail_dock)
+	
 	var dock_trigger := pending_rail_dock
 	pending_rail_dock = null
 

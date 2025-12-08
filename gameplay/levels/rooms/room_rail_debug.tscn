@@ -901,6 +901,9 @@ rail_id = 2
 direction = -1
 target_progress_percent = 100.0
 
+[node name="CollisionShape3D" parent="Triggers/RailRoom_RailDockTrigger2" index="0"]
+transform = Transform3D(0.99999905, 0, -1.1920929e-07, 0, 1, 0, 1.1920929e-07, 0, 0.99999905, -6.1035156e-05, 0, 8.873291)
+
 [node name="Markers" type="Node3D" parent="."]
 
 [node name="EntryMarker" type="Marker3D" parent="Markers"]
@@ -908,3 +911,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
 
 [node name="ExitMarker" type="Marker3D" parent="Markers"]
 transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -13.442292, 0.9342081, -572.1973)
+
+[editable path="Triggers/RailRoom_RailDockTrigger"]
+[editable path="Triggers/RailRoom_RailDockTrigger2"]

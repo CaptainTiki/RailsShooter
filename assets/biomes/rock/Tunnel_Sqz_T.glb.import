@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://iks8unx63yfk"
-path="res://.godot/imported/Straight_Short_Rock_2.glb-36d5822874df784978fbc7e83f292e19.scn"
+uid="uid://colgabk74451j"
+path="res://.godot/imported/Tunnel_Sqz_T.glb-0b77da2aa5564bddaf31b9f0ad956bc9.scn"
 
 [deps]
 
-source_file="res://assets/biomes/rock/Straight_Short_Rock_2.glb"
-dest_files=["res://.godot/imported/Straight_Short_Rock_2.glb-36d5822874df784978fbc7e83f292e19.scn"]
+source_file="res://assets/biomes/rock/Tunnel_Sqz_T.glb"
+dest_files=["res://.godot/imported/Tunnel_Sqz_T.glb-0b77da2aa5564bddaf31b9f0ad956bc9.scn"]
 
 [params]
 
@@ -38,16 +38,11 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"materials": {
-"ImphenziaPixPal": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/Materials/ImphenziaPixPal.tres",
-"use_external/path": "uid://7o7npc70gid"
-}
-},
 "nodes": {
-"PATH:Straight_Short_Rock_2": {
+"PATH:Tunnel_squeeze_Top": {
 "generate/physics": true,
+"physics/layer": 65536,
+"physics/mask": 0,
 "physics/shape_type": 2
 }
 }

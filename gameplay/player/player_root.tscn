@@ -100,7 +100,7 @@ player_input = NodePath("../FollowCamera/Player_Input")
 rail_controller = NodePath("../Rail_Controller")
 
 [node name="Ship_Root" type="Area3D" parent="." node_paths=PackedStringArray("player_input", "camera") groups=["player"]]
-collision_mask = 131072
+collision_mask = 0
 script = ExtResource("3_n3mgn")
 player_input = NodePath("../FollowCamera/Player_Input")
 camera = NodePath("../FollowCamera")

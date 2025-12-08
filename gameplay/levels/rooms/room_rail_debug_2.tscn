@@ -1,29 +1,116 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjur0pgj85cwp"]
+[gd_scene load_steps=17 format=3 uid="uid://cjur0pgj85cwp"]
 
 [ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_pblmp"]
+[ext_resource type="PackedScene" uid="uid://dhi2c0hloi73x" path="res://assets/biomes/rock/Tunnel_Strt_T.glb" id="2_0e56h"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_7blt8"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_71mw5"]
+[ext_resource type="PackedScene" uid="uid://bvddw373aud37" path="res://assets/biomes/rock/Tunne_45L_T.glb" id="3_g216k"]
+[ext_resource type="PackedScene" uid="uid://colgabk74451j" path="res://assets/biomes/rock/Tunnel_Sqz_T.glb" id="4_02m2v"]
 [ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_21gqm"]
 [ext_resource type="PackedScene" uid="uid://cp4oodnwifpan" path="res://gameplay/levels/rooms/raildock_trigger.tscn" id="5_bl23d"]
+[ext_resource type="PackedScene" uid="uid://cchx8tmukvbfr" path="res://assets/biomes/rock/Tunne_45R_T.glb" id="5_pwf6p"]
+[ext_resource type="PackedScene" uid="uid://ro3y0jjp5e0j" path="res://assets/biomes/rock/Tunnel_Xpnd_T.glb" id="6_n30a4"]
+[ext_resource type="PackedScene" uid="uid://ixpvuw5s3fiv" path="res://assets/biomes/rock/Tunnel_Strt_B.glb" id="7_atavo"]
+[ext_resource type="PackedScene" uid="uid://b6pr734he7sh5" path="res://assets/biomes/rock/Tunne_45L_B.glb" id="8_3w0te"]
+[ext_resource type="PackedScene" uid="uid://bno5k05sumi2m" path="res://assets/biomes/rock/Tunnel_Sqz_B.glb" id="9_cu6y5"]
+[ext_resource type="PackedScene" uid="uid://c4h1mw82oliqu" path="res://assets/biomes/rock/Tunne_45R_B.glb" id="10_3vp0a"]
+[ext_resource type="PackedScene" uid="uid://dlknser47lmer" path="res://assets/biomes/rock/Tunne_Xpnd_B.glb" id="11_u7fyf"]
 
 [sub_resource type="Curve3D" id="Curve3D_pblmp"]
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, -16.039083, 0, 0, 0, 0, 0, 0, -0.21639374, 0.72114503, -28.281387, 1.0211506, -0.31147766, 3.1356926, -1.0211506, 0.31147766, -3.1356926, -1.9826555, 1.1723156, -39.953472, 0, 0, 0, 0, 0, 0, -9.748769, 1.4386082, -53.596085, 0, 0, 0, 0, 0, 0, -17.978886, 1.4162731, -63.245476, 1.143816, 0.22293472, 1.2309265, -1.143816, -0.22293472, -1.2309265, -26.243196, 1.1078739, -71.55106, 0, 0, 0, 0, 0, 0, -33.628765, 1.1723614, -79.26402, 0, 0, 0, 0, 0, 0, -39.51219, 1.1723614, -85.00098, 0, 0, 0, 0, 0, 0, -45.638924, 1.1394062, -90.67252, 0, 0, 0, 0, 0, 0, -52.786648, 1.1161928, -97.4324, 1.1716728, -0.5350733, 1.2499466, -1.1716728, 0.5350733, -1.2499466, -57.092236, 1.5800347, -101.846054, 0, 0, 0, -0.43800735, -0.088332176, -0.78726196, -60.134033, 1.4327698, -105.671555, 0.47172165, 0.1002655, 1.111206, -0.47172165, -0.1002655, -1.111206, -62.31807, 1.0893078, -109.984055, 0, 0, 0, 0, 0, 0, -64.203255, 1.1113977, -115.400856, 0, 0, 0, 0, 0, 0, -66.19473, 1.1723614, -121.57584, 0, 0, 0, 0, 0, 0, -67.87207, 1.1723614, -126.08868, 0.35591125, -0.109324455, 1.1351929, -0.35591125, 0.109324455, -1.1351929, -70.024994, 1.2952862, -132.85118, -0.0077209473, -0.025589705, 0.88894653, 0.0077209473, 0.025589705, -0.88894653, -70.65118, 1.1723614, -138.78348, 0, 0, 0, 0, 0, 0, -70.65447, 1.1723614, -145.1838, 0, 0, 0, 0, 0, 0, -70.1472, 1.1723614, -153.14964, 0, 0, 0, 0, 0, 0, -69.58134, 1.1723614, -160.41226, 0, 0, 0, 0, 0, 0, -69.07835, 1.1723614, -165.79349, 0, 0, 0, 0, 0, 0, -68.74951, 1.1723614, -170.7684, 0, 0, 0, 0, 0, 0, -68.40509, 1.1723614, -175.97919),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 24
 
-[node name="Room_Rail_Debug" type="Node3D"]
+[node name="Room_Rail_Debug_2" type="Node3D"]
 script = ExtResource("1_pblmp")
 
 [node name="Terrain" type="Node3D" parent="."]
+
+[node name="Tops" type="Node3D" parent="Terrain"]
+
+[node name="Tunnel_Strt_T" parent="Terrain/Tops" instance=ExtResource("2_0e56h")]
+
+[node name="Tunnel_Strt_T2" parent="Terrain/Tops" instance=ExtResource("2_0e56h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Tunne_45L_T" parent="Terrain/Tops" instance=ExtResource("3_g216k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="Tunnel_Strt_T3" parent="Terrain/Tops" instance=ExtResource("2_0e56h")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -22, 0, -70.12449)
+
+[node name="Tunnel_Strt_T4" parent="Terrain/Tops" instance=ExtResource("2_0e56h")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -36, 0, -84.12449)
+
+[node name="Tunnel_Sqz_T" parent="Terrain/Tops" instance=ExtResource("4_02m2v")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -50, 0, -98)
+
+[node name="Tunne_45R_T" parent="Terrain/Tops" instance=ExtResource("5_pwf6p")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -63.783157, 0, -112.07234)
+
+[node name="Tunnel_Xpnd_T" parent="Terrain/Tops" instance=ExtResource("6_n30a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -144)
+
+[node name="Tunnel_Xpnd_T2" parent="Terrain/Tops" instance=ExtResource("6_n30a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -164)
+
+[node name="Tunnel_Sqz_T2" parent="Terrain/Tops" instance=ExtResource("4_02m2v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -184)
+
+[node name="Bottoms" type="Node3D" parent="Terrain"]
+
+[node name="Tunnel_Strt_B" parent="Terrain/Bottoms" instance=ExtResource("7_atavo")]
+
+[node name="Tunnel_Strt_B2" parent="Terrain/Bottoms" instance=ExtResource("7_atavo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Tunne_45L_B" parent="Terrain/Bottoms" instance=ExtResource("8_3w0te")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="Tunnel_Strt_B3" parent="Terrain/Bottoms" instance=ExtResource("7_atavo")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -22, 0, -70.12449)
+
+[node name="Tunnel_Strt_B4" parent="Terrain/Bottoms" instance=ExtResource("7_atavo")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -36, 0, -84.12449)
+
+[node name="Tunnel_Sqz_B" parent="Terrain/Bottoms" instance=ExtResource("9_cu6y5")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -50, 0, -98)
+
+[node name="Tunne_45R_B" parent="Terrain/Bottoms" instance=ExtResource("10_3vp0a")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -63.783157, 0, -112.07234)
+
+[node name="Tunne_Xpnd_B" parent="Terrain/Bottoms" instance=ExtResource("11_u7fyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -144)
+
+[node name="Tunne_Xpnd_B2" parent="Terrain/Bottoms" instance=ExtResource("11_u7fyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -164)
+
+[node name="Tunnel_Sqz_B2" parent="Terrain/Bottoms" instance=ExtResource("9_cu6y5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -184)
 
 [node name="PathNodes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.545999, 0)
 
 [node name="Rail_Path" type="Path3D" parent="PathNodes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2530136, 13.801627, 4.923065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.765479, 0)
 curve = SubResource("Curve3D_pblmp")
 
 [node name="Mineables" type="Node3D" parent="."]
 
 [node name="Mineable" parent="Mineables" instance=ExtResource("2_7blt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, 0.43147755, -172.13322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, -11.468765, -14.007385)
+
+[node name="Mineable2" parent="Mineables" instance=ExtResource("2_7blt8")]
+transform = Transform3D(0.1458343, -0.97721195, -0.1542368, -0.87093335, -0.052864365, -0.48854926, 0.46926254, 0.20557722, -0.8587959, 0.009078383, 1.5664127, -77.7125)
+
+[node name="Mineable3" parent="Mineables" instance=ExtResource("2_7blt8")]
+transform = Transform3D(0.6527137, -0.03831907, 0.75663495, 0.24220169, 0.95686233, -0.16047661, -0.71784616, 0.28800353, 0.63383794, -59.947296, -11.487503, -106.46653)
+
+[node name="Mineable4" parent="Mineables" instance=ExtResource("2_7blt8")]
+transform = Transform3D(0.6527137, -0.03831907, 0.75663495, 0.24220169, 0.95686233, -0.16047661, -0.71784616, 0.28800353, 0.63383794, -79.331436, -13.585477, -161.4307)
 
 [node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
@@ -32,35 +119,52 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
 [node name="Enemy" parent="EnemyParent" instance=ExtResource("3_71mw5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.322946, 8.197519, -143.8657)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.772521, -7.5935316, -24.369755)
+
+[node name="Enemy2" parent="EnemyParent" instance=ExtResource("3_71mw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.59773, -1.6289649, -88.105774)
+
+[node name="Enemy3" parent="EnemyParent" instance=ExtResource("3_71mw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.98187, -3.726939, -143.06995)
 
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
 [node name="RoomGate_1" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_21gqm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.70874, 8.47407)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.70874, 9.549267)
 align_marker = NodePath("../../Markers/EntryMarker")
 
 [node name="RoomGate_2" parent="Triggers" node_paths=PackedStringArray("align_marker") instance=ExtResource("4_21gqm")]
-transform = Transform3D(0.88087416, 0, -0.47335044, 0, 1, 0, 0.47335044, 0, 0.88087416, -14.333024, 15.70874, -570.9043)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -70.56178, 15.70874, -193.21057)
 gate_id = &"gate_2"
 align_marker = NodePath("../../Markers/ExitMarker")
 
-[node name="RailRoom_RailDockTrigger" parent="Triggers" instance=ExtResource("5_bl23d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.944031, 3.5761247)
+[node name="RailRoom_RailDockTrigger" parent="Triggers" node_paths=PackedStringArray("rail_path") instance=ExtResource("5_bl23d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.944031, -7.3036017)
 rail_id = 1
 direction = 0
+rail_path = NodePath("../../PathNodes/Rail_Path")
 
-[node name="RailRoom_RailDockTrigger2" parent="Triggers" instance=ExtResource("5_bl23d")]
-transform = Transform3D(0.8874939, 0, -0.4608195, 0, 1, 0, 0.4608195, 0, 0.8874939, -16.645638, 14.620199, -564.68353)
+[node name="CollisionShape3D" parent="Triggers/RailRoom_RailDockTrigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1305656, -15.897511, 2.6681366)
+
+[node name="RailRoom_RailDockTrigger2" parent="Triggers" node_paths=PackedStringArray("rail_path") instance=ExtResource("5_bl23d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.7234, 14.620199, -186.51657)
 rail_id = 2
 direction = -1
 target_progress_percent = 100.0
+rail_path = NodePath("../../PathNodes/Rail_Path")
+
+[node name="CollisionShape3D" parent="Triggers/RailRoom_RailDockTrigger2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30176544, -12.810291, 3.6510315)
 
 [node name="Markers" type="Node3D" parent="."]
 
 [node name="EntryMarker" type="Marker3D" parent="Markers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="ExitMarker" type="Marker3D" parent="Markers"]
-transform = Transform3D(0.86602545, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, 0.86602545, -13.442292, 0.9342081, -572.1973)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68, 0.934, -194.036)
+
+[editable path="Triggers/RailRoom_RailDockTrigger"]
+[editable path="Triggers/RailRoom_RailDockTrigger2"]

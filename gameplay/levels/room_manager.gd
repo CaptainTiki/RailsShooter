@@ -7,8 +7,7 @@ enum State {IN_ROOM, TRANSITIONING, SPAWNING_NEXT_ROOM, ENTERING_ROOM, EXITING_R
 
 var deploy_room : PackedScene = preload("res://gameplay/levels/rooms/moon_bay_room.tscn")
 var available_rooms : Array[PackedScene] = [
-		preload("res://gameplay/levels/rooms/room_rail_debug.tscn"),
-		preload("res://gameplay/levels/rooms/room_arena_debug.tscn")
+		preload("res://gameplay/levels/rooms/room_rail_debug_2.tscn")
 	]
 
 var room_graph = {} # { RoomA: {gate1: RoomB, gate2: RoomC, ...} }

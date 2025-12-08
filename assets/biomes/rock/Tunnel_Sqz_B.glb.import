@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b1u2hxcf1t38u"
-path="res://.godot/imported/BendR_Short_Rock_1.glb-7d12495dbccdcaf624d98217bc8803c0.scn"
+uid="uid://bno5k05sumi2m"
+path="res://.godot/imported/Tunnel_Sqz_B.glb-d9e6d1df9a2751015aebdc81a8d0b85c.scn"
 
 [deps]
 
-source_file="res://assets/biomes/rock/BendR_Short_Rock_1.glb"
-dest_files=["res://.godot/imported/BendR_Short_Rock_1.glb-7d12495dbccdcaf624d98217bc8803c0.scn"]
+source_file="res://assets/biomes/rock/Tunnel_Sqz_B.glb"
+dest_files=["res://.godot/imported/Tunnel_Sqz_B.glb-d9e6d1df9a2751015aebdc81a8d0b85c.scn"]
 
 [params]
 
@@ -38,16 +38,11 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
-"materials": {
-"ImphenziaPixPal": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/Materials/ImphenziaPixPal.tres",
-"use_external/path": "uid://7o7npc70gid"
-}
-},
 "nodes": {
-"PATH:BendR_Short_Rock_1": {
+"PATH:Tunnel_squeeze_Bottom": {
 "generate/physics": true,
+"physics/layer": 65536,
+"physics/mask": 0,
 "physics/shape_type": 2
 }
 }

@@ -6,8 +6,10 @@ class_name RailDockTrigger
 @export_range(0.0, 100.0, 1.0)
 var target_progress_percent: float = 0.0
 @export var cooldown_seconds: float = 5.0
+@export var rail_path : Path3D
 
 @onready var parent_room: Room = $"../.."
+
 
 var _cooldown_active: bool = false
 
@@ -25,7 +27,7 @@ func _on_raildock_entered(area: Area3D) -> void:
 		" room=", parent_room.name)
 
 	if _cooldown_active:
-		print("  -> IGNORE: cooldown active")
+		print("  -> IGNORE: cooldown active", " trigger=", name, " id=", get_instance_id())
 		return
 
 	if not area.is_in_group("player"):

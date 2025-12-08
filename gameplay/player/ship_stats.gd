@@ -6,9 +6,9 @@ signal stats_updated
 @export_category("Ship Fwd Movement")
 @export var lateral_speed : float = 12
 @export var acceleration : float = 6.5 #6.5
-@export var travel_speed : float = 44.0 #14.0
+@export var travel_speed : float = 14.0 #14.0
 @export var brake_speed : float = 6.0
-@export var boost_speed : float = 84.0 #24.0
+@export var boost_speed : float = 24.0 #24.0
 @export var docking_speed : float = 6 #transition to docking port
 @export_category("Ship Rotation")
 @export var rotation_speed : float = 7 #how fast we rotate in rail & docking mode
