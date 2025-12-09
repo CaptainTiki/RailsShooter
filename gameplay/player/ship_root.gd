@@ -16,7 +16,7 @@ class_name ShipRoot
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
 @onready var weapon: Weapon = $Weapon
-@onready var player_root: PlayerRoot = $".."
+@onready var player_root: PlayerRoot = $"../.."
 @onready var cargo_hold: CargoHold = $CargoHold
 
 @onready var cargo_ammount_label: Label = %cargo_ammount_label

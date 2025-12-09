@@ -67,58 +67,32 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Player_Root" type="PathFollow3D" node_paths=PackedStringArray("camera")]
 loop = false
+tilt_enabled = false
 script = ExtResource("1_jgd4k")
-camera = NodePath("FollowCamera")
+camera = NodePath("Ship_Rotation_Handler/FollowCamera")
 
-[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
-script = ExtResource("16_hxaeb")
-camera = NodePath("../FollowCamera")
-ship_root = NodePath("../Ship_Root")
-stats = NodePath("../Ship_Root/ShipStats")
-player_root = NodePath("..")
-attitude_controller = NodePath("../Attitude_Controller")
+[node name="Ship_Rotation_Handler" type="Node3D" parent="."]
 
-[node name="FreeFlight_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
-script = ExtResource("17_w168g")
-camera = NodePath("../FollowCamera")
-ship_root = NodePath("../Ship_Root")
-stats = NodePath("../Ship_Root/ShipStats")
-player_root = NodePath("..")
-attitude_controller = NodePath("../Attitude_Controller")
-
-[node name="Docking_Controller" type="Node3D" parent="." node_paths=PackedStringArray("player_root", "stats")]
-script = ExtResource("18_w168g")
-player_root = NodePath("..")
-stats = NodePath("../Ship_Root/ShipStats")
-
-[node name="Attitude_Controller" type="Node3D" parent="." node_paths=PackedStringArray("ship_root", "player_root", "stats", "player_input", "rail_controller")]
-script = ExtResource("5_eyn2n")
-ship_root = NodePath("../Ship_Root")
-player_root = NodePath("..")
-stats = NodePath("../Ship_Root/ShipStats")
-player_input = NodePath("../FollowCamera/Player_Input")
-rail_controller = NodePath("../Rail_Controller")
-
-[node name="Ship_Root" type="Area3D" parent="." node_paths=PackedStringArray("player_input", "camera") groups=["player"]]
+[node name="Ship_Root" type="Area3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("player_input", "camera") groups=["player"]]
 collision_mask = 0
 script = ExtResource("3_n3mgn")
 player_input = NodePath("../FollowCamera/Player_Input")
 camera = NodePath("../FollowCamera")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Root"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.430665e-10, 0.01928711)
 shape = SubResource("CapsuleShape3D_qgtnq")
 
-[node name="mesh_craft_miner2" parent="Ship_Root" instance=ExtResource("4_jhpp0")]
+[node name="mesh_craft_miner2" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("4_jhpp0")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.0108918, -0.1848324, -0.7884023)
 
-[node name="AreaLight" type="SpotLight3D" parent="Ship_Root"]
+[node name="AreaLight" type="SpotLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
 light_color = Color(0.9504, 0.96, 0.672, 1)
 light_energy = 3.0
 spot_range = 100.0
 spot_angle = 60.0
 
-[node name="SpotLight" type="SpotLight3D" parent="Ship_Root"]
+[node name="SpotLight" type="SpotLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
 light_color = Color(0.9504, 0.96, 0.672, 1)
 light_energy = 4.0
 light_volumetric_fog_energy = 0.5
@@ -126,88 +100,117 @@ spot_range = 300.0
 spot_attenuation = 0.5
 spot_angle = 35.0
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Ship_Root"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.340755)
 light_color = Color(0.93192214, 0.98897463, 0.75807405, 1)
 omni_range = 40.0
 omni_attenuation = 0.55
 
-[node name="ShipStats" type="Node" parent="Ship_Root"]
+[node name="ShipStats" type="Node" parent="Ship_Rotation_Handler/Ship_Root"]
 unique_name_in_owner = true
 script = ExtResource("13_xftqn")
 
-[node name="Health" parent="Ship_Root" node_paths=PackedStringArray("armor", "sheilds") instance=ExtResource("4_xw8sf")]
+[node name="Health" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("armor", "sheilds") instance=ExtResource("4_xw8sf")]
 armor = NodePath("../Armor")
 sheilds = NodePath("../Shields")
 
-[node name="HurtBox" parent="Ship_Root/Health" index="0"]
+[node name="HurtBox" parent="Ship_Rotation_Handler/Ship_Root/Health" index="0"]
 collision_mask = 66304
 
-[node name="Shields" parent="Ship_Root" instance=ExtResource("5_b8bi6")]
+[node name="Shields" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("5_b8bi6")]
 
-[node name="Armor" parent="Ship_Root" instance=ExtResource("6_28odr")]
+[node name="Armor" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("6_28odr")]
 
-[node name="Weapon" type="Node3D" parent="Ship_Root"]
+[node name="Weapon" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
 script = ExtResource("5_n3mgn")
 
-[node name="GunsFireRate" type="Timer" parent="Ship_Root/Weapon"]
+[node name="GunsFireRate" type="Timer" parent="Ship_Rotation_Handler/Ship_Root/Weapon"]
 wait_time = 0.125
 one_shot = true
 
-[node name="TorpFireRate" type="Timer" parent="Ship_Root/Weapon"]
+[node name="TorpFireRate" type="Timer" parent="Ship_Rotation_Handler/Ship_Root/Weapon"]
 one_shot = true
 
-[node name="Reticle1" type="MeshInstance3D" parent="Ship_Root"]
+[node name="Reticle1" type="MeshInstance3D" parent="Ship_Rotation_Handler/Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 mesh = SubResource("QuadMesh_wk61r")
 
-[node name="Reticle2" type="MeshInstance3D" parent="Ship_Root"]
+[node name="Reticle2" type="MeshInstance3D" parent="Ship_Rotation_Handler/Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 mesh = SubResource("QuadMesh_xw8sf")
 
-[node name="RollCooldown" type="Timer" parent="Ship_Root"]
+[node name="RollCooldown" type="Timer" parent="Ship_Rotation_Handler/Ship_Root"]
 wait_time = 3.0
 one_shot = true
 
-[node name="TargetingComponent" type="Node3D" parent="Ship_Root" node_paths=PackedStringArray("ship_root") groups=["targeting_component"]]
+[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("ship_root") groups=["targeting_component"]]
 script = ExtResource("6_qgtnq")
 ship_root = NodePath("..")
 
-[node name="PlayerHud" parent="Ship_Root" instance=ExtResource("7_wk61r")]
+[node name="PlayerHud" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("7_wk61r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51771677)
 visible = false
 
-[node name="CargoHold" type="Node3D" parent="Ship_Root"]
+[node name="CargoHold" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root"]
 script = ExtResource("11_b8bi6")
 
-[node name="Magnet" type="Area3D" parent="Ship_Root"]
+[node name="Magnet" type="Area3D" parent="Ship_Rotation_Handler/Ship_Root"]
 collision_layer = 0
 collision_mask = 131072
 script = ExtResource("12_28odr")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Root/Magnet"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root/Magnet"]
 shape = SubResource("SphereShape3D_b8bi6")
 debug_color = Color(0.92632747, 0.5120404, 0.0859239, 0.41960785)
 
-[node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("ship_root")]
+[node name="FollowCamera" type="Camera3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("ship_root")]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
 fov = 40.0
 script = ExtResource("6_ptojr")
 ship_root = NodePath("../Ship_Root")
 
-[node name="Player_Input" type="Node3D" parent="FollowCamera"]
+[node name="Player_Input" type="Node3D" parent="Ship_Rotation_Handler/FollowCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.99254614, -0.12186935, 0, 0.12186935, 0.99254614, 0, 0.22614735, -10.047331)
 script = ExtResource("2_jhpp0")
 
-[node name="Bank_Input_Timer" type="Timer" parent="FollowCamera/Player_Input"]
+[node name="Bank_Input_Timer" type="Timer" parent="Ship_Rotation_Handler/FollowCamera/Player_Input"]
 wait_time = 0.15
 one_shot = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FollowCamera/Player_Input"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship_Rotation_Handler/FollowCamera/Player_Input"]
 visible = false
 mesh = SubResource("SphereMesh_jhpp0")
+
+[node name="Rail_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
+script = ExtResource("16_hxaeb")
+camera = NodePath("../Ship_Rotation_Handler/FollowCamera")
+ship_root = NodePath("../Ship_Rotation_Handler/Ship_Root")
+stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+player_root = NodePath("..")
+attitude_controller = NodePath("../Attitude_Controller")
+
+[node name="FreeFlight_Controller" type="Node3D" parent="." node_paths=PackedStringArray("camera", "ship_root", "stats", "player_root", "attitude_controller")]
+script = ExtResource("17_w168g")
+camera = NodePath("../Ship_Rotation_Handler/FollowCamera")
+ship_root = NodePath("../Ship_Rotation_Handler/Ship_Root")
+stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+player_root = NodePath("..")
+attitude_controller = NodePath("../Attitude_Controller")
+
+[node name="Docking_Controller" type="Node3D" parent="." node_paths=PackedStringArray("player_root", "stats")]
+script = ExtResource("18_w168g")
+player_root = NodePath("..")
+stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+
+[node name="Attitude_Controller" type="Node3D" parent="." node_paths=PackedStringArray("ship_root", "player_root", "stats", "player_input", "rail_controller")]
+script = ExtResource("5_eyn2n")
+ship_root = NodePath("../Ship_Rotation_Handler/Ship_Root")
+player_root = NodePath("..")
+stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+player_input = NodePath("../Ship_Rotation_Handler/FollowCamera/Player_Input")
+rail_controller = NodePath("../Rail_Controller")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -253,7 +256,7 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_28odr")
 debug_color = Color(0.6456532, 0.52246577, 0, 0.41960785)
 
-[connection signal="area_entered" from="Ship_Root/Magnet" to="Ship_Root/Magnet" method="_on_area_entered"]
-[connection signal="area_exited" from="Ship_Root/Magnet" to="Ship_Root/Magnet" method="_on_area_exited"]
+[connection signal="area_entered" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_entered"]
+[connection signal="area_exited" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_exited"]
 
-[editable path="Ship_Root/Health"]
+[editable path="Ship_Rotation_Handler/Ship_Root/Health"]

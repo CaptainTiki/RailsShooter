@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://don7vqbjh7fpe" path="res://gameplay/levels/rooms/raildock_trigger.gd" id="1_plxlu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vykfn"]
-size = Vector3(41.69729, 38.912575, 17.701492)
+size = Vector3(43.156677, 31.133972, 18.448038)
 
 [node name="RailDockTrigger" type="Area3D"]
 collision_layer = 524288

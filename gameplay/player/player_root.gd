@@ -8,7 +8,8 @@ enum MoveMode {NONE, ON_RAIL, MOVE_TO_PATH, FREE_FLIGHT, DOCKING}
 
 @export var camera : FollowCamera
 @onready var stats: ShipStats = %ShipStats
-@onready var ship_root: ShipRoot = $Ship_Root
+@onready var ship_root: ShipRoot = $Ship_Rotation_Handler/Ship_Root
+@onready var ship_handler: Node3D = $Ship_Rotation_Handler
 @onready var rail_controller: RailController = $Rail_Controller
 @onready var free_flight_controller: FreeFlightController = $FreeFlight_Controller
 @onready var docking_controller: DockingController = $Docking_Controller
@@ -22,9 +23,13 @@ var direction : int = 1 #direction of travel - set by docking triggers
 var rail_transition_in_progress: bool = false
 
 func _ready() -> void:
+	rotation_mode = PathFollow3D.RotationMode.ROTATION_NONE
+	tilt_enabled = false
 	docking_controller.docking_complete.connect(_on_rail_docking_complete)
 	ship_root.health_component.died.connect(_on_player_died)
-	
+
+func _physics_process(delta: float) -> void:
+	_align_ship_to_rail(delta)
 
 func brake_ship(delta: float) -> void:
 	current_speed = move_toward(current_speed, stats.brake_speed, 2 * stats.acceleration * delta)
@@ -131,3 +136,51 @@ func set_move_mode(_m : MoveMode)-> void:
 func _on_player_died() -> void:
 	set_move_mode(MoveMode.NONE) #disable input
 	PlayerDied.emit()
+
+func _align_ship_to_rail(delta : float) -> void:
+	# Only care when we're on the rail or docking toward it
+	if move_mode != MoveMode.ON_RAIL and move_mode != MoveMode.DOCKING:
+		return
+
+	var path : Path3D = get_parent() as Path3D
+	if path == null or path.curve == null:
+		return
+
+	var curve: Curve3D = path.curve
+	var length : float = curve.get_baked_length()
+	if length <= 0.0:
+		return
+
+	# PathFollow3D.progress is distance along the curve in 3D units
+	var d0 : float = clamp(progress, 0.0, length)
+	var d1 : float = clamp(progress + stats.lead_ammount, 0.0, length)  # 0.5 units ahead, tweak to taste
+
+	var p0 : Vector3 = curve.sample_baked(d0)
+	var p1 : Vector3 = curve.sample_baked(d1)
+
+	var rail_forward_local : Vector3 = (p1 - p0).normalized()
+	if rail_forward_local == Vector3.ZERO:
+		return
+
+	# Convert to global direction using the Path3D's basis
+	var rail_forward_global : Vector3 = (path.global_transform.basis * rail_forward_local).normalized()
+
+	# Build a target basis facing along the rail, using global up
+	var target_basis : Basis = Basis.looking_at(rail_forward_global, Vector3.UP)
+
+	# Strip roll so PlayerRoot only carries yaw + pitch
+	var euler : Vector3 = target_basis.get_euler()
+	euler.z = 0.0
+	target_basis = Basis.from_euler(euler)
+
+	# Smoothly rotate PlayerRoot toward that target
+	var current_basis : Basis = ship_handler.global_transform.basis
+	var t : float = clamp(stats.rail_align_speed * delta, 0.0, 1.0)
+	var new_basis : Basis = current_basis.slerp(target_basis, t)
+
+	var xform : Transform3D = ship_handler.global_transform
+	xform.basis = new_basis.orthonormalized()
+	ship_handler.global_transform = xform
+	
+	var yaw : float = ship_handler.global_transform.basis.get_euler().y
+	print(rad_to_deg(yaw))
