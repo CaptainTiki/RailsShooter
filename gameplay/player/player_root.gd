@@ -182,5 +182,6 @@ func _align_ship_to_rail(delta : float) -> void:
 	xform.basis = new_basis.orthonormalized()
 	ship_handler.global_transform = xform
 	
-	var yaw : float = ship_handler.global_transform.basis.get_euler().y
-	print(rad_to_deg(yaw))
+	#print out yaw rotation for debug
+	#var yaw : float = ship_handler.global_transform.basis.get_euler().y
+	#print(rad_to_deg(yaw))

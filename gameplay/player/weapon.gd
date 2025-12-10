@@ -1,6 +1,9 @@
 extends Node3D
 class_name Weapon
 
+@export var camera : FollowCamera
+@export var reticle_ui: Control
+
 @onready var fire_rate_timer: Timer = $GunsFireRate #set to 0.125 8/s
 @onready var torp_fire_rate: Timer = $TorpFireRate #set to 1.0 1/s
 
@@ -45,25 +48,55 @@ func fire_torp() -> void:
 	current_torps = max(0, current_torps - 1)
 	torp_fire_rate.start()
 
+func spawn_projectile(scene: PackedScene) -> void:
+	var tgt: Targetable = targeting_component.current_target
 
-func spawn_projectile(scene : PackedScene)-> void:
-	var tgt : Targetable = targeting_component.current_target
-	var ship_forward : Vector3 = -global_basis.z
-	var new_projo : Projectile = scene.instantiate() as Projectile
-	var bullet_parent : Node3D = get_tree().get_first_node_in_group("BulletsParent")
-	
+	# 1) Build aim ray from camera + reticle
+	var aim_origin: Vector3 = global_position
+	var aim_dir: Vector3 = -global_basis.z   # fallback
+
+	if camera:
+		var viewport_rect := get_viewport().get_visible_rect()
+		var reticle_screen_pos: Vector2 = viewport_rect.size * 0.5
+		if reticle_ui:
+			reticle_screen_pos = reticle_ui.get_global_position()
+
+		aim_origin = camera.project_ray_origin(reticle_screen_pos)
+		aim_dir    = camera.project_ray_normal(reticle_screen_pos).normalized()
+
+	# 2) Raycast to find aim point
+	var max_range: float = targeting_component.max_range
+	var space_state := get_world_3d().direct_space_state
+	var ray_params : PhysicsRayQueryParameters3D
+	ray_params = PhysicsRayQueryParameters3D.create(
+		aim_origin,
+		aim_origin+aim_dir *max_range,
+		0xFFFFFFFF
+		)
+	var result := space_state.intersect_ray(ray_params)
+
+	var aim_point: Vector3 = aim_origin + aim_dir * max_range
+	if result and result.has("position"):
+		aim_point = result["position"]
+
+	# 3) Spawn projectile and give it a direction
+	var new_projo: Projectile = scene.instantiate() as Projectile
+	var bullet_parent: Node3D = get_tree().get_first_node_in_group("BulletsParent")
+
+	var base_dir: Vector3 = (aim_point - global_position).normalized()
+
 	if tgt:
-		var dir_to_target : Vector3 = (tgt.global_position - global_position).normalized()
-		var dot_product : float = ship_forward.dot(dir_to_target)
-		dot_product = clamp(dot_product, 0.01, 1)
-		var dir : Vector3 = lerp(ship_forward, dir_to_target, dot_product)
+		var to_target: Vector3 = (tgt.global_position - global_position).normalized()
+		var dot_product: float = clamp(base_dir.dot(to_target), 0.01, 1.0)
+		var dir: Vector3 = lerp(base_dir, to_target, dot_product)
 		new_projo.set_direction(dir)
-		new_projo.set_target(tgt,dot_product)
+		new_projo.set_target(tgt, dot_product)
 	else:
-		new_projo.set_direction(ship_forward)
-		
+		new_projo.set_direction(base_dir)
+
 	bullet_parent.add_child(new_projo)
 	new_projo.global_position = global_position
+
 
 func add_torp_ammo(num : int)-> void:
 	current_torps = min(ship_stats.max_torps, current_torps + num)

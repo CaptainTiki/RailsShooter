@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://p644gpr2dec2"]
+[gd_scene load_steps=32 format=3 uid="uid://p644gpr2dec2"]
 
 [ext_resource type="Script" uid="uid://bpkp4rsxx3nb3" path="res://gameplay/player/player_root.gd" id="1_jgd4k"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/player_input.gd" id="2_jhpp0"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://dlsk3ka6s2rtj" path="res://gameplay/player/rail_controller.gd" id="16_hxaeb"]
 [ext_resource type="Script" uid="uid://ckoyv7vq7q81a" path="res://gameplay/player/free_flight_controller.gd" id="17_w168g"]
 [ext_resource type="Script" uid="uid://cdsjpjnadrhi1" path="res://gameplay/player/docking_controller.gd" id="18_w168g"]
+[ext_resource type="Script" uid="uid://bjxffagn3ia2v" path="res://gameplay/player/reticle_2d.gd" id="20_s2xhd"]
+[ext_resource type="Script" uid="uid://blb55aeg8p6vv" path="res://gameplay/player/virtual_stick_visualization.gd" id="21_1ge4i"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qgtnq"]
 radius = 0.558
@@ -145,9 +147,11 @@ mesh = SubResource("QuadMesh_xw8sf")
 wait_time = 3.0
 one_shot = true
 
-[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("ship_root") groups=["targeting_component"]]
+[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("ship_root", "camera", "reticle_ui") groups=["targeting_component"]]
 script = ExtResource("6_qgtnq")
 ship_root = NodePath("..")
+camera = NodePath("../../FollowCamera")
+reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 
 [node name="PlayerHud" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("7_wk61r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51771677)
@@ -248,6 +252,29 @@ text = "1"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
 layout_mode = 2
+
+[node name="Reticle2D" type="TextureRect" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ynfs2")
+stretch_mode = 3
+script = ExtResource("20_s2xhd")
+player_input = NodePath("../../../Ship_Rotation_Handler/FollowCamera/Player_Input")
+
+[node name="VirtualStick_Visualization" type="Control" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
+anchors_preset = 0
+script = ExtResource("21_1ge4i")
+player_input = NodePath("../../../Ship_Rotation_Handler/FollowCamera/Player_Input")
 
 [node name="TriggerCollider" type="Area3D" parent="." groups=["player"]]
 collision_mask = 0

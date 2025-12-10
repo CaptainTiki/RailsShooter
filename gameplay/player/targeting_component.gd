@@ -2,36 +2,54 @@ extends Node3D
 class_name TargetingComponent
 
 @export var ship_root : ShipRoot
+@export var camera : FollowCamera
+@export var reticle_ui: Control
 
 @export_category("Aim_Assist Vars")
 @export_range(-1,1) var cone_angle : float = 0.999 #dot range -1 to 1 (anything bigger than .99 is friggen huge
 @export_range(50,300) var max_range : float = 100
 
-var targets : Array[Targetable]
-var current_target : Targetable
+var targets: Array[Targetable]
+var current_target: Targetable
 
 func _ready() -> void:
 	targets = []
 
 func _process(_delta: float) -> void:
-	#_debug_draw_aim_cone()
-	var target_to_lock : Targetable = null
-	var dot_product : float = -1 #start as not null - or errors out
-	var ship_forward : Vector3 = -ship_root.global_basis.z
+	if camera == null:
+		return
+
+	var space_state := get_world_3d().direct_space_state
+
+	# 1) Get reticle screen position
+	var viewport_rect := get_viewport().get_visible_rect()
+	var reticle_screen_pos: Vector2 = viewport_rect.size * 0.5
+	if reticle_ui:
+		reticle_screen_pos = reticle_ui.get_global_position()
+
+	# 2) Build aim ray from camera through reticle
+	var aim_origin: Vector3 = camera.project_ray_origin(reticle_screen_pos)
+	var aim_dir: Vector3    = camera.project_ray_normal(reticle_screen_pos).normalized()
+
+	var target_to_lock: Targetable = null
+	var best_dot: float = -1.0
+
 	for tgt in targets:
-		if tgt.is_in_group("mineables"):
-			print("is in mineables")
-		if tgt.lockable == false:
-			continue #if we're not lockable - just continue the loop
-		var dir_to_target : Vector3 = (tgt.global_position - ship_root.global_position)
-		if dir_to_target.length() > max_range:
+		if not tgt.lockable:
 			continue
-		dir_to_target = dir_to_target.normalized()
-		var new_dot : float = ship_forward.dot(dir_to_target)
-		if new_dot <= cone_angle: #outside our cone of targeting - we ignore it
+
+		var to_target: Vector3 = tgt.global_position - aim_origin
+		var dist: float = to_target.length()
+		if dist > max_range:
 			continue
-		if new_dot > dot_product: #this is closer to center forward
-			dot_product = new_dot
+
+		to_target = to_target.normalized()
+		var new_dot: float = aim_dir.dot(to_target)
+		if new_dot <= cone_angle:
+			continue
+
+		if new_dot > best_dot:
+			best_dot = new_dot
 			target_to_lock = tgt
 	
 	if target_to_lock == null:
@@ -45,6 +63,7 @@ func _process(_delta: float) -> void:
 			current_target.unlock_target()
 		if target_to_lock:
 			target_to_lock.lock_target()
+		
 		current_target = target_to_lock
 
 func register_target(tgt : Targetable) -> void:
