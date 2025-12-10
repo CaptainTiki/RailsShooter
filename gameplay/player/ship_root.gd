@@ -16,7 +16,7 @@ class_name ShipRoot
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
 @onready var weapon: Weapon = $Weapon
-@onready var player_root: PlayerRoot = $"../.."
+@onready var player_ship: PlayerShip = $"../.."
 @onready var cargo_hold: CargoHold = $CargoHold
 
 @onready var cargo_ammount_label: Label = %cargo_ammount_label
@@ -44,11 +44,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("brake"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_root.brake_ship(delta)
+			player_ship.brake_ship(delta)
 	if Input.is_action_pressed("boost"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_root.boost_ship(delta)
+			player_ship.boost_ship(delta)
 	
 	if Input.is_action_just_released("brake"):
 		camera.set_zoom_in(false)

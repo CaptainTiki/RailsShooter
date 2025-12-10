@@ -1,6 +1,7 @@
 extends Node3D
 class_name TargetingComponent
 
+@export var player_ship : PlayerShip
 @export var ship_root : ShipRoot
 @export var camera : FollowCamera
 @export var reticle_ui: Control
@@ -18,9 +19,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if camera == null:
 		return
-
-	var space_state := get_world_3d().direct_space_state
-
+	
 	# 1) Get reticle screen position
 	var viewport_rect := get_viewport().get_visible_rect()
 	var reticle_screen_pos: Vector2 = viewport_rect.size * 0.5
@@ -29,7 +28,7 @@ func _process(_delta: float) -> void:
 
 	# 2) Build aim ray from camera through reticle
 	var aim_origin: Vector3 = camera.project_ray_origin(reticle_screen_pos)
-	var aim_dir: Vector3    = camera.project_ray_normal(reticle_screen_pos).normalized()
+	player_ship.aim_dir = camera.project_ray_normal(reticle_screen_pos).normalized()
 
 	var target_to_lock: Targetable = null
 	var best_dot: float = -1.0
@@ -44,7 +43,7 @@ func _process(_delta: float) -> void:
 			continue
 
 		to_target = to_target.normalized()
-		var new_dot: float = aim_dir.dot(to_target)
+		var new_dot: float = player_ship.aim_dir.dot(to_target)
 		if new_dot <= cone_angle:
 			continue
 

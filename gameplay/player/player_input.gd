@@ -19,7 +19,7 @@ var visual_radius : float = 3.0
 @export_category("MouseStick Variables")
 @export var _input_box_width_prcnt : float = 0.8 #how much of the screen is used for the stick horizontally
 @export var _input_box_height_prcnt : float = 0.8 #how much of the screen is used for the stick vertically
-@export var deadzone_prcnt : float = 0.1 #percentage of screen dedicated to "center stick"
+@export var deadzone_prcnt : float = 0.2 #percentage of screen dedicated to "center stick"
 
 @onready var bank_timer: Timer = $Bank_Input_Timer
 
