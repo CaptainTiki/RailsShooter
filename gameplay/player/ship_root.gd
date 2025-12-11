@@ -3,7 +3,6 @@ class_name ShipRoot
 
 @export_category("Node Links")
 @export var player_input : PlayerInput
-@export var camera : FollowCamera
 
 @export_category("Movement Variables")
 @export var barrel_roll_duration : float = 1.0 #in seconds
@@ -26,12 +25,14 @@ class_name ShipRoot
 @onready var armor_component: ArmorComponent = $Armor
 @onready var health_component: HealthComponent = $Health
 
+var camera : CameraRig
+
 var roll_tween : Tween #used for barrel rolls
 var is_rolling : bool = false
 
 func _ready() -> void:
 	ship_stats.setup_stats()
-	
+	camera = GameManager.camera_rig
 	player_input.roll_left.connect(roll_left)
 	player_input.roll_right.connect(roll_right)
 
@@ -44,16 +45,16 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("brake"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_ship.brake_ship(delta)
+			player_ship.brake_ship()
 	if Input.is_action_pressed("boost"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_ship.boost_ship(delta)
+			player_ship.boost_ship()
 	
 	if Input.is_action_just_released("brake"):
-		camera.set_zoom_in(false)
+		camera.zoom_in = false
 	if Input.is_action_just_released("boost"):
-		camera.set_zoom_out(false)
+		camera.zoom_out = false
 		
 	boost_power = min(max_engine_power, boost_power + boost_power_regen * delta)
 

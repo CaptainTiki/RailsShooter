@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cn0ociviqdigv"]
+[gd_scene load_steps=20 format=3 uid="uid://cn0ociviqdigv"]
 
 [ext_resource type="Script" uid="uid://oesmiypqg3xy" path="res://gameplay/player/ship_root.gd" id="1_up7vx"]
 [ext_resource type="Script" uid="uid://ck1qao2roqwbp" path="res://gameplay/player/player_ship.gd" id="1_v6sl1"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="10_qn6ct"]
 [ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_pa0q3"]
 [ext_resource type="Script" uid="uid://cviqde28ejbaa" path="res://gameplay/player/magnet.gd" id="12_jyhos"]
-[ext_resource type="Script" uid="uid://d2vke2b5gxy08" path="res://gameplay/player/follow_camera.gd" id="13_e20uf"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/player_input.gd" id="14_xrijq"]
 [ext_resource type="Script" uid="uid://bjxffagn3ia2v" path="res://gameplay/player/reticle_2d.gd" id="15_fgjgg"]
 [ext_resource type="Script" uid="uid://qpgiglqwr0v7" path="res://gameplay/player/player_controller.gd" id="15_hnppb"]
@@ -26,26 +25,15 @@ height = 1.758
 [sub_resource type="SphereShape3D" id="SphereShape3D_8pifx"]
 radius = 4.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgd4k"]
-albedo_color = Color(0, 0, 2.102475, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_hme5v"]
-material = SubResource("StandardMaterial3D_jgd4k")
-radius = 0.2
-height = 0.4
-radial_segments = 8
-rings = 4
-
 [node name="PlayerShip" type="Node3D"]
 script = ExtResource("1_v6sl1")
 
 [node name="Ship_Rotation_Handler" type="Node3D" parent="."]
 
-[node name="Ship_Root" type="Area3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("player_input", "camera") groups=["player"]]
+[node name="Ship_Root" type="Area3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("player_input") groups=["player"]]
 collision_mask = 0
 script = ExtResource("1_up7vx")
-player_input = NodePath("../FollowCamera/Player_Input")
-camera = NodePath("../FollowCamera")
+player_input = NodePath("../../Player_Input")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.430665e-10, 0.01928711)
@@ -89,11 +77,10 @@ collision_mask = 66304
 
 [node name="Armor" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("6_hqu1f")]
 
-[node name="Weapon" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("camera", "reticle_ui")]
+[node name="Weapon" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("reticle_ui")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
 script = ExtResource("7_p1fuj")
-camera = NodePath("../../FollowCamera")
 reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 
 [node name="GunsFireRate" type="Timer" parent="Ship_Rotation_Handler/Ship_Root/Weapon"]
@@ -107,11 +94,10 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("player_ship", "ship_root", "camera", "reticle_ui") groups=["targeting_component"]]
+[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("player_ship", "ship_root", "reticle_ui") groups=["targeting_component"]]
 script = ExtResource("9_c55ub")
 player_ship = NodePath("../../..")
 ship_root = NodePath("..")
-camera = NodePath("../../FollowCamera")
 reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 
 [node name="PlayerHud" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("10_qn6ct")]
@@ -130,29 +116,12 @@ script = ExtResource("12_jyhos")
 shape = SubResource("SphereShape3D_8pifx")
 debug_color = Color(0.92632747, 0.5120404, 0.0859239, 0.41960785)
 
-[node name="FollowCamera" type="Camera3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("ship_root")]
-transform = Transform3D(1, 0, 0, 0, 0.99254614, 0.12186935, 0, -0.12186935, 0.99254614, 0, 1, 10)
-fov = 40.0
-script = ExtResource("13_e20uf")
-ship_root = NodePath("../Ship_Root")
-
-[node name="Player_Input" type="Node3D" parent="Ship_Rotation_Handler/FollowCamera"]
-transform = Transform3D(1, 0, 0, 0, 0.99254614, -0.12186935, 0, 0.12186935, 0.99254614, 0, 0.22614735, -10.047331)
-script = ExtResource("14_xrijq")
-
-[node name="Bank_Input_Timer" type="Timer" parent="Ship_Rotation_Handler/FollowCamera/Player_Input"]
-wait_time = 0.15
-one_shot = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ship_Rotation_Handler/FollowCamera/Player_Input"]
-visible = false
-mesh = SubResource("SphereMesh_hme5v")
-
-[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("player_ship", "input", "stats")]
+[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("player_ship", "input", "stats", "reticle")]
 script = ExtResource("15_hnppb")
 player_ship = NodePath("..")
-input = NodePath("../Ship_Rotation_Handler/FollowCamera/Player_Input")
+input = NodePath("../Player_Input")
 stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+reticle = NodePath("../CanvasLayer/Ship_HUD/Reticle2D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -163,19 +132,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TopLeftDock" type="Control" parent="CanvasLayer/Ship_HUD"]
 layout_mode = 1
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock"]
 layout_mode = 1
 offset_right = 112.0
 offset_bottom = 23.0
+mouse_filter = 2
 
 [node name="CargoLabels" type="HBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer/CargoLabels"]
 layout_mode = 2
@@ -190,6 +163,7 @@ text = "1"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Reticle2D" type="TextureRect" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
 layout_mode = 1
@@ -204,15 +178,24 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("8_hrflb")
 stretch_mode = 3
 script = ExtResource("15_fgjgg")
-player_input = NodePath("../../../Ship_Rotation_Handler/FollowCamera/Player_Input")
+player_input = NodePath("../../../Player_Input")
 
 [node name="VirtualStick_Visualization" type="Control" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("16_ml2qm")
-player_input = NodePath("../../../Ship_Rotation_Handler/FollowCamera/Player_Input")
+player_input = NodePath("../../../Player_Input")
+
+[node name="Player_Input" type="Node3D" parent="."]
+script = ExtResource("14_xrijq")
+
+[node name="Bank_Input_Timer" type="Timer" parent="Player_Input"]
+wait_time = 0.15
+one_shot = true
 
 [connection signal="area_entered" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_entered"]
 [connection signal="area_exited" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_exited"]

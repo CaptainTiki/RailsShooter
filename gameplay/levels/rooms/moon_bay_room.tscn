@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dgtdlu34jlqj4"]
 
-[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_tunnel.gd" id="1_jpe2b"]
+[ext_resource type="Script" uid="uid://d1sr0j1bbn8yx" path="res://gameplay/levels/rooms/launch_room.gd" id="1_l5hvc"]
 [ext_resource type="PackedScene" uid="uid://dhi2c0hloi73x" path="res://assets/biomes/rock/Tunnel_Strt_T.glb" id="2_ic63l"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_n1e08"]
 [ext_resource type="PackedScene" uid="uid://bvddw373aud37" path="res://assets/biomes/rock/Tunne_45L_T.glb" id="3_4hy6m"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dlknser47lmer" path="res://assets/biomes/rock/Tunne_Xpnd_B.glb" id="11_d53pa"]
 
 [node name="MoonPool_Room" type="Node3D"]
-script = ExtResource("1_jpe2b")
+script = ExtResource("1_l5hvc")
 
 [node name="Terrain" type="Node3D" parent="."]
 
@@ -186,5 +186,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
 [node name="ExitMarker" type="Marker3D" parent="Markers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137.861, 0, -398.033)
 gizmo_extents = 4.19
+
+[node name="ShipSpawnLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.296795)
 
 [editable path="Triggers/RoomGate_1"]

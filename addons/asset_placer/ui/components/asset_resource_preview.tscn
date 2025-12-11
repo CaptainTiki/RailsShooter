@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_55ohh"]
 [ext_resource type="Script" uid="uid://dephufwlu765k" path="res://addons/asset_placer/ui/components/asset_thumbnail.gd" id="2_xdgah"]
 
+
 [sub_resource type="LabelSettings" id="LabelSettings_55ohh"]
 font_size = 14
 

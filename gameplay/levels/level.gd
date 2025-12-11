@@ -36,6 +36,7 @@ func _ready() -> void:
 	_debug_list_rooms("level._ready()")
 	level_ready.emit()
 	GameManager.set_gamestate(Globals.GameState.IN_RUN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	player_ship.PlayerDied.connect(_on_player_died)
 	_setup_menus()
 
@@ -68,7 +69,10 @@ func ready_first_room() -> void:
 	_spawn_player()
 	room_manager.deploy_first_room() #deploy the moon pool room
 	#TODO: make an explicit spawn ship in moonpool room
-	player_ship.global_position = Vector3(0,0,0) 
+	if room_manager.current_room.has_method("get_spawn_transform"):
+		player_ship.global_transform = room_manager.current_room.get_spawn_transform()
+	else:
+		player_ship.global_position = Vector3.ZERO
 
 func _spawn_player() -> void:
 	var player : PlayerShip = player_scene.instantiate() as PlayerShip #player needs to be first , so targets can register as targetable

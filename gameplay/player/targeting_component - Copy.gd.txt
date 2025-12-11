@@ -3,7 +3,7 @@ class_name TargetingComponent
 
 @export var player_ship : PlayerShip
 @export var ship_root : ShipRoot
-var camera_rig : CameraRig
+var camera : CameraRig
 @export var reticle_ui: Control
 
 @export_category("Aim_Assist Vars")
@@ -14,11 +14,10 @@ var targets: Array[Targetable]
 var current_target: Targetable
 
 func _ready() -> void:
-	camera_rig = GameManager.camera_rig
 	targets = []
 
 func _process(_delta: float) -> void:
-	if camera_rig == null:
+	if camera == null:
 		return
 	
 	# 1) Get reticle screen position
@@ -28,8 +27,8 @@ func _process(_delta: float) -> void:
 		reticle_screen_pos = reticle_ui.get_global_position()
 
 	# 2) Build aim ray from camera through reticle
-	var aim_origin: Vector3 = camera_rig.camera.project_ray_origin(reticle_screen_pos)
-	player_ship.aim_dir = camera_rig.camera.project_ray_normal(reticle_screen_pos).normalized()
+	var aim_origin: Vector3 = camera.follow_camera.project_ray_origin(reticle_screen_pos)
+	player_ship.aim_dir = camera.follow_camera.project_ray_normal(reticle_screen_pos).normalized()
 
 	var target_to_lock: Targetable = null
 	var best_dot: float = -1.0

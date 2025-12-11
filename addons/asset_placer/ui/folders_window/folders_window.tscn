@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tkdl83npcow1" path="res://addons/asset_placer/ui/folders_window/folders_window.gd" id="1_umbsx"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_1gh27"]
 
+
 [sub_resource type="Texture2D" id="Texture2D_caby4"]
 resource_local_to_scene = false
 resource_name = ""
