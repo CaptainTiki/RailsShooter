@@ -11,7 +11,7 @@ func _run():
 	file.set_value("build", "number", num)
 	file.save("res://build_info.cfg")
 
-	var version_string := "0.0.%d" % num
+	var version_string := "0.1.%d" % num
 	ProjectSettings.set_setting("application/config/version", version_string)
 	ProjectSettings.save()
 	print("Updated build to %s" % version_string)

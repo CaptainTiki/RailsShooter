@@ -27,9 +27,8 @@ var run_outcome : RunData.RunOutcome = RunData.RunOutcome.NOT_LOGGED
 var player_ship: PlayerShip
 var elapsed_run_time : float = 0
 var completed_rooms : int = 0
-var target_room_num : int = 4
 
-@export var end_run_cinematic_timer : float = 5
+@export var end_run_cinematic_timer : float = 1
 
 func _ready() -> void:
 	GameManager.set_current_level(self)
@@ -61,7 +60,7 @@ func _process(delta: float) -> void:
 		GameManager.current_run.aetherium_ore += 1
 		
 	if Input.is_action_just_pressed("debug_win_run"):
-		_end_run_successfully()
+		end_run_successfully()
 	if Input.is_action_just_pressed("debug_action_two"):
 		room_manager.spawn_debug_room_after_current(arena_debug_scene)
 	pass
@@ -83,10 +82,9 @@ func _spawn_player() -> void:
 
 func _end_room() -> void:
 	completed_rooms += 1
-	if completed_rooms >= target_room_num:
-		_end_run_successfully()
 
-func _end_run_successfully() -> void:
+func end_run_successfully() -> void:
+	print("Game Manager ending run successfully")
 	run_outcome = RunData.RunOutcome.SUCCESS
 	run_complete.emit(true) #we made it!!  - let everybody know
 	#TODO: animate camera to circle ship?

@@ -38,6 +38,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Level" type="Node3D" groups=["level"]]
 script = ExtResource("1_6mttl")
+end_run_cinematic_timer = null
 
 [node name="Environment" type="Node3D" parent="."]
 

@@ -6,6 +6,7 @@ signal PlayerDied
 @onready var ship_root : ShipRoot = $Ship_Rotation_Handler/Ship_Root
 @onready var input : PlayerInput = $Player_Input
 @onready var reticle : Reticle2D = $CanvasLayer/Ship_HUD/Reticle2D
+@onready var controller : PlayerController = $PlayerController
 
 var parent_level : Level
 
@@ -20,3 +21,6 @@ func brake_ship() -> void:
 func boost_ship() -> void:
 	#TODO: speed up the ship speed - prob need to translate this to player controller?
 	pass
+
+func stop_ship() -> void:
+	controller.current_speed = 0
