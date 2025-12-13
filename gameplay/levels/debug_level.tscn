@@ -53,6 +53,8 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 script = ExtResource("2_5t2ux")
 
+[node name="BulletParent" type="Node3D" parent="."]
+
 [node name="Menus" type="CanvasLayer" parent="."]
 
 [node name="Vignette_Fade" type="TextureRect" parent="Menus"]

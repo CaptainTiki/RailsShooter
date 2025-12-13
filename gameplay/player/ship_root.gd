@@ -14,12 +14,11 @@ class_name ShipRoot
 @export var boost_power_cost = 32
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
-@onready var weapon: Weapon = $Weapon
+
 @onready var player_ship: PlayerShip = $"../.."
 @onready var cargo_hold: CargoHold = $CargoHold
-
 @onready var cargo_ammount_label: Label = %cargo_ammount_label
-
+@onready var weapon_hub: Weaponhub = %WeaponHub
 @onready var ship_stats: ShipStats = %ShipStats
 @onready var shields_component: SheildsComponent = $Shields
 @onready var armor_component: ArmorComponent = $Armor
@@ -38,9 +37,16 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("fire_primary"):
-		weapon.fire_guns()
+		weapon_hub.fire_primary_pressed()
+	
+	if Input.is_action_just_released("fire_primary"):
+		weapon_hub.fire_primary_released()
+
 	if Input.is_action_pressed("fire_secondary"):
-		weapon.fire_torp()
+		weapon_hub.fire_secondary_pressed()
+	
+	if Input.is_action_just_released("fire_secondary"):
+		weapon_hub.fire_secondary_released()
 	
 	if Input.is_action_pressed("brake"):
 		if boost_power > boost_power_cost:

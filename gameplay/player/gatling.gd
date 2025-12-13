@@ -1,5 +1,5 @@
-extends Node3D
-class_name Weapon
+extends Weapon
+class_name GatlingWeapon
 
 @export var reticle_ui: Control
 
@@ -9,8 +9,6 @@ class_name Weapon
 @onready var ship_stats: ShipStats = %ShipStats
 
 @onready var targeting_component: TargetingComponent = $"../TargetingComponent"
-
-var camera : CameraRig
 
 var current_torps : int = 0
 var current_power : float = 100
@@ -23,7 +21,6 @@ var torp_scene = preload("res://gameplay/projectiles/torpedos/basic_torp_proj.ts
 func _ready() -> void:
 	ship_stats.stats_updated.connect(_update_stats)
 	current_torps = ship_stats.max_torps
-	camera = GameManager.camera_rig
 
 func _process(delta: float) -> void:
 	current_power = min(ship_stats.max_gun_power, current_power + (power_regen_rate * delta))
@@ -57,14 +54,14 @@ func spawn_projectile(scene: PackedScene) -> void:
 	var aim_origin: Vector3 = global_position
 	var aim_dir: Vector3 = -global_basis.z   # fallback
 
-	if camera.follow_camera:
+	if camera_rig.camera:
 		var viewport_rect := get_viewport().get_visible_rect()
 		var reticle_screen_pos: Vector2 = viewport_rect.size * 0.5
 		if reticle_ui:
 			reticle_screen_pos = reticle_ui.get_global_position()
 
-		aim_origin = camera.follow_camera.project_ray_origin(reticle_screen_pos)
-		aim_dir    = camera.follow_camera.project_ray_normal(reticle_screen_pos).normalized()
+		aim_origin = camera_rig.camera.project_ray_origin(reticle_screen_pos)
+		aim_dir    = camera_rig.camera.project_ray_normal(reticle_screen_pos).normalized()
 
 	# 2) Raycast to find aim point
 	var max_range: float = targeting_component.max_range

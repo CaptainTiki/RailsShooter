@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://du00mx80pt8i8"]
+
+[ext_resource type="Script" uid="uid://1uascowtpj3g" path="res://gameplay/player/weapon_projectile.gd" id="1_482ws"]
+
+[node name="ProjectileWeapon" type="Node3D"]
+script = ExtResource("1_482ws")
+
+[node name="Fire_Rate_Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true

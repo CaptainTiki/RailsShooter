@@ -145,7 +145,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, -388)
 [node name="Mineables" type="Node3D" parent="."]
 
 [node name="Mineable" parent="Mineables" instance=ExtResource("2_n1e08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, 0.43147755, -172.13322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.75709, -12.100321, -172.13322)
+
+[node name="Mineable2" parent="Mineables" instance=ExtResource("2_n1e08")]
+transform = Transform3D(0.33285248, 0.94297886, 0, -0.94297886, 0.33285248, 0, 0, 0, 1, -83.80004, -2.7905035, -113.90205)
 
 [node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)

@@ -11,7 +11,6 @@ var camera_rig : CameraRig
 @export_range(50,300) var max_range : float = 100
 
 var targets: Array[Targetable]
-var current_target: Targetable
 
 func _ready() -> void:
 	camera_rig = GameManager.camera_rig
@@ -35,7 +34,7 @@ func _process(_delta: float) -> void:
 	var best_dot: float = -1.0
 
 	for tgt in targets:
-		if not tgt.lockable:
+		if not tgt or not tgt.lockable:
 			continue
 
 		var to_target: Vector3 = tgt.global_position - aim_origin
@@ -53,18 +52,18 @@ func _process(_delta: float) -> void:
 			target_to_lock = tgt
 	
 	if target_to_lock == null:
-		if current_target:
-			current_target.unlock_target()
-			current_target = null
+		if player_ship.current_target:
+			player_ship.current_target.unlock_target()
+			player_ship.current_target = null
 	
 	#once we're through the list - we're left with the target_to_lock being the closest targetable
-	if target_to_lock != current_target:
-		if current_target:
-			current_target.unlock_target()
+	if target_to_lock != player_ship.current_target:
+		if player_ship.current_target:
+			player_ship.current_target.unlock_target()
 		if target_to_lock:
 			target_to_lock.lock_target()
 		
-		current_target = target_to_lock
+		player_ship.current_target = target_to_lock
 
 func register_target(tgt : Targetable) -> void:
 	targets.append(tgt)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cn0ociviqdigv"]
+[gd_scene load_steps=22 format=3 uid="uid://cn0ociviqdigv"]
 
 [ext_resource type="Script" uid="uid://oesmiypqg3xy" path="res://gameplay/player/ship_root.gd" id="1_up7vx"]
 [ext_resource type="Script" uid="uid://ck1qao2roqwbp" path="res://gameplay/player/player_ship.gd" id="1_v6sl1"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" uid="uid://l578yot6eigw" path="res://gameplay/player/ship_stats.gd" id="4_hnppb"]
 [ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="5_ou2vc"]
 [ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="6_hqu1f"]
-[ext_resource type="Script" uid="uid://ihkbfhlm0bso" path="res://gameplay/player/weapon.gd" id="7_p1fuj"]
+[ext_resource type="Script" uid="uid://cjpqmntsmfmey" path="res://gameplay/player/weapon_hub.gd" id="8_hnppb"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="8_hrflb"]
+[ext_resource type="PackedScene" uid="uid://du00mx80pt8i8" path="res://gameplay/player/weapon_projectile.tscn" id="9_6uejx"]
 [ext_resource type="Script" uid="uid://cudearsw1ab20" path="res://gameplay/player/targeting_component.gd" id="9_c55ub"]
+[ext_resource type="PackedScene" uid="uid://db4lsbt241yap" path="res://gameplay/player/weapon_beam.tscn" id="10_ou2vc"]
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="10_qn6ct"]
 [ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_pa0q3"]
 [ext_resource type="Script" uid="uid://cviqde28ejbaa" path="res://gameplay/player/magnet.gd" id="12_jyhos"]
@@ -77,18 +79,17 @@ collision_mask = 66304
 
 [node name="Armor" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("6_hqu1f")]
 
-[node name="Weapon" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("reticle_ui")]
+[node name="WeaponHub" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("playership", "stats", "reticle_ui")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
-script = ExtResource("7_p1fuj")
+script = ExtResource("8_hnppb")
+playership = NodePath("../../..")
+stats = NodePath("../ShipStats")
 reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 
-[node name="GunsFireRate" type="Timer" parent="Ship_Rotation_Handler/Ship_Root/Weapon"]
-wait_time = 0.125
-one_shot = true
+[node name="ProjectileWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("9_6uejx")]
 
-[node name="TorpFireRate" type="Timer" parent="Ship_Rotation_Handler/Ship_Root/Weapon"]
-one_shot = true
+[node name="BeamWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("10_ou2vc")]
 
 [node name="RollCooldown" type="Timer" parent="Ship_Rotation_Handler/Ship_Root"]
 wait_time = 3.0

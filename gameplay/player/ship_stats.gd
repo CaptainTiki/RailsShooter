@@ -19,8 +19,15 @@ signal stats_updated
 @export var max_roll_angle : float = 1.3
 
 @export_category("Ship Weapons")
+@export var max_ammo_energy : float = 250
+@export var max_ammo_bullet_sm : float = 250
+@export var max_ammo_bullet_lg : float = 120
+@export var max_ammo_rocket : float = 12
+@export var max_ammo_explosive : float = 4
+#legacy vars:
 @export var max_torps : int = 6
 @export var max_gun_power : int = 100
+
 
 func setup_stats() -> void:
 	max_torps = max_torps + GameManager.player_data.max_torps_level
