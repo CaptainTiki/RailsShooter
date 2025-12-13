@@ -42,6 +42,8 @@ func hide_menu() -> void:
 	visible = false
 
 func _on_resume_bn_pressed() -> void:
+	vignette.self_modulate.a = 0
+	fade.self_modulate.a = 0
 	hide_menu()
 
 func _on_exit_bn_pressed() -> void:

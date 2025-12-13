@@ -31,7 +31,6 @@ func take_damage(amount : float, _type : Globals.DamageType) -> void:
 	if armor:
 		remainder = armor.reduce_damage(remainder, _type)
 	current_health -= remainder
-	print(current_health)
 	if current_health <= 0:
 		die()
 	else:
