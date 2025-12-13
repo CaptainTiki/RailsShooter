@@ -4,38 +4,40 @@ class_name Mineable
 @onready var target_node: Targetable = $Target_Node
 @onready var parent_room: Room = $"../.."
 @onready var floating_progress_bar: FloatingProgressBar = $FloatingProgressBar
+@onready var health: HealthComponent = $Health
 
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/resources/aetherium_pickup.tscn")
-var max_health : float = 20
-var health : float = 20
 var spread : float = 0.5  # ~28 degrees
 var speed : float = 10
 var num_resources : int = 3
 
 func _ready() -> void:
-	health = max_health
 	parent_room.destroying_room.connect(_destroy)
 	target_node.register()
+	health.connect("died", _on_died)
 	floating_progress_bar.set_target(self)
-	floating_progress_bar.value = health
-	floating_progress_bar.max_value = health
+	floating_progress_bar.value = health.current_health
+	floating_progress_bar.max_value = health.max_health
 	pass
 
 func _process(delta: float) -> void:
-	if health < max_health:
-		floating_progress_bar.value = health
-		health = clamp(health + delta, 0, max_health)
+	if health.current_health <= health.max_health:
+		floating_progress_bar.value = health.current_health
+		health.current_health = clamp(health.current_health + delta, 0, health.max_health)
+
+func adjust_damage(amount : float, _type : Globals.DamageType) -> float:
+	match _type:
+		Globals.DamageType.MINING:
+			return amount #we take full damage from mining lazers
+		_:
+			return amount * 0.1 #take 1/10 damage from everything else
 
 func take_damage(amount : float, _type : Globals.DamageType) -> void:
-	if _type == Globals.DamageType.MINING:
-		health -= amount
-	else:
-		health -= amount *.5
+	health.take_damage(amount, _type)
 
-		floating_progress_bar.value = health
-		if health <= 0:
-			_spawn_resource()
-			_destroy()
+func _on_died() -> void:
+	_spawn_resource()
+	_destroy()
 
 func _spawn_resource() -> void:
 	for i in num_resources:

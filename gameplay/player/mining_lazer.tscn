@@ -16,12 +16,6 @@ height = 1.0
 
 [node name="MiningLazer" type="Node3D"]
 script = ExtResource("1_xlqht")
-projo_scene = null
-display_name = null
-icon = null
-ammo_type = null
-ammo_cost_per_shot = null
-weapon_belt = null
 
 [node name="Fire_Rate_Timer" type="Timer" parent="."]
 one_shot = true

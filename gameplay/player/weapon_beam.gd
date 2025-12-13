@@ -8,10 +8,10 @@ enum BeamState {ON, OFF}
 @onready var beam_mesh: MeshInstance3D = $Rotation_Handle/Beam_Mesh
 @onready var rot_handle: Node3D = $Rotation_Handle
 
-var dmg_pr_sec : float = 4 # this is applied * delta
+var dmg_pr_sec : float = 24 # this is applied * delta
 var damage_type : Globals.DamageType = Globals.DamageType.GENERAL
 var beam_state : BeamState = BeamState.OFF
-var range: float = 50
+var beam_range: float = 50
 
 func _ready() -> void:
 	display_name = "Beam Weapon"
@@ -31,7 +31,7 @@ func process_beam(delta: float) -> void:
 	if target:
 		update_beam_visual(origin, target.global_position)
 	else:
-		update_beam_visual(origin, origin + hub.playership.aim_dir * range)
+		update_beam_visual(origin, origin + hub.playership.aim_dir * beam_range)
 	
 	if fire_rate_timer.is_stopped():
 		if try_consume_ammo():

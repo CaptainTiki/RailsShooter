@@ -20,10 +20,8 @@ func fire_released() -> void:
 
 func can_fire() -> bool:
 	if !fire_rate_timer.is_stopped(): #cooldown not ready
-		print("timer running")
 		return false
 	if not hub.has_ammo(ammo_type, ammo_cost_per_shot): #not enough ammo to shoot
-		print("no ammo")
 		return false
 	return true
 

@@ -197,6 +197,7 @@ script = ExtResource("15_fgjgg")
 player_input = NodePath("../../../Player_Input")
 
 [node name="VirtualStick_Visualization" type="Control" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
+visible = false
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("16_ml2qm")

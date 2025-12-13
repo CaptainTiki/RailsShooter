@@ -10,7 +10,7 @@ signal died
 @export var sheilds : SheildsComponent
 
 @export_category("Stats")
-@export var max_health : float = 1
+@export var max_health : float = 10
 var current_health : float = 0
 
 func _ready() -> void:
@@ -24,11 +24,14 @@ func heal(amount : float) -> void:
  
 func take_damage(amount : float, _type : Globals.DamageType) -> void:
 	var remainder : float = amount #set the amount in case we have no shields or armor
+	if get_parent().has_method("adjust_damage"):
+		remainder = get_parent().adjust_damage(amount, _type) #adjust damage per damage type -if available
 	if sheilds:
 		remainder = sheilds.block_damage(remainder, _type)
 	if armor:
 		remainder = armor.reduce_damage(remainder, _type)
 	current_health -= remainder
+	print(current_health)
 	if current_health <= 0:
 		die()
 	else:

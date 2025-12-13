@@ -4,6 +4,7 @@ class_name Enemy
 @onready var health: HealthComponent = $Health
 @onready var target_node: ShipTarget = $Target_Node
 @onready var parent_room: Room = $"../.."
+@onready var floating_progress_bar: FloatingProgressBar = $FloatingProgressBar
 
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/ship-ammo/torp_ammo_pickup.tscn")
 var spread : float = 0.5  # ~28 degrees
@@ -14,10 +15,13 @@ func _ready() -> void:
 	parent_room.destroying_room.connect(_destroy)
 	health.connect("died", _on_died)
 	target_node.register()
+	floating_progress_bar.set_target(self)
+	floating_progress_bar.value = health.current_health
+	floating_progress_bar.max_value = health.max_health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	floating_progress_bar.value = health.current_health
 
 func _on_died() -> void:
 	var drop = pickup_scene.instantiate() as Pickup
@@ -42,6 +46,13 @@ func _on_died() -> void:
 func _destroy() -> void:
 	target_node.unregister()
 	queue_free()
-	
+
+func adjust_damage(amount : float, _type : Globals.DamageType) -> float:
+	match _type:
+		Globals.DamageType.MINING:
+			return amount * 0.1 #we take 1/10 damage from mining lazers
+		_:
+			return amount #take full damage from everything else
+
 func take_damage(amount : float, _type : Globals.DamageType) -> void:
 	health.take_damage(amount, _type)
