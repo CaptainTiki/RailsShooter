@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dclcoehldtdcd" path="res://addons/asset_placer/ui/folders_window/folder_view.gd" id="1_q40po"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_q40po"]
 
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q40po"]
 content_margin_left = 0.0
 content_margin_top = 0.0

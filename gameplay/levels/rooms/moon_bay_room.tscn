@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgtdlu34jlqj4"]
+[gd_scene load_steps=17 format=3 uid="uid://dgtdlu34jlqj4"]
 
-[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_jpe2b"]
+[ext_resource type="Script" uid="uid://d1sr0j1bbn8yx" path="res://gameplay/levels/rooms/launch_room.gd" id="1_l5hvc"]
 [ext_resource type="PackedScene" uid="uid://dhi2c0hloi73x" path="res://assets/biomes/rock/Tunnel_Strt_T.glb" id="2_ic63l"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_n1e08"]
 [ext_resource type="PackedScene" uid="uid://bvddw373aud37" path="res://assets/biomes/rock/Tunne_45L_T.glb" id="3_4hy6m"]
@@ -8,24 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://colgabk74451j" path="res://assets/biomes/rock/Tunnel_Sqz_T.glb" id="4_shyem"]
 [ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_yiawq"]
 [ext_resource type="PackedScene" uid="uid://cchx8tmukvbfr" path="res://assets/biomes/rock/Tunne_45R_T.glb" id="5_n8gg7"]
-[ext_resource type="PackedScene" uid="uid://cp4oodnwifpan" path="res://gameplay/levels/rooms/raildock_trigger.tscn" id="5_vykfn"]
 [ext_resource type="PackedScene" uid="uid://ro3y0jjp5e0j" path="res://assets/biomes/rock/Tunnel_Xpnd_T.glb" id="6_lg3g4"]
 [ext_resource type="PackedScene" uid="uid://ixpvuw5s3fiv" path="res://assets/biomes/rock/Tunnel_Strt_B.glb" id="7_603ey"]
 [ext_resource type="PackedScene" uid="uid://b6pr734he7sh5" path="res://assets/biomes/rock/Tunne_45L_B.glb" id="8_o0ppk"]
 [ext_resource type="PackedScene" uid="uid://bno5k05sumi2m" path="res://assets/biomes/rock/Tunnel_Sqz_B.glb" id="9_w3km6"]
 [ext_resource type="PackedScene" uid="uid://c4h1mw82oliqu" path="res://assets/biomes/rock/Tunne_45R_B.glb" id="10_0s10j"]
 [ext_resource type="PackedScene" uid="uid://dlknser47lmer" path="res://assets/biomes/rock/Tunne_Xpnd_B.glb" id="11_d53pa"]
-[ext_resource type="Script" uid="uid://csg6o0vsr6xa1" path="res://gameplay/levels/rooms/rail_visualization_tool.gd" id="12_xj8po"]
+[ext_resource type="Script" uid="uid://dbwvwlgrf0ksc" path="res://gameplay/levels/rooms/moon_pool_dock.gd" id="15_v4n05"]
 
-[sub_resource type="Curve3D" id="Curve3D_pxc7r"]
-_data = {
-"points": PackedVector3Array(0.29971254, -0.0014371872, 8.9799185, -0.29971254, 0.0014371872, -8.9799185, 1.5844965, -10.545965, -9.264134, 0.23629093, -0.0025367737, 3.1898422, -0.23629093, 0.0025367737, -3.1898422, 1.1401289, -10.540395, -30.53695, 1.29542, 0.0032176971, 3.2233124, -1.29542, -0.0032176971, -3.2233124, -1.754295, -10.538598, -44.127914, 1.9511251, -0.0020942688, 2.60149, -1.9511251, 0.0020942688, -2.60149, -10.004078, -10.543435, -56.680843, 4.269108, -0.0014076233, 4.5267105, -4.269108, 0.0014076233, -4.5267105, -22.096508, -10.543866, -71.009926, 3.0194702, -0.0024414063, 3.029831, -3.0194702, 0.0024414063, -3.029831, -43.112225, -10.542825, -90.55571, 2.7685661, 0, 3.2530441, -2.7685661, 0, -3.2530441, -57.558758, -10.544412, -105.29468, 1.3893204, -0.0032958984, 3.9568787, -1.3893204, 0.0032958984, -3.9568787, -67.460815, -10.545999, -121.085106, -0.16786957, 0, 3.1530304, 0.16786957, 0, -3.1530304, -68.8365, -10.544778, -134.94926, -0.18401337, -0.0020885468, 2.6329956, 0.18401337, 0.0020885468, -2.6329956, -67.5942, -10.5449, -150.69485, -0.22280121, -0.0020942688, 3.8437958, 0.22280121, 0.0020942688, -3.8437958, -66.5848, -10.545247, -166.92877, -0.19106293, -2.0980835e-05, 4.4179077, 0.19106293, 2.0980835e-05, -4.4179077, -65.37959, -10.545632, -194.78052, 0.56845856, -0.0061597824, 7.791504, -0.56845856, 0.0061597824, -7.791504, -65.80627, -10.545965, -221.5936, 3.216072, -0.0059690475, 7.5067596, -3.216072, 0.0059690475, -7.5067596, -72.289116, -10.545965, -252.15564, 0, 0, 0, 0, 0, 0, -82.23208, -10.545461, -268.13208, 4.9171143, -0.0045728683, 5.7914124, -4.9171143, 0.0045728683, -5.7914124, -92.66387, -10.545965, -281.79156, 5.2493515, -0.0038728714, 4.75589, -5.2493515, 0.0038728714, -4.75589, -116.69017, -10.545999, -303.3687, 3.3491058, -0.0063476563, 6.7915955, -3.3491058, 0.0063476563, -6.7915955, -134.11395, -10.545999, -323.79343, 0.43336487, -2.7656555e-05, 3.6408691, -0.43336487, 2.7656555e-05, -3.6408691, -138.66164, -10.546243, -343.01376, 0.07019043, -0.0072021484, 6.4321594, -0.07019043, 0.0072021484, -6.4321594, -139.77408, -10.545999, -362.58658, -0.0801239, -3.33786e-05, 3.0543823, 0.0801239, 3.33786e-05, -3.0543823, -139.89609, -10.545965, -377.1822),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 21
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4n05"]
+size = Vector3(40, 40, 10)
 
 [node name="MoonPool_Room" type="Node3D"]
-script = ExtResource("1_jpe2b")
+script = ExtResource("1_l5hvc")
 
 [node name="Terrain" type="Node3D" parent="."]
 
@@ -90,6 +85,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, -368)
 [node name="Tunnel_Sqz_T4" parent="Terrain/Tops" instance=ExtResource("4_shyem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, -388)
 
+[node name="Tunne_45L_T3" parent="Terrain/Tops" instance=ExtResource("3_4hy6m")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 16.357437)
+
+[node name="Tunne_45R_T3" parent="Terrain/Tops" instance=ExtResource("5_n8gg7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 16.357437)
+
 [node name="Bottoms" type="Node3D" parent="Terrain"]
 
 [node name="Tunnel_Strt_B" parent="Terrain/Bottoms" instance=ExtResource("7_603ey")]
@@ -151,47 +152,81 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, -368)
 [node name="Tunnel_Sqz_B4" parent="Terrain/Bottoms" instance=ExtResource("9_w3km6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138, 0, -388)
 
-[node name="PathNodes" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.545999, 0)
+[node name="Tunne_45L_B3" parent="Terrain/Bottoms" instance=ExtResource("8_o0ppk")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 16.357437)
 
-[node name="Rail_Path" type="Path3D" parent="PathNodes"]
-curve = SubResource("Curve3D_pxc7r")
+[node name="Tunne_45R_B3" parent="Terrain/Bottoms" instance=ExtResource("10_0s10j")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1, 16.357437)
 
-[node name="Rail_Visualization_Tool" type="Node3D" parent="PathNodes"]
-script = ExtResource("12_xj8po")
+[node name="CSGBox3D" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0087890625, 15, 31.954308)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(16.050781, 15, 1)
 
-[node name="rail_l" type="CSGPolygon3D" parent="PathNodes/Rail_Visualization_Tool"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-mode = 2
-path_node = NodePath("../../Rail_Path")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
+[node name="CSGBox3D2" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0087890625, 15, 7.9543076)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(16.050781, 15, 1)
 
-[node name="rail_r" type="CSGPolygon3D" parent="PathNodes/Rail_Visualization_Tool"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-mode = 2
-path_node = NodePath("../../Rail_Path")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
+[node name="CSGBox3D3" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.991211, 15, 19.754356)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(24.450684, 15, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.019947, 15, 19.754356)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(24.450684, 15, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4241943, 23.509596, 44.837334)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(51.687256, 1.3748779, 26.766052)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3511963, 23.344435, -2.7622452)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(52.16382, 1.7052002, 22.433105)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 14.998779, 23.422377, 19.754356)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(24.450684, 1.5493164, 15.015137)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Terrain"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.452625, 23.279066, 19.754356)
+use_collision = true
+collision_layer = 65536
+collision_mask = 0
+size = Vector3(24.450684, 1.8359375, 21.865356)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.124871, 22.426397)
+light_color = Color(0.55837834, 0.6983413, 0.50521016, 1)
+omni_range = 179.693
+omni_attenuation = 0.125
 
 [node name="Mineables" type="Node3D" parent="."]
 
 [node name="Mineable" parent="Mineables" instance=ExtResource("2_n1e08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29568, 0.43147755, -172.13322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.75709, -12.100321, -172.13322)
+
+[node name="Mineable2" parent="Mineables" instance=ExtResource("2_n1e08")]
+transform = Transform3D(0.33285248, 0.94297886, 0, -0.94297886, 0.33285248, 0, 0, 0, 1, -83.80004, -2.7905035, -113.90205)
 
 [node name="BulletsParent" type="Node3D" parent="." groups=["BulletsParent"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
@@ -221,14 +256,6 @@ align_marker = NodePath("../../Markers/ExitMarker")
 [node name="CollisionShape3D" parent="Triggers/RoomGate_1" index="0"]
 transform = Transform3D(0.99998826, 0, 0, 0, 1, 0, 0, 0, 0.99998826, 0.72798157, -15.670368, 0)
 
-[node name="Moonbay_RailDockTrigger" parent="Triggers" instance=ExtResource("5_vykfn")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -137.43826, 11.501869, -383.1495)
-direction = 0
-target_progress_percent = 100.0
-
-[node name="CollisionShape3D" parent="Triggers/Moonbay_RailDockTrigger" index="0"]
-transform = Transform3D(0.99999213, 0, 0, 0, 1, 0, 0, 0, 0.99999213, 0, -13.79883, 0.44830322)
-
 [node name="PlayerSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.4723, 1.9831693)
 
@@ -241,5 +268,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051188584, 10.004137)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -137.861, 0, -398.033)
 gizmo_extents = 4.19
 
+[node name="ShipSpawnLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29694128, 19.627483)
+
+[node name="MoonPoolDock" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.2595844)
+collision_layer = 524288
+script = ExtResource("15_v4n05")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MoonPoolDock"]
+shape = SubResource("BoxShape3D_v4n05")
+
+[connection signal="area_entered" from="MoonPoolDock" to="MoonPoolDock" method="_on_dock_entered"]
+
 [editable path="Triggers/RoomGate_1"]
-[editable path="Triggers/Moonbay_RailDockTrigger"]

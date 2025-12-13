@@ -22,7 +22,7 @@ func _draw() -> void:
 
 	var center: Vector2 = player_input.input_center
 	var half_extents: Vector2 = player_input.input_half_extents
-	var mouse_pos: Vector2 = player_input.mouse_pos
+	var mouse_pos: Vector2 = player_input.virtual_stick
 
 	# deadzone radius in screen space:
 	var deadzone_radius: float = player_input.deadzone_prcnt * min(half_extents.x, half_extents.y)

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="1_20mcy"]
 [ext_resource type="Script" uid="uid://dwwbuico5765w" path="res://addons/asset_placer/ui/asset_collections_window/edit/collection_edit_popup.gd" id="1_jhaji"]
 
+
 [sub_resource type="Texture2D" id="Texture2D_jhaji"]
 resource_local_to_scene = false
 resource_name = ""

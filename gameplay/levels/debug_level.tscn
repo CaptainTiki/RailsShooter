@@ -38,6 +38,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Level" type="Node3D" groups=["level"]]
 script = ExtResource("1_6mttl")
+end_run_cinematic_timer = null
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -53,9 +54,25 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 script = ExtResource("2_5t2ux")
 
-[node name="Menus" type="CanvasLayer" parent="."]
+[node name="BulletParent" type="Node3D" parent="."]
 
-[node name="Vignette_Fade" type="TextureRect" parent="Menus"]
+[node name="EnemyParent" type="Node3D" parent="."]
+
+[node name="Level_UI" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Faders" type="Control" parent="Level_UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Vignette_Fade" type="TextureRect" parent="Level_UI/Faders"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -64,7 +81,8 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_so80d")
 
-[node name="Screen_Fade" type="ColorRect" parent="Menus"]
+[node name="Screen_Fade" type="ColorRect" parent="Level_UI/Faders"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -72,3 +90,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="Screen_UI" type="Control" parent="Level_UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

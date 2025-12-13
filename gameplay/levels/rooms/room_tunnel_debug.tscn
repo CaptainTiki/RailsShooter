@@ -1,13 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://cjur0pgj85cwp"]
+[gd_scene load_steps=15 format=3 uid="uid://cjur0pgj85cwp"]
 
-[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_rail.gd" id="1_pblmp"]
+[ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_tunnel.gd" id="1_pblmp"]
 [ext_resource type="PackedScene" uid="uid://dhi2c0hloi73x" path="res://assets/biomes/rock/Tunnel_Strt_T.glb" id="2_0e56h"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_7blt8"]
 [ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_71mw5"]
 [ext_resource type="PackedScene" uid="uid://bvddw373aud37" path="res://assets/biomes/rock/Tunne_45L_T.glb" id="3_g216k"]
 [ext_resource type="PackedScene" uid="uid://colgabk74451j" path="res://assets/biomes/rock/Tunnel_Sqz_T.glb" id="4_02m2v"]
 [ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_21gqm"]
-[ext_resource type="PackedScene" uid="uid://cp4oodnwifpan" path="res://gameplay/levels/rooms/raildock_trigger.tscn" id="5_bl23d"]
 [ext_resource type="PackedScene" uid="uid://cchx8tmukvbfr" path="res://assets/biomes/rock/Tunne_45R_T.glb" id="5_pwf6p"]
 [ext_resource type="PackedScene" uid="uid://ro3y0jjp5e0j" path="res://assets/biomes/rock/Tunnel_Xpnd_T.glb" id="6_n30a4"]
 [ext_resource type="PackedScene" uid="uid://ixpvuw5s3fiv" path="res://assets/biomes/rock/Tunnel_Strt_B.glb" id="7_atavo"]
@@ -15,16 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bno5k05sumi2m" path="res://assets/biomes/rock/Tunnel_Sqz_B.glb" id="9_cu6y5"]
 [ext_resource type="PackedScene" uid="uid://c4h1mw82oliqu" path="res://assets/biomes/rock/Tunne_45R_B.glb" id="10_3vp0a"]
 [ext_resource type="PackedScene" uid="uid://dlknser47lmer" path="res://assets/biomes/rock/Tunne_Xpnd_B.glb" id="11_u7fyf"]
-[ext_resource type="Script" uid="uid://csg6o0vsr6xa1" path="res://gameplay/levels/rooms/rail_visualization_tool.gd" id="12_g216k"]
 
-[sub_resource type="Curve3D" id="Curve3D_02m2v"]
-_data = {
-"points": PackedVector3Array(-0.072333336, -6.1035156e-05, 4.010414, 0.072333336, 6.1035156e-05, -4.010414, 2.3361368, 0.024719238, -12.258366, 0.9190655, 0, 4.4608345, -0.9190655, 0, -4.4608345, 1.8042412, 0.030517578, -27.869984, 1.6064198, 0, 3.598587, -1.6064198, 0, -3.598587, -3.0654786, 0.040161133, -42.064247, 1.4084167, -0.00011062622, 2.5076942, -1.4084167, 0.00011062622, -2.5076942, -9.035552, 0.04689789, -53.823345, 3.0914536, 0, 3.7953644, -3.0914536, 0, -3.7953644, -18.615116, 0.052490234, -66.301605, 2.8640556, 0, 2.4399796, -2.8640556, 0, -2.4399796, -34.34524, 0.064331055, -81.1186, 2.7908707, 0, 2.323372, -2.7908707, 0, -2.323372, -50.240852, 0.07507324, -93.409935, 2.7399406, -0.0031738281, 3.2981339, -2.7399406, 0.0031738281, -3.2981339, -60.865532, 0.083496094, -104.14645, 1.4152985, -0.00390625, 5.9718018, -1.4152985, 0.00390625, -5.9718018, -68.7092, -0.0021972656, -121.65157, 0.048110962, 4.5776367e-05, 1.5608063, -0.048110962, -4.5776367e-05, -1.5608063, -69.612625, 0.11291504, -141.73297, -0.009147644, 5.340576e-05, 1.4820251, 0.009147644, -5.340576e-05, -1.4820251, -69.82805, 0.123535156, -154.72012, 0.08307648, -3.8146973e-05, 5.5311737, -0.08307648, 3.8146973e-05, -5.5311737, -70.05208, 0.13871002, -173.9239),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 12
-
-[node name="Room_Rail_Debug_2" type="Node3D"]
+[node name="Room_Tunnel_Debug" type="Node3D"]
 script = ExtResource("1_pblmp")
 
 [node name="Terrain" type="Node3D" parent="."]
@@ -91,42 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -164)
 [node name="Tunnel_Sqz_B2" parent="Terrain/Bottoms" instance=ExtResource("9_cu6y5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69, 0, -184)
 
-[node name="PathNodes" type="Node3D" parent="."]
-
-[node name="Rail_Path" type="Path3D" parent="PathNodes"]
-curve = SubResource("Curve3D_02m2v")
-
-[node name="Rail_Visualization_Tool" type="Node3D" parent="PathNodes"]
-script = ExtResource("12_g216k")
-
-[node name="rail_l" type="CSGPolygon3D" parent="PathNodes/Rail_Visualization_Tool"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-mode = 2
-path_node = NodePath("../../Rail_Path")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-
-[node name="rail_r" type="CSGPolygon3D" parent="PathNodes/Rail_Visualization_Tool"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-mode = 2
-path_node = NodePath("../../Rail_Path")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = true
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-
 [node name="Mineables" type="Node3D" parent="."]
 
 [node name="Mineable" parent="Mineables" instance=ExtResource("2_7blt8")]
@@ -171,25 +126,6 @@ align_marker = NodePath("../../Markers/ExitMarker")
 [node name="CollisionShape3D" parent="Triggers/RoomGate_2" index="0"]
 transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 2.1084213, 0, 0)
 
-[node name="RailRoom_RailDockTrigger" parent="Triggers" node_paths=PackedStringArray("rail_path") instance=ExtResource("5_bl23d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.304)
-rail_id = 1
-direction = 0
-rail_path = NodePath("../../PathNodes/Rail_Path")
-
-[node name="CollisionShape3D" parent="Triggers/RailRoom_RailDockTrigger" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27847672, -0.7187176, 0)
-
-[node name="RailRoom_RailDockTrigger2" parent="Triggers" node_paths=PackedStringArray("rail_path") instance=ExtResource("5_bl23d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.723, 0, -186.517)
-rail_id = 2
-direction = -1
-target_progress_percent = 100.0
-rail_path = NodePath("../../PathNodes/Rail_Path")
-
-[node name="CollisionShape3D" parent="Triggers/RailRoom_RailDockTrigger2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.302, 0, 5.934)
-
 [node name="Markers" type="Node3D" parent="."]
 
 [node name="EntryMarker" type="Marker3D" parent="Markers"]
@@ -198,9 +134,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 [node name="ExitMarker" type="Marker3D" parent="Markers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.73657, 0.934, -194.036)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-
 [editable path="Triggers/RoomGate_1"]
 [editable path="Triggers/RoomGate_2"]
-[editable path="Triggers/RailRoom_RailDockTrigger"]
-[editable path="Triggers/RailRoom_RailDockTrigger2"]

@@ -1,0 +1,215 @@
+[gd_scene load_steps=25 format=3 uid="uid://cn0ociviqdigv"]
+
+[ext_resource type="Script" uid="uid://oesmiypqg3xy" path="res://gameplay/player/ship_root.gd" id="1_up7vx"]
+[ext_resource type="Script" uid="uid://ck1qao2roqwbp" path="res://gameplay/player/player_ship.gd" id="1_v6sl1"]
+[ext_resource type="PackedScene" uid="uid://c8xcmiicqtcth" path="res://assets/player/craft_miner.glb" id="2_ge5fb"]
+[ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="4_6uejx"]
+[ext_resource type="Script" uid="uid://l578yot6eigw" path="res://gameplay/player/ship_stats.gd" id="4_hnppb"]
+[ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="5_ou2vc"]
+[ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="6_hqu1f"]
+[ext_resource type="Script" uid="uid://cjpqmntsmfmey" path="res://gameplay/player/weapon_hub.gd" id="8_hnppb"]
+[ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="8_hrflb"]
+[ext_resource type="PackedScene" uid="uid://du00mx80pt8i8" path="res://gameplay/player/weapon_projectile.tscn" id="9_6uejx"]
+[ext_resource type="Script" uid="uid://cudearsw1ab20" path="res://gameplay/player/targeting_component.gd" id="9_c55ub"]
+[ext_resource type="PackedScene" uid="uid://db4lsbt241yap" path="res://gameplay/player/weapon_beam.tscn" id="10_ou2vc"]
+[ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="10_qn6ct"]
+[ext_resource type="PackedScene" uid="uid://ch4h4w8aak6e6" path="res://gameplay/player/mining_lazer.tscn" id="11_ou2vc"]
+[ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_pa0q3"]
+[ext_resource type="Script" uid="uid://cviqde28ejbaa" path="res://gameplay/player/magnet.gd" id="12_jyhos"]
+[ext_resource type="PackedScene" uid="uid://cmt6b25ultidd" path="res://gameplay/projectiles/bullets/basic_bullet_proj.tscn" id="12_p1fuj"]
+[ext_resource type="Texture2D" uid="uid://c451uwtbwy8j5" path="res://icon.png" id="13_hrflb"]
+[ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/player_input.gd" id="14_xrijq"]
+[ext_resource type="Script" uid="uid://bjxffagn3ia2v" path="res://gameplay/player/reticle_2d.gd" id="15_fgjgg"]
+[ext_resource type="Script" uid="uid://qpgiglqwr0v7" path="res://gameplay/player/player_controller.gd" id="15_hnppb"]
+[ext_resource type="Script" uid="uid://blb55aeg8p6vv" path="res://gameplay/player/virtual_stick_visualization.gd" id="16_ml2qm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hjjx4"]
+radius = 0.558
+height = 1.758
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8pifx"]
+radius = 4.0
+
+[node name="PlayerShip" type="Node3D"]
+script = ExtResource("1_v6sl1")
+
+[node name="Ship_Rotation_Handler" type="Node3D" parent="."]
+
+[node name="Ship_Root" type="Area3D" parent="Ship_Rotation_Handler" node_paths=PackedStringArray("player_input") groups=["player"]]
+collision_mask = 0
+script = ExtResource("1_up7vx")
+player_input = NodePath("../../Player_Input")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.430665e-10, 0.01928711)
+shape = SubResource("CapsuleShape3D_hjjx4")
+
+[node name="mesh_craft_miner2" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("2_ge5fb")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.0108918, -0.1848324, -0.7884023)
+
+[node name="AreaLight" type="SpotLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
+light_color = Color(0.9504, 0.96, 0.672, 1)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 60.0
+
+[node name="SpotLight" type="SpotLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
+light_color = Color(0.9504, 0.96, 0.672, 1)
+light_energy = 4.0
+light_volumetric_fog_energy = 0.5
+spot_range = 300.0
+spot_attenuation = 0.5
+spot_angle = 35.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Ship_Rotation_Handler/Ship_Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.340755)
+light_color = Color(0.93192214, 0.98897463, 0.75807405, 1)
+omni_range = 40.0
+omni_attenuation = 0.55
+
+[node name="ShipStats" type="Node" parent="Ship_Rotation_Handler/Ship_Root"]
+unique_name_in_owner = true
+script = ExtResource("4_hnppb")
+
+[node name="Health" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("armor", "sheilds") instance=ExtResource("4_6uejx")]
+armor = NodePath("../Armor")
+sheilds = NodePath("../Shields")
+
+[node name="HurtBox" parent="Ship_Rotation_Handler/Ship_Root/Health" index="0"]
+collision_mask = 66304
+
+[node name="Shields" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("5_ou2vc")]
+
+[node name="Armor" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("6_hqu1f")]
+
+[node name="WeaponHub" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("playership", "stats", "reticle_ui")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
+script = ExtResource("8_hnppb")
+playership = NodePath("../../..")
+stats = NodePath("../ShipStats")
+reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
+
+[node name="ProjectileWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("9_6uejx")]
+
+[node name="BeamWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("10_ou2vc")]
+
+[node name="Mining_Lazer" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("11_ou2vc")]
+projo_scene = ExtResource("12_p1fuj")
+display_name = "Default Weapon Name"
+icon = ExtResource("13_hrflb")
+ammo_type = 0
+ammo_cost_per_shot = 1.0
+weapon_belt = 0
+
+[node name="RollCooldown" type="Timer" parent="Ship_Rotation_Handler/Ship_Root"]
+wait_time = 3.0
+one_shot = true
+
+[node name="TargetingComponent" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("player_ship", "ship_root", "reticle_ui") groups=["targeting_component"]]
+script = ExtResource("9_c55ub")
+player_ship = NodePath("../../..")
+ship_root = NodePath("..")
+reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
+
+[node name="PlayerHud" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("10_qn6ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51771677)
+visible = false
+
+[node name="CargoHold" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root"]
+script = ExtResource("11_pa0q3")
+
+[node name="Magnet" type="Area3D" parent="Ship_Rotation_Handler/Ship_Root"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("12_jyhos")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root/Magnet"]
+shape = SubResource("SphereShape3D_8pifx")
+debug_color = Color(0.92632747, 0.5120404, 0.0859239, 0.41960785)
+
+[node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("player_ship", "input", "stats", "reticle")]
+script = ExtResource("15_hnppb")
+player_ship = NodePath("..")
+input = NodePath("../Player_Input")
+stats = NodePath("../Ship_Rotation_Handler/Ship_Root/ShipStats")
+reticle = NodePath("../CanvasLayer/Ship_HUD/Reticle2D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Ship_HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopLeftDock" type="Control" parent="CanvasLayer/Ship_HUD"]
+layout_mode = 1
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock"]
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 23.0
+mouse_filter = 2
+
+[node name="CargoLabels" type="HBoxContainer" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer/CargoLabels"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Cargo: "
+
+[node name="cargo_ammount_label" type="Label" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer/CargoLabels"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Ship_HUD/TopLeftDock/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Reticle2D" type="TextureRect" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_hrflb")
+stretch_mode = 3
+script = ExtResource("15_fgjgg")
+player_input = NodePath("../../../Player_Input")
+
+[node name="VirtualStick_Visualization" type="Control" parent="CanvasLayer/Ship_HUD" node_paths=PackedStringArray("player_input")]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("16_ml2qm")
+player_input = NodePath("../../../Player_Input")
+
+[node name="Player_Input" type="Node3D" parent="."]
+script = ExtResource("14_xrijq")
+
+[node name="Bank_Input_Timer" type="Timer" parent="Player_Input"]
+wait_time = 0.15
+one_shot = true
+
+[connection signal="area_entered" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_entered"]
+[connection signal="area_exited" from="Ship_Rotation_Handler/Ship_Root/Magnet" to="Ship_Rotation_Handler/Ship_Root/Magnet" method="_on_area_exited"]
+
+[editable path="Ship_Rotation_Handler/Ship_Root/Health"]

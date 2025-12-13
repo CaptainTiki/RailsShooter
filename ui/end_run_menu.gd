@@ -10,11 +10,23 @@ class_name EndRunMenu
 @onready var results_label: Label = $VBoxContainer/Container3/VBoxContainer/Results_Label
 @onready var exit_bn: Button = $Container/VBoxContainer/Exit_Bn
 
+var vignette : TextureRect
+var fade : ColorRect
+var fade_speed: float = 1.5
+var fadeout : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hide_menu()
+	vignette = GameManager.current_level.vignette_fade
+	fade = GameManager.current_level.screen_fade
+
+func _process(delta: float) -> void:
+	vignette.self_modulate.a += fade_speed * 2 * delta
+	fade.self_modulate.a += fade_speed * delta
 
 func show_menu()-> void:
+	fadeout = true
 	results_label.text = str(GameManager.current_level.run_outcome)
 	GameManager.pause_game()
 	visible = true

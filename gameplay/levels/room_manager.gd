@@ -7,7 +7,7 @@ enum State {IN_ROOM, TRANSITIONING, SPAWNING_NEXT_ROOM, ENTERING_ROOM, EXITING_R
 
 var deploy_room : PackedScene = preload("res://gameplay/levels/rooms/moon_bay_room.tscn")
 var available_rooms : Array[PackedScene] = [
-		preload("res://gameplay/levels/rooms/room_rail_debug_2.tscn")
+		preload("res://gameplay/levels/rooms/room_tunnel_debug.tscn")
 	]
 
 var room_graph = {} # { RoomA: {gate1: RoomB, gate2: RoomC, ...} }
@@ -68,25 +68,6 @@ func _align_rooms(from_room: Room, to_room: Room, from_gate: RoomGate) -> void:
 	# 3) Compute offset and move the whole room so anchors coincide
 	var offset := from_pos - to_pos
 	to_room.global_position += offset
-
-
-func get_room_path_start(room : Room) -> Vector3:
-	return room.rail_path.to_global(room.rail_path.curve.get_point_position(0))
-
-func parent_to_path(player_root : PlayerRoot)-> void:
-	if current_room.room_type == Room.RoomType.RAIL_ROOM:
-		player_root.un_parent()
-		current_room.rail_path.add_child(player_root)
-
-#func spawn_debug_room_after_current(scene: PackedScene) -> void:
-	#if next_room:
-		#next_room.destroy()
-	#
-	#var new_room : Room = scene.instantiate() as Room
-	#add_child(new_room)
-	#next_room = new_room
-	#if current_room and new_room:
-		#_align_rooms(current_room, new_room)
 
 #exiting a node - this spawns in our next rooms in the graph
 func _on_gate_exit(roomA: Room, gate_id) -> void:

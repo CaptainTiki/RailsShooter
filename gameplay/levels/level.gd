@@ -8,11 +8,12 @@ signal run_complete(success: bool)
 @onready var enemy_parent: Node3D = $EnemyParent
 @onready var room_manager: Node3D = $RoomManager
 
-@onready var menus: Node = $Menus
-@onready var vignette_fade: TextureRect = $Menus/Vignette_Fade
-@onready var screen_fade: ColorRect = $Menus/Screen_Fade
+@onready var level_ui: Node = $Level_UI
+@onready var screen_ui: Control = $Level_UI/Screen_UI
+@onready var vignette_fade: TextureRect = $Level_UI/Faders/Vignette_Fade
+@onready var screen_fade: ColorRect = $Level_UI/Faders/Screen_Fade
 
-var player_scene : PackedScene = preload("res://gameplay/player/player_root.tscn")
+var player_scene : PackedScene = preload("res://gameplay/player/player_ship.tscn")
 var arena_debug_scene : PackedScene = preload("res://gameplay/levels/rooms/room_arena_debug.tscn")
 var pause_scene : PackedScene = preload("res://ui/pause_menu.tscn")
 var endrun_scene : PackedScene = preload("uid://cojyl2glcbth2")
@@ -23,14 +24,11 @@ var endrun_menu : EndRunMenu = null
 var debugrun_menu : DebugRunMenu = null
 
 var run_outcome : RunData.RunOutcome = RunData.RunOutcome.NOT_LOGGED
-var player_root: PlayerRoot
+var player_ship: PlayerShip
 var elapsed_run_time : float = 0
 var completed_rooms : int = 0
-var target_room_num : int = 4
 
-var pending_rail_dock: RailDockTrigger = null
-
-@export var end_run_cinematic_timer : float = 5
+@export var end_run_cinematic_timer : float = 1
 
 func _ready() -> void:
 	GameManager.set_current_level(self)
@@ -38,7 +36,8 @@ func _ready() -> void:
 	_debug_list_rooms("level._ready()")
 	level_ready.emit()
 	GameManager.set_gamestate(Globals.GameState.IN_RUN)
-	player_root.PlayerDied.connect(_on_player_died)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	player_ship.PlayerDied.connect(_on_player_died)
 	_setup_menus()
 
 func _debug_list_rooms(context: String) -> void:
@@ -61,7 +60,7 @@ func _process(delta: float) -> void:
 		GameManager.current_run.aetherium_ore += 1
 		
 	if Input.is_action_just_pressed("debug_win_run"):
-		_end_run_successfully()
+		end_run_successfully()
 	if Input.is_action_just_pressed("debug_action_two"):
 		room_manager.spawn_debug_room_after_current(arena_debug_scene)
 	pass
@@ -69,60 +68,23 @@ func _process(delta: float) -> void:
 func ready_first_room() -> void:
 	_spawn_player()
 	room_manager.deploy_first_room() #deploy the moon pool room
-	_parent_player_to_path() #parent player to the path in moon pool room
-	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
-	player_root.global_position = room_manager.get_room_path_start(room_manager.current_room)
+	#TODO: make an explicit spawn ship in moonpool room
+	if room_manager.current_room.has_method("get_spawn_transform"):
+		player_ship.global_transform = room_manager.current_room.get_spawn_transform()
+	else:
+		player_ship.global_position = Vector3.ZERO
 
 func _spawn_player() -> void:
-	var player : PlayerRoot = player_scene.instantiate() as PlayerRoot #player needs to be first , so targets can register as targetable
+	var player : PlayerShip = player_scene.instantiate() as PlayerShip #player needs to be first , so targets can register as targetable
 	player.parent_level = self
-	player_root = player
+	player_ship = player
+	add_child(player) 
 
-func on_raildock_trigger(_ship_root: ShipRoot, trigger: RailDockTrigger) -> void:
-	var ts := Time.get_ticks_msec()
-	print("Level.on_raildock_trigger t=", ts,
-		" trigger=", trigger.name,
-		" mode=", player_root.move_mode)
-
-	match player_root.move_mode:
-		PlayerRoot.MoveMode.ON_RAIL:
-			print("  -> exit_rail_via_trigger")
-			player_root.exit_rail_via_trigger(trigger)
-		PlayerRoot.MoveMode.FREE_FLIGHT:
-			print("  -> enter_rail_via_trigger")
-			player_root.enter_rail_via_trigger(trigger)
-		_:
-			print("  -> ignored (mode=", player_root.move_mode, ")")
-
-func _move_player_to_path() -> void:
-	player_root.docking_controller.docking_position = room_manager.get_room_path_start(room_manager.current_room)
-	player_root.set_move_mode(PlayerRoot.MoveMode.MOVE_TO_PATH)
-
-func _parent_player_to_path() -> void:
-	player_root.set_progress(0)
-	room_manager.parent_to_path(player_root)
-	player_root.set_move_mode(PlayerRoot.MoveMode.ON_RAIL)
-
-func _parent_player_to_room() -> void:
-	var ship_pos : Vector3 = player_root.ship_root.global_position
-	player_root.un_parent()
-	add_child(player_root) #no path, parent to the level directly
-	player_root.ship_root.position = Vector3.ZERO
-	player_root.global_position = ship_pos
-	player_root.set_move_mode(PlayerRoot.MoveMode.FREE_FLIGHT)
-
-#called by the player - who has exited a room (hit the end of the path, or triggered an exit node)
-func _end_rail_room() -> void:
+func _end_room() -> void:
 	completed_rooms += 1
-	if completed_rooms >= target_room_num:
-		_end_run_successfully()
 
-func _end_arena_room() -> void:
-	completed_rooms += 1
-	if completed_rooms >= target_room_num:
-		_end_run_successfully()
-
-func _end_run_successfully() -> void:
+func end_run_successfully() -> void:
+	print("Game Manager ending run successfully")
 	run_outcome = RunData.RunOutcome.SUCCESS
 	run_complete.emit(true) #we made it!!  - let everybody know
 	#TODO: animate camera to circle ship?
@@ -150,9 +112,9 @@ func _setup_menus() -> void:
 	pause_menu = pause_scene.instantiate() as PauseMenu
 	endrun_menu = endrun_scene.instantiate() as EndRunMenu
 	debugrun_menu = debug_scene.instantiate() as DebugRunMenu
-	menus.add_child(pause_menu)
-	menus.add_child(endrun_menu)
-	menus.add_child(debugrun_menu)
+	level_ui.add_child(pause_menu)
+	level_ui.add_child(endrun_menu)
+	level_ui.add_child(debugrun_menu)
 	pause_menu.hide()
 	endrun_menu.hide()
 	debugrun_menu.hide()

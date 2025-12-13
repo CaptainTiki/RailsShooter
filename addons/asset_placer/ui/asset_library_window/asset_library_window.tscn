@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="3_gvdec"]
 
+
 [sub_resource type="Texture2D" id="Texture2D_gvdec"]
 resource_local_to_scene = false
 resource_name = ""

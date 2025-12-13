@@ -1,6 +1,5 @@
 extends Node3D
 
-
 @onready var guns_power_bar: ProgressBar = $Hud_SubViewport/HUD_root/MarginContainer/LeftDock/HBoxContainer/Guns_PowerBar
 @onready var torps_ammo_bar: ProgressBar = $Hud_SubViewport/HUD_root/MarginContainer/LeftDock/HBoxContainer/Torps_AmmoBar
 
@@ -17,7 +16,7 @@ extends Node3D
 @onready var hud_sub_viewport: SubViewport = $Hud_SubViewport
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
-@onready var weapon: Weapon = %Weapon
+
 @onready var ship_root: ShipRoot = $".."
 
 @onready var ship_stats: ShipStats = %ShipStats
@@ -36,8 +35,8 @@ func _process(_delta: float) -> void:
 	_update_ship_UI()
 
 func _update_weapon_UI() -> void:
-	guns_power_bar.value = weapon.current_power
-	torps_ammo_bar.value = weapon.current_torps
+	#guns_power_bar.value = weapon_hub.current_power
+	#torps_ammo_bar.value = weapon_hub.current_torps
 	pass
 
 func _update_ship_UI() -> void:
@@ -57,8 +56,8 @@ func _setup_UI() -> void:
 	boost_power_bar_left.value = ship_root.max_engine_power
 	boost_power_bar_right.value = ship_root.max_engine_power
 	
-	guns_power_bar.value = weapon.current_power
-	torps_ammo_bar.value = weapon.current_torps
+	#guns_power_bar.value = weapon_hub.current_power
+	#torps_ammo_bar.value = weapon_hub.current_torps
 	health_bar.value = health.current_health
 	shields_bar.value = shields.current_shields
 	boost_power_bar_left.value = ship_root.max_engine_power

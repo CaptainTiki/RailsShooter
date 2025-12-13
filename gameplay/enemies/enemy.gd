@@ -13,6 +13,7 @@ var speed : float = 5
 func _ready() -> void:
 	parent_room.destroying_room.connect(_destroy)
 	health.connect("died", _on_died)
+	target_node.register()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -41,3 +42,6 @@ func _on_died() -> void:
 func _destroy() -> void:
 	target_node.unregister()
 	queue_free()
+	
+func take_damage(amount : float, _type : Globals.DamageType) -> void:
+	health.take_damage(amount, _type)

@@ -1,7 +1,7 @@
 extends Camera3D
 class_name FollowCamera
 
-@export var ship_root : ShipRoot
+var player : PlayerShip
 
 var camera_distance : float = 8
 var camera_zoomin_distance : float = 6
@@ -11,8 +11,11 @@ var spring_speed : float = 4
 var zoom_in = false
 var zoom_out = false
 
+func _ready() -> void:
+	player = GameManager.current_level.player_ship
+
 func _physics_process(delta: float) -> void:
-	set_pos(ship_root.position)
+	set_pos(player.position)
 	position.z = move_toward(position.z, camera_distance, spring_speed * delta)
 	
 	if zoom_in:

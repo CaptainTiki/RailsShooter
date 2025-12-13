@@ -1,20 +1,16 @@
 extends Node3D
 class_name Room
 
-enum RoomType {NONE, RAIL_ROOM, ARENA_ROOM}
+enum RoomType {NONE, TUNNEL_ROOM, ARENA_ROOM}
 
 signal destroying_room
 
-@onready var entry_marker: Marker3D = $EntryMarker
-@onready var exit_marker: Marker3D = $ExitMarker
+@onready var entry_marker: Marker3D = $Markers/EntryMarker
+@onready var exit_marker: Marker3D = $Markers/ExitMarker
 @onready var markers: Node3D = $Markers
 @onready var triggers: Node3D = $Triggers
-@export var room_type : RoomType = RoomType.RAIL_ROOM
+@export var room_type : RoomType = RoomType.TUNNEL_ROOM
 
-
-func _ready() -> void:
-	print("Room READY: ", name, " id=", get_instance_id())
-	
 func destroy() -> void:
 	destroying_room.emit() #this tells our targets to unregister
 	queue_free()

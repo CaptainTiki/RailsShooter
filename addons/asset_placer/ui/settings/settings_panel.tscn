@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="1_si2q2"]
 [ext_resource type="Script" uid="uid://c4ms6t1dhy278" path="res://addons/asset_placer/ui/settings/components/keybinding_group.gd" id="3_l6bix"]
 
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cqn4c"]
 
 [sub_resource type="Texture2D" id="Texture2D_l6bix"]
