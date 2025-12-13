@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 func show_menu()-> void:
 	GameManager.pause_game()
 	visible = true
+	set_fadeout(true)
 
 func hide_menu() -> void:
 	GameManager.unpause_game()

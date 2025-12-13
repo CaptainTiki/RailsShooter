@@ -4,7 +4,7 @@ extends Node
 enum GameState {PAUSED, MENUS, IN_RUN, LOADING}
 enum Rarity {NONE, COMMON, UNCOMMON, RARE, EPIC, LEGENDARY}
 enum AmmoType {ENERGY, BULLET_SM, BULLET_LG, ROCKET, EXPLOSIVE}
-enum DamageType {GENERAL, KINETIC, ENERGY, HEAT, EXPLOSIVE, CORROSIVE}
+enum DamageType {GENERAL, KINETIC, ENERGY, HEAT, EXPLOSIVE, CORROSIVE, MINING}
 
 @export_category("Difficulty Settings")
 var aim_assist_strength : float = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cn0ociviqdigv"]
+[gd_scene load_steps=23 format=3 uid="uid://cn0ociviqdigv"]
 
 [ext_resource type="Script" uid="uid://oesmiypqg3xy" path="res://gameplay/player/ship_root.gd" id="1_up7vx"]
 [ext_resource type="Script" uid="uid://ck1qao2roqwbp" path="res://gameplay/player/player_ship.gd" id="1_v6sl1"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cudearsw1ab20" path="res://gameplay/player/targeting_component.gd" id="9_c55ub"]
 [ext_resource type="PackedScene" uid="uid://db4lsbt241yap" path="res://gameplay/player/weapon_beam.tscn" id="10_ou2vc"]
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="10_qn6ct"]
+[ext_resource type="PackedScene" uid="uid://ch4h4w8aak6e6" path="res://gameplay/player/mining_lazer.tscn" id="11_ou2vc"]
 [ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_pa0q3"]
 [ext_resource type="Script" uid="uid://cviqde28ejbaa" path="res://gameplay/player/magnet.gd" id="12_jyhos"]
 [ext_resource type="Script" uid="uid://dog1r33e1kmh8" path="res://gameplay/player/player_input.gd" id="14_xrijq"]
@@ -90,6 +91,8 @@ reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 [node name="ProjectileWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("9_6uejx")]
 
 [node name="BeamWeapon" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("10_ou2vc")]
+
+[node name="Mining_Lazer" parent="Ship_Rotation_Handler/Ship_Root/WeaponHub" instance=ExtResource("11_ou2vc")]
 
 [node name="RollCooldown" type="Timer" parent="Ship_Rotation_Handler/Ship_Root"]
 wait_time = 3.0

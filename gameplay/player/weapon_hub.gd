@@ -42,19 +42,27 @@ func _ready() -> void:
 	primary_weapon_changed.emit(primary_weaps[current_primary_index])
 	secondary_weapon_changed.emit(primary_weaps[current_secondary_index])
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("cycle_primary_weapon"):
+		cycle_primary_weapon()
+	if Input.is_action_just_pressed("cycle_secondary_weapon"):
+		cycle_secondary_weapon()
+
 #we only support forward cycling - not enough buttons on the controller lol
 func cycle_primary_weapon() -> void:
 	if primary_weaps.is_empty():
 		return
 	current_primary_index = (current_primary_index + 1) % primary_weaps.size()
 	primary_weapon_changed.emit(primary_weaps[current_primary_index])
+	print("Primary Weapon changed to: ", primary_weaps[current_primary_index])
 
 #we only support forward cycling - not enough buttons on the controller lol
 func cycle_secondary_weapon() -> void:
 	if secondary_weaps.is_empty():
 		return
 	current_secondary_index = (current_secondary_index + 1) % secondary_weaps.size()
-	secondary_weapon_changed.emit(primary_weaps[current_secondary_index])
+	secondary_weapon_changed.emit(secondary_weaps[current_secondary_index])
+	print("Secondary Weapon changed to: ", secondary_weaps[current_secondary_index])
 
 func fire_primary_pressed() -> void:
 	if primary_weaps.is_empty():

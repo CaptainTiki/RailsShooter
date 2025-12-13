@@ -8,9 +8,10 @@ signal run_complete(success: bool)
 @onready var enemy_parent: Node3D = $EnemyParent
 @onready var room_manager: Node3D = $RoomManager
 
-@onready var menus: Node = $Menus
-@onready var vignette_fade: TextureRect = $Menus/Vignette_Fade
-@onready var screen_fade: ColorRect = $Menus/Screen_Fade
+@onready var level_ui: Node = $Level_UI
+@onready var screen_ui: Control = $Level_UI/Screen_UI
+@onready var vignette_fade: TextureRect = $Level_UI/Faders/Vignette_Fade
+@onready var screen_fade: ColorRect = $Level_UI/Faders/Screen_Fade
 
 var player_scene : PackedScene = preload("res://gameplay/player/player_ship.tscn")
 var arena_debug_scene : PackedScene = preload("res://gameplay/levels/rooms/room_arena_debug.tscn")
@@ -113,9 +114,9 @@ func _setup_menus() -> void:
 	pause_menu = pause_scene.instantiate() as PauseMenu
 	endrun_menu = endrun_scene.instantiate() as EndRunMenu
 	debugrun_menu = debug_scene.instantiate() as DebugRunMenu
-	menus.add_child(pause_menu)
-	menus.add_child(endrun_menu)
-	menus.add_child(debugrun_menu)
+	level_ui.add_child(pause_menu)
+	level_ui.add_child(endrun_menu)
+	level_ui.add_child(debugrun_menu)
 	pause_menu.hide()
 	endrun_menu.hide()
 	debugrun_menu.hide()

@@ -14,6 +14,7 @@ var beam_state : BeamState = BeamState.OFF
 var range: float = 50
 
 func _ready() -> void:
+	display_name = "Beam Weapon"
 	set_beam_mesh(false)
 	weapon_belt = Belt.SECONDARY
 

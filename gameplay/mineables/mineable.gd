@@ -3,21 +3,36 @@ class_name Mineable
 
 @onready var target_node: Targetable = $Target_Node
 @onready var parent_room: Room = $"../.."
+@onready var floating_progress_bar: FloatingProgressBar = $FloatingProgressBar
 
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/resources/aetherium_pickup.tscn")
+var max_health : float = 20
 var health : float = 20
 var spread : float = 0.5  # ~28 degrees
 var speed : float = 10
 var num_resources : int = 3
 
 func _ready() -> void:
+	health = max_health
 	parent_room.destroying_room.connect(_destroy)
 	target_node.register()
+	floating_progress_bar.set_target(self)
+	floating_progress_bar.value = health
+	floating_progress_bar.max_value = health
 	pass
 
+func _process(delta: float) -> void:
+	if health < max_health:
+		floating_progress_bar.value = health
+		health = clamp(health + delta, 0, max_health)
+
 func take_damage(amount : float, _type : Globals.DamageType) -> void:
+	if _type == Globals.DamageType.MINING:
 		health -= amount
-		print(health)
+	else:
+		health -= amount *.5
+
+		floating_progress_bar.value = health
 		if health <= 0:
 			_spawn_resource()
 			_destroy()
