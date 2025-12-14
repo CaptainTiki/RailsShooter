@@ -16,6 +16,12 @@ func _ready() -> void:
 	# start at some forward speed; adjust if you want to start stopped
 	current_speed = max_speed * 0.25  # 1/4 start speed
 
+func brake(delta : float) -> void:
+	current_speed -= stats.throttle_change_speed * delta * 4
+
+func boost(delta : float) -> void:
+	current_speed += stats.throttle_change_speed * delta * 4
+
 func _physics_process(delta: float) -> void:
 	if not player_ship or not stats:
 		return
@@ -26,8 +32,10 @@ func _physics_process(delta: float) -> void:
 	# --- THROTTLE UPDATE ---
 	if input.throttle_up_pressed:
 		current_speed += stats.throttle_change_speed * delta
+		print("Throttle: " , current_speed)
 	elif input.throttle_down_pressed:
 		current_speed -= stats.throttle_change_speed * delta
+		print("Throttle: " , current_speed)
 
 	# clamp between full reverse and full forward
 	current_speed = clamp(current_speed, min_speed, max_speed)

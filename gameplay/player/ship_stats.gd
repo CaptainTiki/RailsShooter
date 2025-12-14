@@ -4,6 +4,7 @@ class_name ShipStats
 signal stats_updated
 
 @export_category("Ship Fwd Movement")
+#TODO: actually use all these variables for movement :D
 @export var travel_speed : float = 64.0    # max forward speed
 @export var brake_speed : float = 6.0
 @export var boost_speed : float = 44.0

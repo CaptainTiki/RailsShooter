@@ -10,8 +10,8 @@ class_name ShipRoot
 @export var barrel_roll_cooldown = 3.0
 @export var max_engine_power = 100
 @export var boost_power = 100
-@export var boost_power_regen = 12
-@export var boost_power_cost = 32
+@export var boost_power_regen = 4
+@export var boost_power_cost = 48
 
 @onready var roll_cooldown_timer: Timer = $RollCooldown
 
@@ -51,11 +51,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("brake"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_ship.brake_ship()
+			player_ship.brake_ship(delta)
 	if Input.is_action_pressed("boost"):
 		if boost_power > boost_power_cost:
 			boost_power -= boost_power_cost * delta
-			player_ship.boost_ship()
+			player_ship.boost_ship(delta)
 	
 	if Input.is_action_just_released("brake"):
 		camera.zoom_in = false

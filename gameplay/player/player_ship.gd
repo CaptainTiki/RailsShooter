@@ -14,12 +14,12 @@ var aim_dir : Vector3 = Vector3.ZERO
 var aim_point : Vector3 = Vector3.ZERO
 var current_target : Targetable = null
 
-func brake_ship() -> void:
-	#TODO: slow the ship speed - prob need to translate this to player controller?
+func brake_ship(delta : float) -> void:
+	controller.brake(delta)
 	pass
 
-func boost_ship() -> void:
-	#TODO: speed up the ship speed - prob need to translate this to player controller?
+func boost_ship(delta : float) -> void:
+	controller.boost(delta)
 	pass
 
 func stop_ship() -> void:
