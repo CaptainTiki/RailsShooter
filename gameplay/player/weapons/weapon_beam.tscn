@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://db4lsbt241yap"]
 
-[ext_resource type="Script" uid="uid://cg6qqhu22150u" path="res://gameplay/player/weapon_beam.gd" id="1_eu4ay"]
+[ext_resource type="Script" uid="uid://cg6qqhu22150u" path="res://gameplay/player/weapons/weapon_beam.gd" id="1_eu4ay"]
 [ext_resource type="Texture2D" uid="uid://djk5eo8am5far" path="res://assets/shaders/T_MarbleNoise_tiled.png" id="2_72x5g"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_5eoi3"]

@@ -26,16 +26,16 @@ func can_fire() -> bool:
 	return true
 
 func spawn_projectile(scene: PackedScene) -> void:
-	var tgt: Targetable = hub.playership.current_target
+	var tgt: Targetable = hub.player_ship.current_target
 	var new_projo: Projectile = scene.instantiate() as Projectile
 	if tgt:
 		var to_target: Vector3 = (tgt.global_position - global_position).normalized()
-		var dot_product: float = clamp(hub.playership.aim_dir.dot(to_target), 0.01, 1.0)
-		var dir: Vector3 = lerp(hub.playership.aim_dir, to_target, dot_product)
+		var dot_product: float = clamp(hub.player_ship.aim_dir.dot(to_target), 0.01, 1.0)
+		var dir: Vector3 = lerp(hub.player_ship.aim_dir, to_target, dot_product)
 		new_projo.set_direction(dir)
 		new_projo.set_target(tgt, dot_product)
 	else:
-		new_projo.set_direction(hub.playership.aim_dir)
+		new_projo.set_direction(hub.player_ship.aim_dir)
 	hub.bullet_parent.add_child(new_projo)
 	new_projo.global_position = global_position
 	

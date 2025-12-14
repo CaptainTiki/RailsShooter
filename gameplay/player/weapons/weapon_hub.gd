@@ -4,7 +4,7 @@ class_name Weaponhub
 signal primary_weapon_changed(new_weapon: Weapon)
 signal secondary_weapon_changed(new_weapon: Weapon)
 
-@export var playership : PlayerShip
+@export var player_ship: PlayerShip
 @export var stats : ShipStats
 @export var reticle_ui: Control
 

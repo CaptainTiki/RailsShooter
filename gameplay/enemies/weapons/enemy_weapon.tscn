@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd3alcu745tdm"]
+
+[ext_resource type="Script" uid="uid://bafs1a1h57ujp" path="res://gameplay/enemies/weapons/enemy_weapon.gd" id="1_rea6x"]
+
+[node name="EnemyWeapon" type="Node3D"]
+script = ExtResource("1_rea6x")

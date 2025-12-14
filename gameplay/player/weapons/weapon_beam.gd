@@ -25,13 +25,13 @@ func process_beam(delta: float) -> void:
 	if beam_state == BeamState.OFF:
 		return
 	
-	var origin := global_position  # or a $Muzzle.global_position if you have it
-	var target : Targetable = hub.playership.current_target  # best: use centralized aim point
+	var origin := global_position 
+	var target : Targetable = hub.player_ship.current_target
 
 	if target:
 		update_beam_visual(origin, target.global_position)
 	else:
-		update_beam_visual(origin, origin + hub.playership.aim_dir * beam_range)
+		update_beam_visual(origin, origin + hub.player_ship.aim_dir * beam_range)
 	
 	if fire_rate_timer.is_stopped():
 		if try_consume_ammo():

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5qv7y8ip5vfd"]
+
+[ext_resource type="Script" uid="uid://bthfimwemt0j4" path="res://gameplay/enemies/ai/ai_context.gd" id="1_tki03"]
+
+[node name="AIContext" type="Node3D"]
+script = ExtResource("1_tki03")

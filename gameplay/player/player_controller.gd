@@ -32,10 +32,8 @@ func _physics_process(delta: float) -> void:
 	# --- THROTTLE UPDATE ---
 	if input.throttle_up_pressed:
 		current_speed += stats.throttle_change_speed * delta
-		print("Throttle: " , current_speed)
 	elif input.throttle_down_pressed:
 		current_speed -= stats.throttle_change_speed * delta
-		print("Throttle: " , current_speed)
 
 	# clamp between full reverse and full forward
 	current_speed = clamp(current_speed, min_speed, max_speed)

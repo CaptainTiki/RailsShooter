@@ -7,11 +7,11 @@
 [ext_resource type="Script" uid="uid://l578yot6eigw" path="res://gameplay/player/ship_stats.gd" id="4_hnppb"]
 [ext_resource type="PackedScene" uid="uid://epsy3hth1dfq" path="res://gameplay/components/shields_component.tscn" id="5_ou2vc"]
 [ext_resource type="PackedScene" uid="uid://cvtcb8co3aeio" path="res://gameplay/components/armor_component.tscn" id="6_hqu1f"]
-[ext_resource type="Script" uid="uid://cjpqmntsmfmey" path="res://gameplay/player/weapon_hub.gd" id="8_hnppb"]
+[ext_resource type="Script" uid="uid://cjpqmntsmfmey" path="res://gameplay/player/weapons/weapon_hub.gd" id="8_hnppb"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="8_hrflb"]
-[ext_resource type="PackedScene" uid="uid://du00mx80pt8i8" path="res://gameplay/player/weapon_projectile.tscn" id="9_6uejx"]
+[ext_resource type="PackedScene" uid="uid://du00mx80pt8i8" path="res://gameplay/player/weapons/weapon_projectile.tscn" id="9_6uejx"]
 [ext_resource type="Script" uid="uid://cudearsw1ab20" path="res://gameplay/player/targeting_component.gd" id="9_c55ub"]
-[ext_resource type="PackedScene" uid="uid://db4lsbt241yap" path="res://gameplay/player/weapon_beam.tscn" id="10_ou2vc"]
+[ext_resource type="PackedScene" uid="uid://db4lsbt241yap" path="res://gameplay/player/weapons/weapon_beam.tscn" id="10_ou2vc"]
 [ext_resource type="PackedScene" uid="uid://welgauuh3a7l" path="res://gameplay/ui/player_hud.tscn" id="10_qn6ct"]
 [ext_resource type="PackedScene" uid="uid://ch4h4w8aak6e6" path="res://gameplay/player/mining_lazer.tscn" id="11_ou2vc"]
 [ext_resource type="Script" uid="uid://daylcjm7fixgc" path="res://gameplay/player/cargo_hold.gd" id="11_pa0q3"]
@@ -26,7 +26,7 @@ radius = 0.558
 height = 1.758
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8pifx"]
-radius = 4.0
+radius = 3.0
 
 [node name="PlayerShip" type="Node3D"]
 script = ExtResource("1_v6sl1")
@@ -80,11 +80,11 @@ collision_mask = 66304
 
 [node name="Armor" parent="Ship_Rotation_Handler/Ship_Root" instance=ExtResource("6_hqu1f")]
 
-[node name="WeaponHub" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("playership", "stats", "reticle_ui")]
+[node name="WeaponHub" type="Node3D" parent="Ship_Rotation_Handler/Ship_Root" node_paths=PackedStringArray("player_ship", "stats", "reticle_ui")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.81157017)
 script = ExtResource("8_hnppb")
-playership = NodePath("../../..")
+player_ship = NodePath("../../..")
 stats = NodePath("../ShipStats")
 reticle_ui = NodePath("../../../CanvasLayer/Ship_HUD/Reticle2D")
 
@@ -118,7 +118,7 @@ script = ExtResource("12_jyhos")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Ship_Rotation_Handler/Ship_Root/Magnet"]
 shape = SubResource("SphereShape3D_8pifx")
-debug_color = Color(0.92632747, 0.5120404, 0.0859239, 0.41960785)
+debug_color = Color(0.93, 0.50684994, 0.08369998, 0.09019608)
 
 [node name="PlayerController" type="Node3D" parent="." node_paths=PackedStringArray("player_ship", "input", "stats", "reticle")]
 script = ExtResource("15_hnppb")

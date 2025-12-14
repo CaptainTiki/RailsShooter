@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://22r0lclh4psa"]
+
+[ext_resource type="Script" uid="uid://mxcynawe4jl" path="res://gameplay/enemies/ai/ai_move_component.gd" id="1_kll6d"]
+
+[node name="AIMoveComponent" type="Node3D"]
+script = ExtResource("1_kll6d")

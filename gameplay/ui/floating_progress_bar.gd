@@ -5,7 +5,7 @@ var target : Node3D = null
 var offset : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
-	reparent(GameManager.current_level.screen_ui)
+	call_deferred("reparent",[GameManager.current_level.screen_ui])
 	visible = false
 
 func _process(_delta: float) -> void:

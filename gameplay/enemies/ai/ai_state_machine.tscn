@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c61auscib7b44"]
+
+[ext_resource type="Script" uid="uid://cd43a06m4ra3c" path="res://gameplay/enemies/ai/ai_state_machine.gd" id="1_dq7qf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_25xlg"]
+radius = 40.0
+
+[node name="AiStateMachine" type="Node3D"]
+script = ExtResource("1_dq7qf")
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+shape = SubResource("SphereShape3D_25xlg")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -40)
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_thickness = 5
+
+[connection signal="area_entered" from="PlayerDetector" to="." method="_on_playerdetector_entered"]
+[connection signal="area_exited" from="PlayerDetector" to="." method="_on_playerdetector_exited"]

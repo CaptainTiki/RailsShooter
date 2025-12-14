@@ -1,14 +1,24 @@
 extends Node3D
 class_name Enemy
 
+enum State {OFF, STUNNED, ATTACKING, IDLE}
+
 @onready var health: HealthComponent = $Health
 @onready var target_node: ShipTarget = $Target_Node
 @onready var parent_room: Room = $"../.."
 @onready var floating_progress_bar: FloatingProgressBar = $FloatingProgressBar
 
+@onready var ai_aim_component: AIAimComponent = $AI_Brain/AiAimComponent
+@onready var ai_move_component: Node3D = $AI_Brain/AIMoveComponent
+@onready var ai_state_machine: AIStateMachine = $AI_Brain/AiStateMachine
+
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/ship-ammo/torp_ammo_pickup.tscn")
-var spread : float = 0.5  # ~28 degrees
-var speed : float = 5
+var drop_spread : float = 0.5  # ~28 degrees
+var drop_speed : float = 5
+
+var movement_speed : float = 5
+var attack_speed : float = 25
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,12 +38,12 @@ func _on_died() -> void:
 	get_parent().add_child(drop)
 	var base_dir := global_transform.basis.y
 	var random_offset := Vector3(
-		randf_range(-spread, spread),
+		randf_range(-drop_spread, drop_spread),
 		0.0,
-		randf_range(-spread, spread)
+		randf_range(-drop_spread, drop_spread)
 	)
 	var dir : Vector3 = (base_dir + random_offset).normalized()
-	var vel : Vector3 = dir * speed
+	var vel : Vector3 = dir * drop_speed
 	drop.spawn_pickup(
 		vel,
 		Vector3(randf() * TAU, randf()* 3, randf()* TAU),

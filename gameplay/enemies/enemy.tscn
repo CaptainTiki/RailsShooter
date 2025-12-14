@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0jcxoe5h3qg2"]
+[gd_scene load_steps=18 format=3 uid="uid://c0jcxoe5h3qg2"]
 
 [ext_resource type="Script" uid="uid://bfe7mbe64obpw" path="res://gameplay/enemies/enemy.gd" id="1_jpanq"]
 [ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="2_gmro5"]
@@ -8,6 +8,12 @@
 [ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="6_tay03"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="7_p7lxo"]
 [ext_resource type="PackedScene" uid="uid://dhk4pytxsy5un" path="res://gameplay/ui/floating_progress_bar.tscn" id="8_5sd5k"]
+[ext_resource type="PackedScene" uid="uid://dvagdnd6u07pp" path="res://gameplay/enemies/ai/ai_aim_component.tscn" id="9_r2674"]
+[ext_resource type="PackedScene" uid="uid://22r0lclh4psa" path="res://gameplay/enemies/ai/ai_move_component.tscn" id="10_kuwu1"]
+[ext_resource type="PackedScene" uid="uid://c61auscib7b44" path="res://gameplay/enemies/ai/ai_state_machine.tscn" id="11_nxmcr"]
+[ext_resource type="PackedScene" uid="uid://dd3alcu745tdm" path="res://gameplay/enemies/weapons/enemy_weapon.tscn" id="12_70kt8"]
+[ext_resource type="PackedScene" uid="uid://b5qv7y8ip5vfd" path="res://gameplay/enemies/ai/ai_context.tscn" id="12_nxmcr"]
+[ext_resource type="PackedScene" uid="uid://dyaifyf1w67pv" path="res://gameplay/enemies/ai/ai_travel_probe.tscn" id="13_70kt8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6sj2a"]
 
@@ -42,7 +48,7 @@ collision_mask = 3
 
 [node name="Armor" parent="." instance=ExtResource("4_p7lxo")]
 
-[node name="rocket_baseB2" parent="." instance=ExtResource("5_5sd5k")]
+[node name="MeshInstance" parent="." instance=ExtResource("5_5sd5k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9973583, -0.594649, -1.503745)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -57,5 +63,21 @@ script = ExtResource("6_tay03")
 mesh = SubResource("QuadMesh_6sj2a")
 
 [node name="FloatingProgressBar" parent="." instance=ExtResource("8_5sd5k")]
+
+[node name="AI_Brain" type="Node3D" parent="."]
+
+[node name="AiAimComponent" parent="AI_Brain" node_paths=PackedStringArray("state_machine") instance=ExtResource("9_r2674")]
+state_machine = NodePath("../AiStateMachine")
+
+[node name="AIMoveComponent" parent="AI_Brain" node_paths=PackedStringArray("state_machine") instance=ExtResource("10_kuwu1")]
+state_machine = NodePath("../AiStateMachine")
+
+[node name="AiStateMachine" parent="AI_Brain" instance=ExtResource("11_nxmcr")]
+
+[node name="AIContext" parent="AI_Brain" instance=ExtResource("12_nxmcr")]
+
+[node name="AITravelProbe" parent="AI_Brain" instance=ExtResource("13_70kt8")]
+
+[node name="EnemyWeapon" parent="." instance=ExtResource("12_70kt8")]
 
 [editable path="Health"]
