@@ -33,6 +33,11 @@ collision_layer = 256
 collision_mask = 65793
 script = ExtResource("1_jpanq")
 
+[node name="Rotation_Handle" type="Node3D" parent="."]
+
+[node name="MeshInstance" parent="Rotation_Handle" instance=ExtResource("5_5sd5k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9973583, -0.594649, -1.503745)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_6sj2a")
 
@@ -47,9 +52,6 @@ collision_mask = 3
 [node name="Shields" parent="." instance=ExtResource("3_tay03")]
 
 [node name="Armor" parent="." instance=ExtResource("4_p7lxo")]
-
-[node name="MeshInstance" parent="." instance=ExtResource("5_5sd5k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9973583, -0.594649, -1.503745)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5430789, 0, 0)

@@ -237,15 +237,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 [node name="Enemy2" parent="EnemyParent" instance=ExtResource("3_owj7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.402721, 1.0048885, -61.899117)
 
-[node name="Enemy3" parent="EnemyParent" instance=ExtResource("3_owj7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.449867, 9.672796, -114.106705)
-
-[node name="Enemy4" parent="EnemyParent" instance=ExtResource("3_owj7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.64031, -11.54508, -230.98245)
-
-[node name="Enemy5" parent="EnemyParent" instance=ExtResource("3_owj7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -129.88097, 3.0444813, -304.23315)
-
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 

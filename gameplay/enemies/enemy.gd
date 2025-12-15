@@ -11,6 +11,7 @@ enum State {OFF, STUNNED, ATTACKING, IDLE}
 @onready var ai_aim_component: AIAimComponent = $AI_Brain/AiAimComponent
 @onready var ai_move_component: Node3D = $AI_Brain/AIMoveComponent
 @onready var ai_state_machine: AIStateMachine = $AI_Brain/AiStateMachine
+@onready var rotation_handle: Node3D = $Rotation_Handle
 
 var pickup_scene : PackedScene = preload("res://gameplay/pickups/ship-ammo/torp_ammo_pickup.tscn")
 var drop_spread : float = 0.5  # ~28 degrees
@@ -18,6 +19,7 @@ var drop_speed : float = 5
 
 var movement_speed : float = 5
 var attack_speed : float = 25
+var acceleration : float = 5
 
 
 # Called when the node enters the scene tree for the first time.

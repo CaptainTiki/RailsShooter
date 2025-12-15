@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjur0pgj85cwp"]
+[gd_scene load_steps=14 format=3 uid="uid://cjur0pgj85cwp"]
 
 [ext_resource type="Script" uid="uid://bs7f23tp6ag5b" path="res://gameplay/levels/rooms/room_tunnel.gd" id="1_pblmp"]
 [ext_resource type="PackedScene" uid="uid://dhi2c0hloi73x" path="res://assets/biomes/rock/Tunnel_Strt_T.glb" id="2_0e56h"]
 [ext_resource type="PackedScene" uid="uid://v8c1n5heb5he" path="res://gameplay/mineables/mineable.tscn" id="2_7blt8"]
-[ext_resource type="PackedScene" uid="uid://c0jcxoe5h3qg2" path="res://gameplay/enemies/enemy.tscn" id="3_71mw5"]
 [ext_resource type="PackedScene" uid="uid://bvddw373aud37" path="res://assets/biomes/rock/Tunne_45L_T.glb" id="3_g216k"]
 [ext_resource type="PackedScene" uid="uid://colgabk74451j" path="res://assets/biomes/rock/Tunnel_Sqz_T.glb" id="4_02m2v"]
 [ext_resource type="PackedScene" uid="uid://y8hvkw4ln8u2" path="res://gameplay/levels/rooms/room_gate.tscn" id="4_21gqm"]
@@ -101,15 +100,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
 [node name="EnemyParent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
-
-[node name="Enemy" parent="EnemyParent" instance=ExtResource("3_71mw5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.772521, -7.5935316, -24.369755)
-
-[node name="Enemy2" parent="EnemyParent" instance=ExtResource("3_71mw5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.59773, -1.6289649, -88.105774)
-
-[node name="Enemy3" parent="EnemyParent" instance=ExtResource("3_71mw5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.98187, -3.726939, -143.06995)
 
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
