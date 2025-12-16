@@ -19,6 +19,10 @@ var current_move_time : float = 0
 
 var steering_weight : float = 1.0
 
+var t : float = 0 #time counter for movement
+var orbit_speed : float = 1
+var orbit_radius_x : float = 1
+var orbit_radius_y : float = 1
 func _ready() -> void:
 	phase = Phase.WAIT
 	current_wait_time = randf_range(0, idle_wait_time)
@@ -63,7 +67,6 @@ func adjust_steering_collisions() -> void:
 		centering_steering * centering_weight).normalized()
 
 func do_idle(delta: float) -> void:
-	adjust_steering_collisions()
 	match phase:
 		Phase.WAIT:
 			current_wait_time -= delta
@@ -78,6 +81,7 @@ func do_idle(delta: float) -> void:
 			current_move_time -= delta
 			if current_move_time >= 0:
 				#TODO: check if we're close and lerp down to zero speed - so we don't overshoot
+				adjust_steering_collisions()
 				do_movement(delta)
 				return
 			current_wait_time = idle_wait_time
@@ -85,19 +89,27 @@ func do_idle(delta: float) -> void:
 			phase = Phase.WAIT
 
 func do_attacking(delta: float) -> void:
-	adjust_steering_collisions()
-	var standoff_point = calc_standoff_point()
+	var standoff_point = calc_standoff_point() #get our point we want to move to
+	var forward = -GameManager.current_level.player_ship.global_basis.z
+	var right = GameManager.current_level.player_ship.global_basis.x
+	var up = GameManager.current_level.player_ship.global_basis.y
+	var anchor = standoff_point + forward
+	t += orbit_speed * delta
+	var offset = right * cos(t) * orbit_radius_x + up * sin(t) * orbit_radius_y
+	var orbit_target = anchor + offset
+	var to_target = orbit_target - global_position
+	
 	#if we're too close - back away 
-	if context.aim_target_distance < context.aim_target_desired_dist - context.aim_target_distance_buffer:
-		context.desired_travel_dir = -(standoff_point - global_position).normalized()
-	elif context.aim_target_distance > context.aim_target_desired_dist + context.aim_target_distance_buffer:
-		context.desired_travel_dir = (standoff_point - global_position).normalized()
+	if to_target.length() > context.aim_target_distance_buffer:
+		context.desired_travel_dir = to_target.normalized()
 	else:
-		#TODO: do a circle rotating around the FWD direction towards the target (rotate around Z - not rotate around Y, so we keep...
-		#ourselves visible in front of the enemy target ((which is the player))
-		context.desired_speed = -GameManager.current_level.player_ship.controller.current_speed
+		var radial = (global_position - anchor).normalized()
+		var tangent = forward.cross(radial).normalized()
+		context.desired_travel_dir = tangent
 		pass
 		
+
+	adjust_steering_collisions() #check for collisions
 	do_movement(delta)
 	pass
 

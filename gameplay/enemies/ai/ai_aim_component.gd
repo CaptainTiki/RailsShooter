@@ -6,7 +6,7 @@ class_name AIAimComponent
 @onready var host : Enemy = $"../.."
 @onready var context: AIContext = $"../AIContext"
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	match state_machine.state:
 		Enemy.State.OFF:
 			return #early out if we're turned off
@@ -23,6 +23,7 @@ func do_idle(_delta: float) -> void:
 	pass
 
 func do_attacking(_delta: float) -> void:
-	host.rotation_handle.look_at(host.global_position + context.steering_dir)
-	context.aim_target_distance = (context.aim_target.global_position - global_position).length()
+	if context.steering_dir.length() > 0:
+		host.rotation_handle.look_at(host.global_position + context.steering_dir)
+		context.aim_target_distance = (context.aim_target.global_position - global_position).length()
 	pass
