@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvagdnd6u07pp"]
-
-[ext_resource type="Script" uid="uid://5px5rb3dl7d3" path="res://gameplay/enemies/ai/ai_aim_component.gd" id="1_m8kvl"]
-
-[node name="AiAimComponent" type="Node3D"]
-script = ExtResource("1_m8kvl")

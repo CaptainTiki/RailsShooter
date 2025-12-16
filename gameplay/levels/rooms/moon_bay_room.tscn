@@ -23,6 +23,7 @@ size = Vector3(40, 40, 10)
 script = ExtResource("1_l5hvc")
 
 [node name="Terrain" type="Node3D" parent="."]
+visible = false
 
 [node name="Tops" type="Node3D" parent="Terrain"]
 
