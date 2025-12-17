@@ -23,7 +23,6 @@ size = Vector3(40, 40, 10)
 script = ExtResource("1_l5hvc")
 
 [node name="Terrain" type="Node3D" parent="."]
-visible = false
 
 [node name="Tops" type="Node3D" parent="Terrain"]
 
@@ -236,7 +235,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)
 
 [node name="Enemy2" parent="EnemyParent" instance=ExtResource("3_owj7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.402721, 1.0048885, -61.899117)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.25294, 1.0048885, -319.8558)
 
 [node name="Triggers" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.478386, 0)

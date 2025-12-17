@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0jcxoe5h3qg2"]
+[gd_scene load_steps=16 format=3 uid="uid://c0jcxoe5h3qg2"]
 
 [ext_resource type="Script" uid="uid://bfe7mbe64obpw" path="res://gameplay/enemies/enemy.gd" id="1_jpanq"]
 [ext_resource type="PackedScene" uid="uid://ctrs20k5sxinx" path="res://gameplay/components/health_component.tscn" id="2_gmro5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bvhk6kroguvbg" path="res://gameplay/enemies/ship_target.gd" id="6_tay03"]
 [ext_resource type="Texture2D" uid="uid://ddfd8g7crugb" path="res://assets/Reticle.png" id="7_p7lxo"]
 [ext_resource type="PackedScene" uid="uid://dhk4pytxsy5un" path="res://gameplay/ui/floating_progress_bar.tscn" id="8_5sd5k"]
+[ext_resource type="Script" uid="uid://bxpwmu0f1g3oc" path="res://gameplay/enemies/ai_controller.gd" id="9_s5tdg"]
 [ext_resource type="PackedScene" uid="uid://dd3alcu745tdm" path="res://gameplay/enemies/weapons/enemy_weapon.tscn" id="12_70kt8"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6sj2a"]
@@ -24,6 +25,10 @@ billboard_mode = 1
 [sub_resource type="QuadMesh" id="QuadMesh_6sj2a"]
 material = SubResource("StandardMaterial3D_p7lxo")
 size = Vector2(2.5, 2.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s5tdg"]
+radius = 0.75
+height = 3.0
 
 [node name="Enemy" type="Area3D"]
 collision_layer = 256
@@ -67,8 +72,55 @@ mesh = SubResource("QuadMesh_6sj2a")
 
 [node name="FloatingProgressBar" parent="." instance=ExtResource("8_5sd5k")]
 
-[node name="AI_Brain" type="Node3D" parent="."]
+[node name="AI_Controller" type="Node3D" parent="."]
+script = ExtResource("9_s5tdg")
+
+[node name="Fwd_UPL" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0.49999997, 0.70710677, -0.49999997, -0.49999997, 0.70710677, 0.49999997, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Fwd_UPR" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(0.4999999, -0.7071067, -0.49999997, 0.49999994, 0.7071067, -0.49999994, 0.7071067, -3.0908616e-08, 0.7071067, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Fwd_DL" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(0.7071067, 0, 0.7071067, -0.49999997, 0.70710665, 0.49999997, -0.4999999, -0.70710677, 0.4999999, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Fwd_DR" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(0.49999994, -0.7071067, -0.49999994, 0.7071067, -8.289065e-08, 0.7071067, -0.49999994, -0.7071067, 0.49999994, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Back_UPL" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(-0.70710665, -6.181723e-08, -0.70710677, 0.49999994, 0.7071067, -0.49999994, 0.5, -0.7071067, -0.49999988, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Back_UPR" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(-0.49999997, 0.70710677, 0.49999985, 0.49999994, 0.7071067, -0.49999994, -0.70710665, -3.0908616e-08, -0.70710677, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Back_DL" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(-0.7071066, 6.181723e-08, -0.7071067, -0.49999997, 0.70710665, 0.49999997, 0.49999994, 0.7071067, -0.49999982, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
+
+[node name="Back_DR" type="RayCast3D" parent="AI_Controller"]
+transform = Transform3D(-0.4999999, 0.70710677, 0.4999999, 0.7071067, -8.289065e-08, 0.7071067, 0.5, 0.70710665, -0.5, 0, 0, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 327680
 
 [node name="EnemyWeapon" parent="." instance=ExtResource("12_70kt8")]
+
+[node name="HullCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.6105373)
+shape = SubResource("CapsuleShape3D_s5tdg")
+target_position = Vector3(0, 0, 0)
+collision_mask = 327680
 
 [editable path="Health"]

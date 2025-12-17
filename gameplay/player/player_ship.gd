@@ -14,6 +14,17 @@ var aim_dir : Vector3 = Vector3.ZERO
 var aim_point : Vector3 = Vector3.ZERO
 var current_target : Targetable = null
 
+var last_global_pos: Vector3
+var measured_velocity: Vector3 = Vector3.ZERO
+
+func _ready() -> void:
+	last_global_pos = global_position
+
+func _physics_process(delta: float) -> void:
+	measured_velocity = (global_position - last_global_pos) / max(delta, 0.0001)
+	last_global_pos = global_position
+	#print((measured_velocity).length())
+
 func brake_ship(delta : float) -> void:
 	controller.brake(delta)
 	pass

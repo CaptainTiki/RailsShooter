@@ -45,7 +45,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if !target:
 		return
-		
+	
 	handle_distance(delta)
 	spring_to_target(delta)
 	look_at_tgt(delta)
